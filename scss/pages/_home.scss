@@ -1,0 +1,147 @@
+@use "../abstract" as *;
+.Home {
+  min-height: 100vh;
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 25rem;
+    object-fit: cover;
+  }
+  .swiper,
+  swiper-container {
+    z-index: 0;
+    margin: 0;
+  }
+  .mealSlider {
+    position: relative;
+    background-color: transparent;
+
+    .about {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.559);
+      color: whitesmoke;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: rem(18);
+
+      p {
+        margin: 0 auto;
+        font-size: clamp(0.9rem, 0.2rem + 1vw, 1.5rem);
+        font-weight: 600;
+        text-align: center;
+        line-height: 1.5;
+      }
+      button {
+        font-size: 0.9;
+        padding-left: 1.2rem;
+        padding-right: 1.2rem;
+        background-color: $nursh_dark_gold;
+        color: $nursh_green;
+      }
+    }
+    .featuresContainer {
+      width: 80%;
+      z-index: 5;
+      position: absolute;
+      left: 50%;
+      right: 50%;
+      transform: translate(-50%, -50%);
+      bottom: -2rem;
+
+      color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.2rem;
+    }
+    .feature {
+      background-color: white;
+      font-size: clamp(0.3rem, 0.1rem + 1vw, 0.8rem);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+
+      p {
+        text-align: center;
+      }
+      svg {
+        font-size: 1rem;
+      }
+
+      .iconOne {
+        background-color: greenyellow;
+        padding: 0.5rem;
+        border-radius: 50%;
+      }
+      .iconTwo {
+        background-color: $nursh_light_gold;
+        padding: 0.5rem;
+        border-radius: 50%;
+        svg {
+          color: $nursh_dark_olive;
+        }
+      }
+      .iconThree {
+        background-color: greenyellow;
+        padding: 0.5rem;
+        border-radius: 50%;
+      }
+    }
+
+    .right {
+      border-radius: 0 50% 50% 0;
+    }
+    .left {
+      border-radius: 50% 0 0 50%;
+    }
+  }
+  .trendingOrders {
+    position: relative;
+    width: 100%;
+
+    padding-top: 2rem;
+    padding-bottom: 6rem;
+    background-color: $nursh_cream;
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h2 {
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    span {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      font-size: 0.8rem;
+      margin-top: -1rem;
+      margin-left: 70%;
+      text-align: right;
+      border-bottom: 0.1rem solid black;
+    }
+  }
+
+  .trendingOrdersList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .yourChoice {
+    flex-grow: 1;
+    background-color: $nursh_light_gold;
+  }
+}

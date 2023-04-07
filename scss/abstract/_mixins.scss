@@ -1,0 +1,12 @@
+@use "functions" as f;
+$breakpoints-up: (
+  "tablet": f.em(768),
+  "laptop": f.em(1024),
+);
+
+@mixin mq($key) {
+  $size: map-get($breakpoints-up, $key);
+  @media only screen and (min-width: $size) {
+    @content;
+  }
+}
