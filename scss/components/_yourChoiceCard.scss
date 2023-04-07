@@ -1,0 +1,45 @@
+@use "../abstract" as *;
+.yourChoiceCard {
+  width: 80%;
+
+  font-size: clamp(0.5rem, 0.6rem + 1vw, 1rem);
+  background-color: white;
+  box-shadow: $card_shadow;
+  border-radius: $card_border_radius;
+  padding: 0.5rem;
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    "img ."
+    "img cat"
+    "img abt"
+    "img btn";
+  img {
+    grid-area: img;
+    width: 100%;
+    height: 10rem;
+    object-fit: cover;
+    border-radius: $card_border_radius;
+  }
+  .info {
+    grid-area: abt;
+    .title {
+      font-weight: 800;
+      font-size: 0.7rem;
+    }
+  }
+  .category {
+    grid-area: cat;
+    padding: 0.5rem 0;
+  }
+  button {
+    margin-top: 0.5rem;
+    grid-area: btn;
+    background-color: $nursh_dark_olive;
+    color: $nursh_light_gold;
+    font-size: 0.5rem;
+    padding: 0.5rem 0rem;
+    border-radius: 0.5rem;
+  }
+}

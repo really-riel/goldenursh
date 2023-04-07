@@ -118,11 +118,6 @@
     align-items: center;
     justify-content: center;
 
-    h2 {
-      font-size: 0.7rem;
-      font-weight: 600;
-    }
-
     span {
       display: flex;
       align-items: center;
@@ -136,6 +131,7 @@
   }
 
   .trendingOrdersList {
+    width: 95%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
@@ -143,5 +139,20 @@
   .yourChoice {
     flex-grow: 1;
     background-color: $nursh_light_gold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding-bottom: 3rem;
+  }
+  .review {
+    background-color: $nursh_cream;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem 0;
   }
 }

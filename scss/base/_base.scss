@@ -23,15 +23,21 @@ body {
 }
 
 .App {
-  height: 100vh;
-  min-height: 100vh;
+  height: 100%;
 }
 
 main {
   display: flex;
   flex-direction: column;
 }
+h2 {
+  font-size: 0.7rem;
+  font-weight: 500;
+}
 
 img {
   display: block;
+}
+ul {
+  list-style-type: none;
 }

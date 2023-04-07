@@ -4,10 +4,15 @@ import { IoMdFlash } from "react-icons/io";
 import { RiArrowRightFill } from "react-icons/ri";
 
 import MealSlider from "../../components/MealSlider";
-import { trendingOrders, yourChoiceMeals } from "../../utils/data";
+import {
+  customerReview,
+  trendingOrders,
+  yourChoiceMeals,
+} from "../../utils/data";
 import TMealCard from "../../components/TMealCard";
 import { useState } from "react";
 import YourChoiceCard from "../../components/YourChoiceCard";
+import ReviewSlide from "../../components/ReviewSlide";
 
 const Home = () => {
   const [isViewAll, setIsViewAll] = useState(false);
@@ -61,11 +66,19 @@ const Home = () => {
           View all <RiArrowRightFill />
         </span>
       </section>
+      {}
       <section className="yourChoice">
+        <h2>ORDER BASED ON YOUR CHOICE</h2>
         {yourChoiceMeals?.map((item, index) => (
           <YourChoiceCard key={index} item={item} />
         ))}
       </section>
+      {customerReview && (
+        <section className="review">
+          <h2>CUSTOMER REVIEW</h2>
+          <ReviewSlide customerReview={customerReview} />
+        </section>
+      )}
     </main>
   );
 };

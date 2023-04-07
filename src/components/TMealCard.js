@@ -7,15 +7,19 @@ const TMealCard = ({ item }) => {
     <div className="tMealCardContainer">
       <div className="tMealCard">
         <img src={item?.image} alt={item?.name} />
-
-        <p className="name">{item?.mainMeal}</p>
-        <p className="extra">{item?.extra}</p>
-        <StarsRating classNamePrefix="star" value={item?.rating} />
-        <p className="rate">95% successful review</p>
+        <ul className="mealTitle">
+          <li className="name">{item?.mainMeal}</li>
+          <li className="extra">{item?.extra}</li>
+        </ul>
+        <div className="rating">
+          <StarsRating classNamePrefix="star" value={item?.rating} />
+          <p className="rate">95% successful review</p>
+        </div>
         <p className="price">
           <TbCurrencyNaira />
           {item?.price}
         </p>
+
         <button>Order now</button>
       </div>
     </div>

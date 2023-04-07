@@ -1,19 +1,20 @@
 @use "../abstract" as *;
 .tMealCardContainer {
-  width: 10.5rem;
+  width: 100%;
+
   background-color: white;
   .tMealCard {
-    border-radius: 1rem;
+    border-radius: $card_border_radius;
     padding: 0.5rem;
     width: 100%;
+    height: 100%;
     font-size: 0.6rem;
-    box-shadow: 0.1rem 0.2rem 0.6rem rgba(0, 0, 0, 0.505);
-
+    box-shadow: $card_shadow;
+    gap: 0.3rem;
     display: grid;
     grid-template-areas:
       "img img img"
-      "nam . sta"
-      "ext . rat"
+      "mt . rt"
       "pri . ord";
     img {
       width: 100%;
@@ -22,32 +23,41 @@
       border-radius: 1rem;
       grid-area: img;
     }
-    .name {
-      grid-area: nam;
+    .mealTitle {
+      grid-area: mt;
       display: flex;
-      align-items: flex-end;
-      font-weight: 600;
-    }
+      flex-direction: column;
 
-    .star {
-      grid-area: sta;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      font-size: 0.8rem;
-      li {
-        margin-right: 0;
+      .name {
+        font-weight: 600;
+      }
+      .extra {
       }
     }
-    .rate {
-      grid-area: rat;
-      font-size: 0.3rem;
-      margin-top: -0.2rem;
-      text-align: right;
+
+    .rating {
+      grid-area: rt;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
+      .star {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        justify-content: flex-start;
+        font-size: 0.8rem;
+        li {
+          margin-right: 0;
+        }
+      }
+      .rate {
+        font-size: 0.3rem;
+
+        text-align: right;
+      }
     }
-    .extra {
-      grid-area: ext;
-    }
+
     .price {
       grid-area: pri;
       display: flex;
