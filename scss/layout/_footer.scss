@@ -1,0 +1,100 @@
+@use "../abstract" as *;
+
+footer {
+  background-color: $nursh_green;
+  padding: 1.5rem 0;
+  font-size: clamp(0.3rem, 0.5rem + 1vw, 0.6rem);
+  color: white;
+
+  .footerSections {
+    width: 90%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+  }
+
+  .socials {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 0.3rem;
+
+    button {
+      width: 0.8rem;
+      height: 0.8rem;
+      border-radius: 50%;
+      background-color: $nursh_dark_gold;
+      color: white;
+      display: flex;
+
+      justify-content: center;
+      align-items: center;
+      svg {
+        font-size: 0.4rem;
+      }
+    }
+  }
+
+  .formSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+  }
+  section:first-child {
+    align-items: flex-start;
+  }
+  section:last-child {
+    align-items: flex-end;
+  }
+
+  form {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.1rem;
+    border-top-right-radius: $card_border_radius;
+    border-bottom-right-radius: $card_border_radius;
+    input {
+      width: 100%;
+      background-color: transparent;
+      outline-color: transparent;
+      border: none;
+      flex-grow: 1;
+
+      padding-left: 0.4rem;
+    }
+    input::placeholder {
+      font-size: inherit;
+    }
+    label {
+      position: absolute;
+      left: -10000px;
+    }
+    button {
+      background-color: $nursh_dark_olive;
+      color: white;
+      font-size: inherit;
+      padding: 0.2rem 0.3rem;
+    }
+  }
+  a {
+    text-align: right;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+
+    svg {
+      font-size: clamp(0.6rem, 1rem + 1vw, 1rem);
+    }
+  }
+}

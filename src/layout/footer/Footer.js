@@ -1,7 +1,49 @@
 import React from "react";
+import { useState } from "react";
+import { IoIosArrowDropup } from "react-icons/io";
+import { BsInstagram, BsTwitter, BsWhatsapp } from "react-icons/bs";
+import { FaFacebookF } from "react-icons/fa";
 
 const Footer = () => {
-  return <footer>Footer</footer>;
+  const [email, setEmail] = useState("");
+
+  const socialIcons = [
+    <BsInstagram />,
+    <BsTwitter />,
+    <FaFacebookF />,
+    <BsWhatsapp />,
+  ];
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+  return (
+    <footer>
+      <div className="footerSections">
+        <section>
+          <p>Goldenursh</p>
+          <div className="socials">
+            {socialIcons.map((icon, index) => (
+              <button key={index}>{icon}</button>
+            ))}
+          </div>
+        </section>
+        <section className="formSection">
+          <p>Subscribe to our newsletter for frequent trends update</p>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="email">Enter your email:</label>
+            <input type="email" id="email" placeholder="email" />
+            <button>Subscribe</button>
+          </form>
+        </section>
+        <section>
+          <a href="#" role="button">
+            Back to Top <IoIosArrowDropup />
+          </a>
+        </section>
+      </div>
+    </footer>
+  );
 };
 
 export default Footer;
