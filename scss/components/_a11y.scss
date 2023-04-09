@@ -1,3 +1,9 @@
+@use "../abstract" as *;
+
+.active {
+  background-color: $nursh_dark_olive;
+  border-right: 0.2rem solid $nursh_light_gold;
+}
 .shapedividers_com-9855 {
   overflow: hidden;
   position: relative;

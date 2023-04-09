@@ -1,0 +1,50 @@
+@use "../abstract" as *;
+
+.sideNav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  display: grid;
+  grid-template-columns: 70% 30%;
+
+  section:first-child {
+    background-color: $nursh_green;
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    div {
+      padding: 0 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+  }
+  .categoryList {
+    font-size: 0.8rem;
+    padding-left: 2.5rem;
+  }
+  li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.7rem 0.7rem;
+  }
+  svg {
+    font-size: 1.2rem;
+  }
+
+  section:last-child {
+    background-color: black;
+    opacity: 0.5;
+  }
+}

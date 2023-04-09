@@ -7,6 +7,12 @@ import { FaFacebookF } from "react-icons/fa";
 const Footer = () => {
   const [email, setEmail] = useState("");
 
+  const handleGoToTop = () => {
+    window.scrollTo({
+      top: 0,
+    });
+  };
+
   const socialIcons = [
     <BsInstagram />,
     <BsTwitter />,
@@ -37,7 +43,7 @@ const Footer = () => {
           </form>
         </section>
         <section>
-          <a href="#" role="button">
+          <a role="button" onClick={handleGoToTop}>
             Back to Top <IoIosArrowDropup />
           </a>
         </section>

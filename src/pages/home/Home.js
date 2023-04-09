@@ -61,7 +61,10 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="trendingOrders shapedividers_com-9343">
+      <section
+        id="trendingOrders"
+        className="trendingOrders shapedividers_com-9343"
+      >
         <h2>TRENDING ORDER</h2>
         <div className="trendingOrdersList">
           {trendingOrders
@@ -76,7 +79,7 @@ const Home = () => {
         </span>
       </section>
       {}
-      <section className="yourChoice">
+      <section id="yourChoice" className="yourChoice">
         <h2>ORDER BASED ON YOUR CHOICE</h2>
         {yourChoiceMeals?.map((item, index) => (
           <YourChoiceCard key={index} item={item} />
@@ -91,24 +94,26 @@ const Home = () => {
       <section className="connect">
         <h2>CONNECT WITH US</h2>
         <div className="connectSections">
-          <figure className="section1">
-            <img src={img1} alt="connectImg" />
-            <ul>
-              <li>
-                <IoCheckboxOutline />
-                <span> Connect with us via our social media handles</span>
-              </li>
-              <li>
-                <IoCheckboxOutline />
-                <span>Chat and Make enquires about your Order</span>
-              </li>
-              <li>
-                <IoCheckboxOutline />
-                <span>Fast reply from our social media handler</span>
-              </li>
-            </ul>
-          </figure>
-          <div className="">
+          <div className="section1Container">
+            <figure className="section1">
+              <img src={img1} alt="connectImg" />
+              <ul>
+                <li>
+                  <IoCheckboxOutline />
+                  <span> Connect with us via our social media handles</span>
+                </li>
+                <li>
+                  <IoCheckboxOutline />
+                  <span>Chat and Make enquires about your Order</span>
+                </li>
+                <li>
+                  <IoCheckboxOutline />
+                  <span>Fast reply from our social media handler</span>
+                </li>
+              </ul>
+            </figure>
+          </div>
+          <div className="section2Container">
             <figure className="section2">
               <p>
                 Welcome <br /> This is Goldenursh <br /> support line.

@@ -62,7 +62,7 @@
     }
     .feature {
       background-color: white;
-      font-size: clamp(0.3rem, 0.2rem + 1vw, 0.8rem);
+      font-size: clamp(0.3rem, 0.25rem + 1vw, 0.8rem);
       font-weight: 500;
       height: 5rem;
       display: flex;
@@ -74,7 +74,6 @@
 
       p {
         text-align: center;
-        width: 80%;
       }
       svg {
         font-size: 0.7rem;
@@ -171,7 +170,12 @@
     width: 90%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2.5rem;
+    overflow: hidden;
+  }
+  .section1Container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
   }
   .section1 {
     font-size: clamp(0.5rem, 0.4rem + 1vw, 1rem);
@@ -181,9 +185,13 @@
     justify-content: left;
     align-items: center;
     text-align: left;
+    overflow: hidden;
+    gap: 0.5rem;
 
     img {
-      width: 9rem;
+      width: 10rem;
+      height: 12rem;
+      object-fit: cover;
     }
     ul {
       display: flex;
@@ -203,16 +211,21 @@
       font-size: 1.5rem;
     }
   }
+  .section2Container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
   .section2 {
     background-color: white;
     text-align: center;
     box-shadow: $card_shadow;
     border-radius: $card_border_radius;
     border: 0.2rem solid $nursh_dark_gold;
-    width: 75%;
+    width: 70%;
     height: 85%;
-    margin: auto 0 auto auto;
-    font-size: clamp(0.2rem, 0.2rem + 1vw, 0.6rem);
+
+    font-size: clamp(0.3rem, 0.4rem + 1vw, 0.8rem);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -222,7 +235,7 @@
     gap: 0.5rem;
 
     img {
-      width: 9rem;
+      width: 10rem;
       margin-top: -1rem;
     }
   }
