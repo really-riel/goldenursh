@@ -108,13 +108,15 @@ const Home = () => {
               </li>
             </ul>
           </figure>
-          <figure className="section2">
-            <p>
-              Welcome <br /> This is Goldenursh <br /> support line.
-            </p>
+          <div className="">
+            <figure className="section2">
+              <p>
+                Welcome <br /> This is Goldenursh <br /> support line.
+              </p>
 
-            <img src={img2} alt="connectImg" />
-          </figure>
+              <img src={img2} alt="connectImg" />
+            </figure>
+          </div>
         </div>
       </section>
     </main>
