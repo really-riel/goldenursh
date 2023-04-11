@@ -1,0 +1,33 @@
+@use "../abstract" as *;
+.SignUp {
+  .hidden {
+    display: none;
+  }
+  .uploadImage {
+    border: 0.2rem solid $nursh_dark_olive;
+    width: 11rem;
+    height: 11rem;
+
+    margin: 0 auto;
+    display: grid;
+    place-content: center;
+    border-radius: $card_border_radius;
+  }
+  .image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      font-size: clamp(3rem, 1rem + 1vw, 4rem);
+    }
+  }
+  .suggestion {
+    margin: 0.5rem auto;
+    font-size: clamp(0.6rem, 0.6rem + 1vw, 1rem);
+  }
+  span {
+    color: $nursh_dark_gold;
+  }
+}

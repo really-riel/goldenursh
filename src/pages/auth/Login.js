@@ -107,6 +107,12 @@ const Login = () => {
             >
               Sign In With Google <AiOutlineGoogle />
             </motion.button>
+            <p className="signUpOption">
+              Dont have an account? Sign-Up
+              <Link to={"/auth/login"}>
+                <motion.span whileTap={{ scale: 0.8 }}> here</motion.span>
+              </Link>
+            </p>
           </div>
         </motion.div>
       </section>

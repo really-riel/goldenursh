@@ -36,9 +36,11 @@ const ResetPassword = () => {
               </motion.button>
               <div className="options">
                 <Link to={"/auth/login"}>
-                  <motion.p whileTap={{ scale: 0.8 }}>Login</motion.p>
+                  <motion.p whileTap={{ scale: 0.8 }} className="option">
+                    Login
+                  </motion.p>
                 </Link>
-                <Link to={"/auth/sign-up"}>
+                <Link to={"/auth/sign-up"} className="option">
                   <motion.p whileTap={{ scale: 0.8 }}>Sign Up</motion.p>
                 </Link>
               </div>
