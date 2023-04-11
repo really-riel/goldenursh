@@ -28,7 +28,7 @@ const Login = () => {
           </p>
           <form>
             <label htmlFor="email">E-mail Address</label>
-            <input type="email" id="email" autoFocus required />
+            <input type="email" id="email" required />
             <label htmlFor="password">password</label>
             <div className="passwordWrapper">
               <input
