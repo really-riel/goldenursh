@@ -109,7 +109,7 @@ const Login = () => {
             </motion.button>
             <p className="signUpOption">
               Dont have an account? Sign-Up
-              <Link to={"/auth/login"}>
+              <Link to={"/auth/sign-up"}>
                 <motion.span whileTap={{ scale: 0.8 }}> here</motion.span>
               </Link>
             </p>
