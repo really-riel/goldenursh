@@ -31,6 +31,9 @@ const DesktopNav = () => {
             </div>
           )}
         </motion.li>
+        <NavLink to={"/contact"}>
+          <motion.li whileTap={{ scale: 0.8 }}>Contact</motion.li>
+        </NavLink>
         <NavLink to={"auth/login"}>
           <motion.li whileTap={{ scale: 0.8 }} onClick={() => setIsOpen(false)}>
             Login

@@ -1,0 +1,48 @@
+@use "../abstract/" as *;
+.tabletContactPage {
+  display: none;
+
+  @include mq(tablet) {
+    display: flex;
+  }
+
+  .container1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $nursh_light_gold;
+  }
+
+  .gridContainer {
+    width: 80%;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+    position: relative;
+  }
+  .grid1 {
+    background-color: red;
+  }
+  .message {
+  }
+
+  .grid2 {
+    background-color: white;
+    width: 14rem;
+    border: 0.5rem solid $nursh_dark_gold;
+    border-radius: $card_border_radius;
+    height: 100%;
+    right: 0;
+    text-align: center;
+  }
+  figure {
+    width: 20rem;
+    margin-left: -3rem;
+    margin-top: -3rem;
+  }
+  img {
+    width: 100%;
+  }
+}

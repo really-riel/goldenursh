@@ -11,6 +11,7 @@ const MobileContactPage = () => {
         initial={{ opacity: 0, x: 300 }}
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: -300 }}
+        transition={{ delay: 0.2, duration: 1 }}
         className="contactWrapper"
       >
         <p>
