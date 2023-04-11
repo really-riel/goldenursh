@@ -1,7 +1,12 @@
 import React from "react";
+import MobileContactPage from "../../components/MobileContactPage";
 
 const Contact = () => {
-  return <div>Contact</div>;
+  return (
+    <main className="Contact">
+      <MobileContactPage />
+    </main>
+  );
 };
 
 export default Contact;
