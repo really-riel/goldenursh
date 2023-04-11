@@ -5,7 +5,7 @@
   display: grid;
   font-size: clamp(0.5rem, 0.7rem + 1vw, 1rem);
   .formContainer {
-    padding: 2rem 0.5rem;
+    padding: 2rem 1rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -27,6 +27,7 @@
     border-radius: $card_border_radius;
     outline: none;
     border: none;
+    font-size: 1rem;
   }
   .passwordWrapper {
     background-color: $nursh_light_gold;
@@ -54,8 +55,6 @@
     align-items: center;
     justify-content: center;
     gap: 0.2rem;
-  }
-  .switch {
   }
 
   .or {
