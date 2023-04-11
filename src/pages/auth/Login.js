@@ -13,11 +13,13 @@ import Switch from "react-switch";
 
 const Login = () => {
   const [isPasswordvisible, setIsPasswordVisble] = useState(false);
+  const [istoggled, setIsToggled] = useState(false);
+
   return (
     <main className="Login">
       <AuthSectionDesign />
 
-      <section>
+      <section className="loginSection2">
         <p className="tabletLogin">
           Hello, Welcome back. <br /> Good to have you
         </p>
@@ -27,8 +29,8 @@ const Login = () => {
             Hello, Welcome back. <br /> Good to have you
           </p>
           <form>
-            <label htmlFor="email">E-mail Address</label>
-            <input type="email" id="email" required />
+            <label htmlFor="loginEmail">E-mail Address</label>
+            <input type="email" id="loginEmail" required />
             <label htmlFor="password">password</label>
             <div className="passwordWrapper">
               <input
@@ -42,8 +44,16 @@ const Login = () => {
                 onMouseDown={() => setIsPasswordVisble(true)}
                 onMouseUp={() => setIsPasswordVisble(false)}
                 onTouchStart={() => setIsPasswordVisble(true)}
-                onTouchEnd={() => setIsPasswordVisble(false)}
-                onTouchCancel={() => setIsPasswordVisble(false)}
+                onTouchEnd={() =>
+                  setTimeout(() => {
+                    setIsPasswordVisble(false);
+                  }, 3000)
+                }
+                onTouchCancel={() =>
+                  setTimeout(() => {
+                    setIsPasswordVisble(false);
+                  }, 3000)
+                }
               >
                 {isPasswordvisible ? (
                   <AiOutlineEye />
@@ -63,9 +73,13 @@ const Login = () => {
                 <Switch
                   uncheckedIcon={false}
                   checkedIcon={false}
-                  checked={false}
+                  checked={istoggled}
                   onColor="#084104"
                   className="switch"
+                  onChange={() => setIsToggled(!istoggled)}
+                  width={30}
+                  height={15}
+                  /* #084104  #9acd32*/
                 />
               </div>
             </div>

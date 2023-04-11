@@ -257,7 +257,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.3rem;
-  box-shadow: 0 0.2rem 0.3rem $nursh_light_gold;
+  box-shadow: $card_shadow2;
 
   @include mq(tablet) {
     height: auto;
