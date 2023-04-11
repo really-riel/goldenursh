@@ -3,7 +3,7 @@
 footer {
   background-color: $nursh_green;
   padding: 1.5rem 0;
-  font-size: clamp(0.3rem, 0.5rem + 1vw, 0.6rem);
+  font-size: clamp(0.3rem, 0.3rem + 1vw, 1.5rem);
   color: white;
 
   .footerSections {
@@ -20,9 +20,9 @@ footer {
     gap: 0.3rem;
 
     button {
-      width: 0.8rem;
-      height: 0.8rem;
-      border-radius: 50%;
+      padding: clamp(0.3rem, 0.0725rem + 1vw, 0.7rem);
+
+      border-radius: $card_border_radius;
       background-color: $nursh_dark_gold;
       color: white;
       display: flex;
@@ -30,7 +30,7 @@ footer {
       justify-content: center;
       align-items: center;
       svg {
-        font-size: 0.4rem;
+        font-size: clamp(0.4rem, 0.2rem + 1vw, 0.9rem);
       }
     }
   }
@@ -57,6 +57,7 @@ footer {
   }
 
   form {
+    width: 100%;
     background-color: white;
     display: flex;
     justify-content: center;
@@ -67,7 +68,7 @@ footer {
     input {
       width: 100%;
       background-color: transparent;
-      outline-color: transparent;
+      outline: none;
       border: none;
       flex-grow: 1;
 
@@ -92,6 +93,7 @@ footer {
     display: flex;
     align-items: center;
     gap: 0.2rem;
+    cursor: pointer;
 
     svg {
       font-size: clamp(0.6rem, 1rem + 1vw, 1rem);

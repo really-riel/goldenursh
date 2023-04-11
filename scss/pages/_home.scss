@@ -2,16 +2,31 @@
 .Home {
   min-height: 100vh;
 
+  /* Meal slider */
   .swiper-slide img {
     display: block;
     width: 100%;
     height: 25rem;
     object-fit: cover;
+    @include mq(tablet) {
+      height: 50vh;
+    }
+    @include mq(laptop) {
+      height: 95vh;
+    }
   }
   .swiper,
   swiper-container {
     z-index: 0;
     margin: 0;
+  }
+  .mealSliderContainer {
+    position: relative;
+
+    background-color: $nursh_cream;
+    @include mq(tablet) {
+      padding-bottom: 4rem;
+    }
   }
   .mealSlider {
     position: relative;
@@ -24,119 +39,46 @@
       width: 100%;
       background-color: rgba(0, 0, 0, 0.559);
       color: whitesmoke;
-
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: rem(18);
 
+      @include mq(laptop) {
+        align-items: flex-start;
+        padding-left: 5rem;
+      }
+
       p {
         margin: 0 auto;
-        font-size: clamp(0.9rem, 0.2rem + 1vw, 1.5rem);
+        font-size: clamp(0.9rem, 0.7rem + 1vw, 1.5rem);
         font-weight: 600;
         text-align: center;
         line-height: 1.5;
+
+        @include mq(tablet) {
+          font-size: clamp(1.5rem, 1rem + 1vw, 3rem);
+        }
+        @include mq(laptop) {
+          text-align: left;
+        }
       }
       button {
-        font-size: 0.9;
+        font-size: clamp(0.9rem, 1rem + 1vw, 2rem);
         padding-left: 1.2rem;
         padding-right: 1.2rem;
         background-color: $nursh_dark_gold;
         color: $nursh_green;
-      }
-    }
-    .featuresContainer {
-      width: 80%;
-      z-index: 5;
-      position: absolute;
-      left: 50%;
-      right: 50%;
-      transform: translate(-50%, -50%);
-      bottom: -2rem;
-      color: #000;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
 
-      gap: 0.2rem;
-    }
-    .feature {
-      background-color: white;
-      font-size: clamp(0.3rem, 0.25rem + 1vw, 0.8rem);
-      font-weight: 500;
-      height: 5rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.3rem;
-      padding: 0.3rem 0.5rem;
-
-      p {
-        text-align: center;
-      }
-      svg {
-        font-size: 0.7rem;
-      }
-
-      .iconOne {
-        background-color: greenyellow;
-        padding: 0.5rem;
-        border-radius: 50%;
-      }
-      .iconTwo {
-        background-color: $nursh_light_gold;
-        padding: 0.5rem;
-        border-radius: 50%;
-        svg {
-          color: $nursh_dark_olive;
+        @include mq(laptop) {
+          padding: 1.1rem 1.9rem;
         }
       }
-      .iconThree {
-        background-color: greenyellow;
-        padding: 0.5rem;
-        border-radius: 50%;
-      }
-    }
-
-    .right {
-      border-radius: 0 50% 50% 0;
-    }
-    .left {
-      border-radius: 50% 0 0 50%;
-    }
-  }
-  .trendingOrders {
-    position: relative;
-    width: 100%;
-
-    padding-top: 2rem;
-    padding-bottom: 6rem;
-    background-color: $nursh_cream;
-    display: flex;
-    gap: 2rem;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    span {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      font-size: 0.8rem;
-      margin-top: -1rem;
-      margin-left: 70%;
-      text-align: right;
-      border-bottom: 0.1rem solid black;
     }
   }
 
-  .trendingOrdersList {
-    width: 95%;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
+  /* your choice section */
   .yourChoice {
     flex-grow: 1;
     background-color: $nursh_light_gold;
@@ -144,9 +86,20 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: 2rem;
     padding-bottom: 3rem;
   }
+  .yourChoiceList {
+    width: 80%;
+    display: grid;
+    gap: 1rem;
+
+    @include mq(laptop) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* review section */
   .review {
     background-color: $nursh_cream;
     display: flex;
@@ -157,6 +110,7 @@
     padding: 2rem 0;
   }
 
+  /* connect section */
   .connect {
     display: flex;
     flex-direction: column;
@@ -171,14 +125,24 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     overflow: hidden;
+    @include mqSmall {
+      grid-template-columns: auto;
+      gap: 1rem;
+    }
+    @include mq(tablet) {
+      width: 85%;
+    }
   }
   .section1Container {
     display: flex;
     align-items: flex-start;
     justify-content: center;
+
+    @include mq(tablet) {
+    }
   }
   .section1 {
-    font-size: clamp(0.5rem, 0.4rem + 1vw, 1rem);
+    font-size: clamp(0.5rem, 0.4rem + 1vw, 1.5rem);
     font-weight: 500;
     display: flex;
     flex-direction: column;
@@ -187,11 +151,20 @@
     text-align: left;
     overflow: hidden;
     gap: 0.5rem;
+    margin-top: -0.5rem;
+
+    @include mq(laptop) {
+      margin-top: -0.725rem;
+    }
 
     img {
       width: 10rem;
       height: 12rem;
       object-fit: cover;
+      @include mq(tablet) {
+        width: 20rem;
+        height: 20rem;
+      }
     }
     ul {
       display: flex;
@@ -206,6 +179,10 @@
       align-items: flex-start;
       justify-content: flex-start;
       gap: 0.5rem;
+
+      @include mq(tablet) {
+        width: 70%;
+      }
     }
     svg {
       font-size: 1.5rem;
@@ -214,7 +191,7 @@
   .section2Container {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
   }
   .section2 {
     background-color: white;
@@ -222,10 +199,17 @@
     box-shadow: $card_shadow;
     border-radius: $card_border_radius;
     border: 0.2rem solid $nursh_dark_gold;
-    width: 70%;
+    width: min(70%, 8rem);
     height: 85%;
+    margin-left: 1rem;
+    @include mqSmall {
+      width: min(45%, 10rem);
+    }
+    @include mq(tablet) {
+      width: min(70%, 12rem);
+    }
 
-    font-size: clamp(0.3rem, 0.4rem + 1vw, 0.8rem);
+    font-size: clamp(0.3rem, 0.2rem + 1vw, 1rem);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -237,6 +221,85 @@
     img {
       width: 10rem;
       margin-top: -1rem;
+      @include mq(tablet) {
+        width: 18rem;
+      }
     }
+  }
+}
+
+/* features */
+.featuresContainer {
+  width: 80%;
+  z-index: 10;
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%);
+  bottom: -2rem;
+  color: #000;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.2rem;
+  @include mq(tablet) {
+    bottom: -3rem;
+  }
+}
+
+.feature {
+  background-color: white;
+  font-size: clamp(0.3rem, 0.25rem + 1vw, 0.8rem);
+  font-weight: 500;
+  height: clamp(5.4rem, 0.5rem + 1rem, 6rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  box-shadow: 0 0.2rem 0.3rem $nursh_light_gold;
+
+  @include mq(tablet) {
+    height: auto;
+    padding: 1.5rem;
+  }
+
+  p {
+    text-align: center;
+  }
+  svg {
+    font-size: clamp(0.7rem, 0.5rem + 1vw, 2rem);
+  }
+
+  .iconOne {
+    background-color: greenyellow;
+    padding: clamp(0.4rem, 1rem + 1vw, 0.7rem);
+    border-radius: 50%;
+  }
+  .iconTwo {
+    background-color: $nursh_light_gold;
+    padding: clamp(0.4rem, 1rem + 1vw, 0.7rem);
+    border-radius: 50%;
+    svg {
+      color: $nursh_dark_olive;
+    }
+  }
+  .iconThree {
+    background-color: greenyellow;
+    padding: clamp(0.4rem, 1rem + 1vw, 0.7rem);
+    border-radius: 50%;
+  }
+}
+
+.right {
+  border-radius: 0 50% 50% 0;
+  @media only screen and (min-width: em(500)) {
+    border-radius: 0 1.5rem 1.5rem 0;
+  }
+}
+.left {
+  border-radius: 50% 0 0 50%;
+  @media only screen and (min-width: em(500)) {
+    border-radius: 1.5rem 0 0 1.5rem;
   }
 }

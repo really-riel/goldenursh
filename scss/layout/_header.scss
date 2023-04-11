@@ -9,11 +9,30 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 0.5rem 0.2rem 0.7rem;
-  img {
-    width: 6rem;
-    margin-bottom: -0.5rem;
+  color: white;
+  @include mq(tablet) {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
   }
+
+  @include mq(laptop) {
+    flex-direction: row;
+    .hamburgerMenu {
+      display: none;
+    }
+  }
+
   svg {
-    color: whitesmoke;
+    color: white;
+    cursor: pointer;
+    @include mq(tablet) {
+      font-size: clamp(1.5rem, 0.5rem + 1vw, 2.5rem);
+    }
+  }
+
+  .logoContainer {
+    display: flex;
+
+    gap: 1rem;
   }
 }

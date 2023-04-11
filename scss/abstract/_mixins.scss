@@ -2,11 +2,24 @@
 $breakpoints-up: (
   "tablet": f.em(768),
   "laptop": f.em(1024),
+  "xLarge": f.em(2100),
 );
 
 @mixin mq($key) {
   $size: map-get($breakpoints-up, $key);
   @media only screen and (min-width: $size) {
+    @content;
+  }
+}
+
+@mixin mqSmall {
+  @media only screen and (max-width: f.em(375)) {
+    @content;
+  }
+}
+
+@mixin mqMaxWMinH {
+  @media only screen and (max-width: f.em(768)) and (min-height: f.em(960)) {
     @content;
   }
 }

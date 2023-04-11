@@ -3,7 +3,7 @@ import logo from "../assets/logo.png";
 
 const Logo = () => {
   return (
-    <figure>
+    <figure className="logo">
       <img src={logo} alt="goldenurshLogo" />
     </figure>
   );

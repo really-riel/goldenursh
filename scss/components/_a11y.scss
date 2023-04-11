@@ -2,7 +2,20 @@
 
 .active {
   background-color: $nursh_dark_olive;
+
   border-right: 0.2rem solid $nursh_light_gold;
+
+  @include mq(laptop) {
+    border: none;
+    border-radius: $card_border_radius;
+  }
+}
+
+.active > button {
+  background-color: $nursh_dark_olive;
+  svg {
+    color: white;
+  }
 }
 .shapedividers_com-9855 {
   overflow: hidden;

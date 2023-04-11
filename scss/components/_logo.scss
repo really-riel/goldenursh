@@ -1,0 +1,10 @@
+@use "../abstract" as *;
+.logo {
+  img {
+    width: 6rem;
+    margin-bottom: -0.5rem;
+    @include mq(tablet) {
+      width: clamp(8rem, 1rem + 1vw, 9rem);
+    }
+  }
+}

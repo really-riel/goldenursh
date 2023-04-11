@@ -2,7 +2,11 @@ import React from "react";
 import { BsCartFill, BsFillSendFill } from "react-icons/bs";
 import { IoMdFlash } from "react-icons/io";
 import { IoCheckboxOutline } from "react-icons/io5";
-import { RiArrowRightFill } from "react-icons/ri";
+import {
+  RiArrowDownFill,
+  RiArrowRightFill,
+  RiArrowUpFill,
+} from "react-icons/ri";
 import MealSlider from "../../components/MealSlider";
 import {
   customerReview,
@@ -15,22 +19,26 @@ import YourChoiceCard from "../../components/YourChoiceCard";
 import ReviewSlide from "../../components/ReviewSlide";
 import img1 from "../../assets/connectImg1.png";
 import img2 from "../../assets/connectImg2.png";
+import { motion } from "framer-motion";
 
 const Home = () => {
   const [isViewAll, setIsViewAll] = useState(false);
   return (
     <main className="Home">
-      <section className="mealSlider shapedividers_com-9855">
-        <MealSlider />
-        <div className="about">
-          <div>
-            <p>
-              Scrumptious meal Ordering <br /> and Delivery made easy <br />
-              with new Goldenursh <br />
-              Order site.
-            </p>
+      {/* Meal slider */}
+      <section className=" mealSliderContainer ">
+        <div className="mealSlider  shapedividers_com-9855">
+          <MealSlider />
+          <div className="about">
+            <div>
+              <p>
+                Scrumptious meal Ordering <br /> and Delivery made easy <br />
+                with new Goldenursh <br />
+                Order site.
+              </p>
+            </div>
+            <button>Order now</button>
           </div>
-          <button>Order now</button>
         </div>
         <div className="featuresContainer">
           <div className="feature left">
@@ -61,6 +69,8 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* trending Orders */}
       <section
         id="trendingOrders"
         className="trendingOrders shapedividers_com-9343"
@@ -74,16 +84,33 @@ const Home = () => {
             ))}
         </div>
 
-        <span onClick={() => setIsViewAll(!isViewAll)}>
-          View all <RiArrowRightFill />
-        </span>
+        <motion.span
+          whileTap={{ scale: 0.8 }}
+          className="viewAll"
+          onClick={() => setIsViewAll(!isViewAll)}
+        >
+          {isViewAll ? (
+            <>
+              Hide
+              <RiArrowUpFill />
+            </>
+          ) : (
+            <>
+              {" "}
+              View all <RiArrowDownFill />
+            </>
+          )}
+        </motion.span>
       </section>
-      {}
+      {/* your choice */}
       <section id="yourChoice" className="yourChoice">
         <h2>ORDER BASED ON YOUR CHOICE</h2>
-        {yourChoiceMeals?.map((item, index) => (
-          <YourChoiceCard key={index} item={item} />
-        ))}
+        <div className="yourChoiceList">
+          {yourChoiceMeals?.map((item, index) => (
+            <YourChoiceCard key={index} item={item} />
+          ))}
+        </div>
+        {/* review */}
       </section>
       {customerReview && (
         <section className="review">
@@ -91,6 +118,8 @@ const Home = () => {
           <ReviewSlide customerReview={customerReview} />
         </section>
       )}
+
+      {/* connect */}
       <section className="connect">
         <h2>CONNECT WITH US</h2>
         <div className="connectSections">

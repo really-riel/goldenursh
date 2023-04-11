@@ -60,12 +60,20 @@ const SideNav = ({ setIsSideNavOpen }) => {
                 <MdOutlineConnectWithoutContact /> Contact
               </li>
             </NavLink>
-            <NavLink to={"/cart"} onClick={() => setIsSideNavOpen(false)}>
+            <NavLink
+              className="cart"
+              to={"/cart"}
+              onClick={() => setIsSideNavOpen(false)}
+            >
               <li>
                 <FiShoppingCart /> Cart
               </li>
             </NavLink>
-            <NavLink to={"/profile"} onClick={() => setIsSideNavOpen(false)}>
+            <NavLink
+              className="profile"
+              to={"/profile"}
+              onClick={() => setIsSideNavOpen(false)}
+            >
               <li>
                 <BsPerson />
                 Profile

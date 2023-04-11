@@ -1,9 +1,16 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const YourChoiceCard = ({ item }) => {
   return (
     <div className="yourChoiceCard">
-      <img src={item?.image} alt="foodImg" />
+      <figure>
+        <motion.img
+          whileHover={{ scale: 1.2 }}
+          src={item?.image}
+          alt="foodImg"
+        />
+      </figure>
 
       <p className="category">Category</p>
       <div className="info">

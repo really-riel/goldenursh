@@ -9,6 +9,7 @@
   color: white;
   display: grid;
   grid-template-columns: 70% 30%;
+  font-size: clamp(1rem, 1rem + 1vw, 2rem);
 
   section:first-child {
     background-color: $nursh_green;
@@ -22,6 +23,11 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      @include mq(tablet) {
+        svg {
+          margin-right: 0.7rem;
+        }
+      }
     }
   }
 
@@ -30,7 +36,7 @@
     flex-direction: column;
   }
   .categoryList {
-    font-size: 0.8rem;
+    font-size: clamp(0.8rem, 0.6rem + 1vw, 1.3rem);
     padding-left: 2.5rem;
   }
   li {
@@ -40,11 +46,93 @@
     padding: 0.7rem 0.7rem;
   }
   svg {
-    font-size: 1.2rem;
+    font-size: clamp(1.2rem, 1rem + 1vw, 1.6rem);
   }
 
   section:last-child {
     background-color: black;
     opacity: 0.5;
+  }
+  .cart {
+    @include mq(tablet) {
+      display: none;
+    }
+  }
+  .profile {
+    @include mq(tablet) {
+      display: none;
+    }
+  }
+}
+
+/* TABLET NAV */
+.tabletNav {
+  display: none;
+
+  @include mq(tablet) {
+    display: flex;
+    gap: 1rem;
+    font-size: clamp(1rem, 1rem + 1vw, 2rem);
+    svg {
+      color: $nursh_dark_olive;
+    }
+  }
+
+  button {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: grid;
+    place-content: center;
+  }
+}
+
+/* DESKTOP NAV */
+.desktopNav {
+  display: none;
+
+  @include mq(laptop) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 1rem;
+  }
+
+  ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  li {
+    padding: 0.5rem 1.2rem;
+  }
+
+  .category {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+
+    svg {
+      margin-top: 0.2rem;
+    }
+  }
+
+  .categoryList {
+    position: absolute;
+    top: 3rem;
+    font-size: clamp(0.5rem, 0.1rem + 1vw, 0.8rem);
+    padding: min(3vh, 0.4rem) 0;
+    width: 8rem;
+    background-color: white;
+    border-radius: $card_border_radius;
+    color: black;
+    ul {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      align-items: center;
+    }
   }
 }
