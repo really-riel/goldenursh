@@ -14,6 +14,7 @@ import Cart from "./pages/Cart/Cart";
 import Profile from "./pages/Profile/Profile";
 import Login from "./pages/auth/Login";
 import ResetPassword from "./pages/auth/ResetPassword";
+import Missing from "./pages/Missing/Missing";
 
 function App() {
   return (
@@ -41,6 +42,8 @@ function App() {
           <Route path="message" element={<Message />} />
           <Route path="notification" element={<Notification />} />
         </Route>
+
+        <Route path="*" element={<Missing />} />
       </Route>
     </Routes>
   );
