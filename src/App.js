@@ -13,6 +13,7 @@ import Contact from "./pages/Contact/Contact";
 import Cart from "./pages/Cart/Cart";
 import Profile from "./pages/Profile/Profile";
 import Login from "./pages/auth/Login";
+import ResetPassword from "./pages/auth/ResetPassword";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
 
         <Route path="auth">
           <Route path="login" element={<Login />} />
+          <Route path="reset-password" element={<ResetPassword />} />
         </Route>
 
         <Route path="admin">
