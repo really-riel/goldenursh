@@ -25,7 +25,7 @@ const SignUp = () => {
           <div className="formContainer">
             <SmallLogo />
             <p className="mobileLogin">
-              Hello, Glad to have you. <br /> You can Sign-up for an account{" "}
+              Hello, Glad to have you. <br /> You can Sign-up for an account
               <br />
               below.
             </p>
@@ -42,10 +42,13 @@ const SignUp = () => {
                 id="image"
                 accept="image/*"
               />
-              <label htmlFor="firstName">First Name</label>
-              <input type="text" id="firstName" />
-              <label htmlFor="lastName">Last Name</label>
-              <input type="text" id="lastName" />
+              <label htmlFor="name">Name</label>
+              <input
+                type="text"
+                id="name"
+                placeholder="First name   Last name"
+              />
+
               <label htmlFor="signUpEmail">E-mail Address</label>
               <input type="email" id="signUpEmail" required />
               <label htmlFor="signUpPassword">password</label>

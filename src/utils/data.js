@@ -209,3 +209,11 @@ export const customerReview = [
     image: p6,
   },
 ];
+
+export const user = {
+  name: "Oladewa Victor",
+  image: p5,
+  email: "stephenBalogun@gmail.com",
+  phone: "+2348183705147",
+  address: "No 22, irepedon ti oluwani street, Adegbayi, lagos.",
+};

@@ -1,8 +1,5 @@
 @use "../abstract" as *;
 .SignUp {
-  .hidden {
-    display: none;
-  }
   .uploadImage {
     border: 0.2rem solid $nursh_dark_olive;
     width: 11rem;

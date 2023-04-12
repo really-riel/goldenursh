@@ -1,0 +1,32 @@
+@use "../abstract" as *;
+
+.ProfileEdit {
+  figure {
+    width: 9rem;
+    height: 10rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+  }
+  .editPhoto {
+    position: absolute;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.778);
+    color: white;
+    width: 100%;
+    text-align: center;
+  }
+
+  button {
+    background-color: $nursh_dark_olive;
+    color: white;
+    padding: clamp(0.7rem, 1rem + 1vw, 1rem) clamp(0.5rem, 1rem + 1vw, 0.8rem);
+    font-size: clamp(1rem, 1rem + 1vw, 1.3rem);
+    margin-top: 2rem;
+  }
+}

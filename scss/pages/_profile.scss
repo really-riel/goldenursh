@@ -1,0 +1,73 @@
+@use "../abstract" as *;
+
+.Profile {
+  display: flex;
+  flex-direction: column;
+
+  .mobileHeading {
+    font-size: clamp(1rem, 1rem + 1vw, 1.5rem);
+
+    @include mq(tablet) {
+      display: none;
+    }
+  }
+  img {
+    width: 9rem;
+    height: 9rem;
+    box-shadow: $card_shadow;
+    object-fit: cover;
+    border-radius: $card_border_radius;
+  }
+
+  .profileDetails {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .container {
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 30% 70%;
+  }
+  .imageContainer {
+    background-color: white;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0 2rem;
+  }
+  .formContainer {
+    background-color: $nursh_cream;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 1.5rem 0;
+    flex-grow: 1;
+    flex-direction: column;
+  }
+  form {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  input {
+    outline: none;
+    border: none;
+    background-color: $nursh_light_gold;
+    border-radius: 0.7rem;
+    padding: clamp(0.7rem, 1rem + 1vw, 1rem) clamp(0.5rem, 1rem + 1vw, 0.8rem);
+    margin-bottom: clamp(0.5rem, 1rem + 1vw, 1rem);
+  }
+  .editBtn {
+    margin-top: 1rem;
+    font-size: 1rem;
+    border-bottom: 0.2rem solid $nursh_dark_olive;
+  }
+}
