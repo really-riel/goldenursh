@@ -3,7 +3,7 @@
 .Profile {
   display: flex;
   flex-direction: column;
-
+  overflow-y: auto;
   .mobileHeading {
     font-size: clamp(1rem, 1rem + 1vw, 1.5rem);
 

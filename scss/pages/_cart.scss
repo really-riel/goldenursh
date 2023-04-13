@@ -1,0 +1,38 @@
+@use "../abstract" as *;
+.Cart {
+  background-color: $nursh_cream;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.emptyCart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 80%;
+  flex-grow: 1;
+  padding: 4rem 0;
+  gap: 3rem;
+
+  figure {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  img {
+    width: 80%;
+    max-width: rem(350);
+  }
+  h2 {
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+  }
+}

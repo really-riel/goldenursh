@@ -1,4 +1,10 @@
-import { Route, Routes } from "react-router-dom";
+import {
+  Route,
+  RouterProvider,
+  Routes,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from "react-router-dom";
 import Layout from "./layout/Layout";
 
 import Dashboard from "./pages/Admin/Dashboard";
@@ -19,8 +25,8 @@ import SignUp from "./pages/auth/SignUp";
 import ProfileEdit from "./pages/Profile/ProfileEdit";
 
 function App() {
-  return (
-    <Routes>
+  const router = createBrowserRouter(
+    createRoutesFromElements(
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
 
@@ -51,8 +57,9 @@ function App() {
 
         <Route path="*" element={<Missing />} />
       </Route>
-    </Routes>
+    )
   );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

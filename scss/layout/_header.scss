@@ -33,6 +33,6 @@ header {
   .logoContainer {
     display: flex;
 
-    gap: 1rem;
+    gap: clamp(0.5rem, 0.3rem + 1vw, 1rem);
   }
 }

@@ -43,6 +43,11 @@ h2 {
 
 img {
   display: block;
+  pointer-events: none;
+
+  @include mq(laptop) {
+    pointer-events: all;
+  }
 }
 ul {
   list-style-type: none;

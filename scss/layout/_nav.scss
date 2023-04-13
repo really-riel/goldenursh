@@ -67,15 +67,12 @@
 
 /* TABLET NAV */
 .tabletNav {
-  display: none;
-
-  @include mq(tablet) {
-    display: flex;
-    gap: 1rem;
-    font-size: clamp(1rem, 1rem + 1vw, 2rem);
-    svg {
-      color: $nursh_dark_olive;
-    }
+  display: flex;
+  gap: clamp(0.5rem, 1rem + 1vw, 1.2rem);
+  font-size: clamp(1.5rem, 0.5rem + 1vw, 3rem);
+  svg {
+    color: $nursh_dark_olive;
+    font-size: inherit;
   }
 
   button {
@@ -83,6 +80,32 @@
     height: 2.5rem;
     display: grid;
     place-content: center;
+    svg {
+      font-size: clamp(1rem, 1rem + 1vw, 2rem);
+    }
+
+    @include mq(tablet) {
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+  .cart {
+    position: relative;
+    height: 100%;
+    display: grid;
+    place-content: center;
+    svg {
+      color: white;
+    }
+  }
+
+  .count {
+    position: absolute;
+    top: -0.03rem;
+    right: -0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: $nursh_light_gold;
   }
 }
 
@@ -101,7 +124,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: 0.4rem;
   }
   li {
     padding: 0.5rem 1.2rem;

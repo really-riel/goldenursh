@@ -23,6 +23,8 @@ export const trendingOrders = [
     image: I1,
     price: 3500,
     rating: 5,
+    category: "Trending Orders",
+    quantity: 1,
   },
   {
     id: 2,
@@ -31,6 +33,8 @@ export const trendingOrders = [
     image: I3,
     price: 3500,
     rating: 5,
+    category: "Trending Orders",
+    quantity: 1,
   },
   {
     id: 3,
@@ -39,6 +43,8 @@ export const trendingOrders = [
     image: I4,
     price: 3500,
     rating: 5,
+    category: "Trending Orders",
+    quantity: 1,
   },
   {
     id: 4,
@@ -47,6 +53,8 @@ export const trendingOrders = [
     image: I3,
     price: 3500,
     rating: 5,
+    category: "Trending Orders",
+    quantity: 1,
   },
   {
     id: 5,
@@ -55,6 +63,8 @@ export const trendingOrders = [
     image: I1,
     price: 3500,
     rating: 5,
+    category: "Trending Orders",
+    quantity: 1,
   },
   {
     id: 6,
@@ -63,6 +73,8 @@ export const trendingOrders = [
     image: I1,
     price: 3500,
     rating: 5,
+    category: "Trending Orders",
+    quantity: 1,
   },
   {
     id: 7,
@@ -71,6 +83,8 @@ export const trendingOrders = [
     image: I1,
     price: 3500,
     rating: 5,
+    category: "Trending Orders",
+    quantity: 1,
   },
   {
     id: 8,
@@ -79,6 +93,8 @@ export const trendingOrders = [
     image: I6,
     price: 3500,
     rating: 5,
+    category: "Trending Orders",
+    quantity: 1,
   },
   {
     id: 9,
@@ -87,6 +103,8 @@ export const trendingOrders = [
     image: I6,
     price: 3500,
     rating: 5,
+    category: "Trending Orders",
+    quantity: 1,
   },
   {
     id: 10,
@@ -95,6 +113,8 @@ export const trendingOrders = [
     image: I3,
     price: 3500,
     rating: 5,
+    category: "Trending Orders",
+    quantity: 1,
   },
   {
     id: 11,
@@ -103,6 +123,8 @@ export const trendingOrders = [
     image: I1,
     price: 3500,
     rating: 5,
+    category: "Trending Orders",
+    quantity: 1,
   },
   {
     id: 12,
@@ -111,6 +133,8 @@ export const trendingOrders = [
     image: I1,
     price: 3500,
     rating: 5,
+    category: "Trending Orders",
+    quantity: 1,
   },
   {
     id: 13,
@@ -119,6 +143,8 @@ export const trendingOrders = [
     image: I1,
     price: 3500,
     rating: 5,
+    category: "Trending Orders",
+    quantity: 1,
   },
   {
     id: 14,
@@ -127,6 +153,8 @@ export const trendingOrders = [
     image: I6,
     price: 3500,
     rating: 5,
+    category: "Trending Orders",
+    quantity: 1,
   },
   {
     id: 15,
@@ -135,6 +163,8 @@ export const trendingOrders = [
     image: I6,
     price: 3500,
     rating: 5,
+    category: "Trending Orders",
+    quantity: 1,
   },
 ];
 

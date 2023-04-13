@@ -10,6 +10,7 @@ footer {
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  z-index: 50;
 
   .footerSections {
     width: 80%;
@@ -127,7 +128,7 @@ footer {
     }
   }
   .footing {
-    width: 100%;
+    width: 95%;
     border-top: 0.05rem solid $nursh_cream;
     padding: 0.4rem 0;
     text-align: center;
