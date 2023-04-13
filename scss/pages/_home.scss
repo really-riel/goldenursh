@@ -292,14 +292,8 @@
 }
 
 .right {
-  border-radius: 0 50% 50% 0;
-  @media only screen and (min-width: em(500)) {
-    border-radius: 0 1.5rem 1.5rem 0;
-  }
+  border-radius: 0 1.5rem 1.5rem 0;
 }
 .left {
-  border-radius: 50% 0 0 50%;
-  @media only screen and (min-width: em(500)) {
-    border-radius: 1.5rem 0 0 1.5rem;
-  }
+  border-radius: 1.5rem 0 0 1.5rem;
 }

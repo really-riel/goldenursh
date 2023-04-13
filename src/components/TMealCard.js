@@ -2,14 +2,22 @@ import React from "react";
 import StarsRating from "react-star-rate";
 import { TbCurrencyNaira } from "react-icons/tb";
 import { motion } from "framer-motion";
+import useWindowSize from "../hooks/useWindowSize";
 
 const TMealCard = ({ item }) => {
+  const { width } = useWindowSize();
+  const variants = {
+    hover: {
+      scale: 1.2,
+    },
+  };
   return (
     <div className="tMealCardContainer">
       <div className="tMealCard">
         <figure>
           <motion.img
-            whileHover={{ scale: 1.2 }}
+            variants={width >= 1024 ? variants : null}
+            whileHover="hover"
             src={item?.image}
             alt={item?.name}
           />

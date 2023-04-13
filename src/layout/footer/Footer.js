@@ -7,6 +7,8 @@ import { FaFacebookF } from "react-icons/fa";
 const Footer = () => {
   const [email, setEmail] = useState("");
 
+  const year = new Date().getFullYear();
+
   const handleGoToTop = () => {
     window.scrollTo({
       top: 0,
@@ -27,7 +29,7 @@ const Footer = () => {
     <footer>
       <div className="footerSections">
         <section>
-          <p>Goldenursh</p>
+          <p>Socials</p>
           <div className="socials">
             {socialIcons.map((icon, index) => (
               <button key={index}>{icon}</button>
@@ -48,6 +50,7 @@ const Footer = () => {
           </a>
         </section>
       </div>
+      <p className="footing">Copyright {year} &copy; All rights Reserved. </p>
     </footer>
   );
 };

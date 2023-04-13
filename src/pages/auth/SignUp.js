@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AuthSectionDesign from "../../components/AuthSectionDesign";
 import { MdCloudUpload } from "react-icons/md";
 
@@ -7,6 +7,8 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 const SignUp = () => {
+  const [file, setFile] = useState(null);
+  console.log(file);
   return (
     <main className="Login SignUp">
       <AuthSectionDesign />
@@ -31,16 +33,21 @@ const SignUp = () => {
             </p>
             <form>
               <div className="uploadImage">
-                <label htmlFor="image" className="image">
-                  <MdCloudUpload />
-                  upload Profile Picture
-                </label>
+                {file ? (
+                  <img src={URL.createObjectURL(file)} alt="image" />
+                ) : (
+                  <label htmlFor="image" className="image">
+                    <MdCloudUpload />
+                    upload Profile Picture
+                  </label>
+                )}
               </div>
               <input
                 type="file"
                 className="hidden"
                 id="image"
                 accept="image/*"
+                onChange={(e) => setFile(e.target.files[0])}
               />
               <label htmlFor="name">Name</label>
               <input
