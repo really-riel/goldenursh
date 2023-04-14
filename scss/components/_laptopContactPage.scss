@@ -1,8 +1,8 @@
 @use "../abstract/" as *;
-.tabletContactPage {
+.laptopContactPage {
   display: none;
 
-  @include mq(tablet) {
+  @include mq(laptop) {
     display: flex;
   }
 

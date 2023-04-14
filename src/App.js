@@ -23,6 +23,7 @@ import ResetPassword from "./pages/auth/ResetPassword";
 import Missing from "./pages/Missing/Missing";
 import SignUp from "./pages/auth/SignUp";
 import ProfileEdit from "./pages/Profile/ProfileEdit";
+import Checkout from "./pages/Cart/Checkout";
 
 function App() {
   const router = createBrowserRouter(
@@ -32,7 +33,10 @@ function App() {
 
         <Route path="contact" element={<Contact />} />
 
-        <Route path="cart" element={<Cart />} />
+        <Route path="cart">
+          <Route index element={<Cart />} />
+          <Route path="checkout" element={<Checkout />} />
+        </Route>
 
         <Route path="profile">
           <Route index element={<Profile />} />

@@ -1,0 +1,63 @@
+@use "../abstract" as *;
+
+.cartOrderCard {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+  font-size: clamp(0.5rem, 0.5rem + 1vw, 1rem);
+  max-height: 20rem;
+  max-width: rem(600);
+
+  overflow: hidden;
+  background-color: white;
+  border-radius: $card_border_radius;
+
+  box-shadow: $card_shadow;
+
+  h3 {
+    font-weight: 00;
+  }
+  figure {
+    width: 100%;
+    height: 100%;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .orderDetails {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .quantitySection {
+    display: flex;
+    background-color: $nursh_light_gold;
+    padding: 0.2rem 0.3rem;
+    justify-content: space-between;
+    border-radius: 0.2rem;
+  }
+  .react-star-rate {
+    font-size: clamp(1.5rem, 1rem + 1vw, 2rem);
+
+    li {
+      margin-right: 0.1rem;
+    }
+  }
+  .remove {
+    border-radius: 0.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    background-color: transparent;
+
+    color: rgb(214, 51, 51);
+    svg {
+      font-size: 1rem;
+      margin-top: -0.1rem;
+    }
+  }
+}

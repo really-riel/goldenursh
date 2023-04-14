@@ -4,9 +4,9 @@ import { FaFacebookF } from "react-icons/fa";
 import { motion } from "framer-motion";
 import contactImg from "../assets/connectImg2.png";
 
-const TabletContactPage = () => {
+const LaptopContactPage = () => {
   return (
-    <section className="tabletContactPage ">
+    <section className="laptopContactPage ">
       <div className="container1">
         <div className="gridContainer">
           <div className="grid1">
@@ -48,4 +48,4 @@ const TabletContactPage = () => {
   );
 };
 
-export default TabletContactPage;
+export default LaptopContactPage;

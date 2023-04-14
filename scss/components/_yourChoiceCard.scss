@@ -14,7 +14,7 @@
     "img abt"
     "img btn";
   grid-template-rows: 1fr 1fr 2fr 1fr;
-  height: clamp(min(18rem, 40vh), 1rem + 5vw, 40rem);
+  height: clamp(16.5rem, 1rem + 5vw, 40rem);
 
   figure {
     grid-area: img;

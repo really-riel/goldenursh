@@ -1,12 +1,12 @@
 import React from "react";
 import MobileContactPage from "../../components/MobileContactPage";
-import TabletContactPage from "../../components/TabletContactPage";
+import LaptopContactPage from "../../components/LaptopContactPage";
 
 const Contact = () => {
   return (
     <main className="Contact">
       <MobileContactPage />
-      <TabletContactPage />
+      <LaptopContactPage />
     </main>
   );
 };
