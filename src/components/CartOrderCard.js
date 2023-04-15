@@ -11,11 +11,9 @@ const CartOrderCard = ({ order }) => {
   );
   return (
     <div className="cartOrderCard">
-      <div className="figContainer">
-        <figure>
-          <img src={order.image} alt={order.id} />
-        </figure>
-      </div>
+      <figure>
+        <img src={order.image} alt={order.id} />
+      </figure>
 
       <div className="orderDetails">
         <div className="">
