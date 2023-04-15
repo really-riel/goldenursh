@@ -18,6 +18,7 @@ import {
 import Loading from "../../components/Loading";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { useEffect } from "react";
+import Loader from "../../components/Loader";
 
 const SignUp = () => {
   const [rawName, setRawName] = useState("");
@@ -27,6 +28,7 @@ const SignUp = () => {
   const [imageUrl, setImageUrl] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isImageLoading, setIsImageLoading] = useState(false);
 
   const { setUser } = useStoreActions((actions) => actions.auth);
   const navigate = useNavigate();
@@ -44,7 +46,7 @@ const SignUp = () => {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
     if (password !== confirmPassword) {
       toast.error("Passwords don't match");
       return;
@@ -69,17 +71,19 @@ const SignUp = () => {
         image: imageUrl,
         address: "",
       });
+      setIsLoading(false);
       navigate("/");
       toast.success("account created");
     } catch (error) {
       console.error(error);
+      setIsLoading(false);
       toast.error(error.code.split("/")[1].replaceAll("-", " "));
     }
   };
 
   const handleImageUpload = (e) => {
     const imageFile = e.target.files[0];
-    setIsLoading(true);
+    setIsImageLoading(true);
     const storageRef = ref(storage, `profileImages/${imageFile.name}`);
     const uploadTask = uploadBytesResumable(storageRef, imageFile);
 
@@ -90,7 +94,7 @@ const SignUp = () => {
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       },
       (error) => {
-        setIsLoading(false);
+        setIsImageLoading(false);
         console.error(error);
 
         toast.error("Error while uploading : Try Again 🙇‍♂️");
@@ -98,29 +102,30 @@ const SignUp = () => {
       async () => {
         const downloadUrl = await getDownloadURL(uploadTask.snapshot.ref);
         setImageUrl(downloadUrl);
-        setIsLoading(false);
+        setIsImageLoading(false);
         toast.success("image Uploaded successfully 😊");
       }
     );
   };
 
   const handleDeleteImage = async () => {
-    setIsLoading(true);
+    setIsImageLoading(true);
     try {
       const deleteRef = ref(storage, imageUrl);
       await deleteObject(deleteRef);
-      setIsLoading(false);
+      setIsImageLoading(false);
       setImageUrl(null);
       toast.success("image deleted successfully 😊");
     } catch (error) {
       console.log(error);
-      setIsLoading(false);
+      setIsImageLoading(false);
       toast.error("Error occured while deleting: try again 🙇‍♂️");
     }
   };
 
   return (
     <main className="Login SignUp">
+      {isLoading && <Loader />}
       <AuthSectionDesign />
 
       <section className="loginSection2">
@@ -143,7 +148,7 @@ const SignUp = () => {
             </p>
             <form onSubmit={handleSignUp}>
               <div className="uploadImage">
-                {imageUrl && !isLoading ? (
+                {imageUrl && !isImageLoading ? (
                   <>
                     <figure>
                       <img src={imageUrl} alt="image" />
@@ -156,7 +161,7 @@ const SignUp = () => {
                       <MdDelete />
                     </button>
                   </>
-                ) : isLoading ? (
+                ) : isImageLoading ? (
                   <Loading />
                 ) : (
                   <div className="labelContainer">
@@ -217,7 +222,7 @@ const SignUp = () => {
                 whileTap={{ scale: 0.8 }}
                 className="signIn"
                 type="submit"
-                disabled={isLoading}
+                disabled={isImageLoading}
               >
                 Sign Up
               </motion.button>

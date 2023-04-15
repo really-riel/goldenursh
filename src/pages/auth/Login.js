@@ -20,12 +20,14 @@ import { toast } from "react-toastify";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { setUsersInDatabase } from "../../utils/firebaseFunctions";
+import Loader from "../../components/Loader";
 
 const Login = () => {
   const [isPasswordvisible, setIsPasswordVisble] = useState(false);
   const [isRememberMe, setIsRememberMe] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const { setUser, setIsUserInDataBase } = useStoreActions(
     (actions) => actions.auth
   );
@@ -36,18 +38,21 @@ const Login = () => {
 
   const handleSignIn = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
-
+      setIsLoading(false);
       toast.success("Login Successful");
     } catch (error) {
       console.error(error);
+      setIsLoading(false);
       toast.error(error.code.split("/")[1].replaceAll("-", " "));
     }
   };
 
   const handleSignInWithGoogle = async () => {
+    setIsLoading(true);
     try {
       const provider = new GoogleAuthProvider();
       const response = await signInWithPopup(auth, provider);
@@ -62,16 +67,19 @@ const Login = () => {
         timeStamp: serverTimestamp(),
         address: null,
       });
+      setIsLoading(false);
       state ? navigate(state) : navigate("/");
       toast.success("Login Successful");
     } catch (error) {
       console.log(error);
-      toast.error(error.code.split("/")[1]);
+      setIsLoading(false);
+      toast.error(error.code.split("/")[1].replaceAll("-", " "));
     }
   };
 
   return (
     <main className="Login">
+      {isLoading && <Loader />}
       <AuthSectionDesign />
       <section className="loginSection2">
         <motion.div
