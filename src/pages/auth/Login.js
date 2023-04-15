@@ -17,7 +17,7 @@ import {
 } from "firebase/auth";
 import { auth, db } from "../../utils/firebase";
 import { toast } from "react-toastify";
-import { action, useStoreActions, useStoreState } from "easy-peasy";
+import { useStoreActions, useStoreState } from "easy-peasy";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 
 const Login = () => {
