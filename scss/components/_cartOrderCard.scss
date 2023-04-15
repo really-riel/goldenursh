@@ -2,20 +2,22 @@
 
 .cartOrderCard {
   display: grid;
-
+  width: 100%;
+  max-width: rem(400);
+  margin: 0 auto;
   grid-template-columns: repeat(2, 1fr);
-  font-size: clamp(0.5rem, 0.5rem + 1vw, 1rem);
-  max-height: 20rem;
-  max-width: rem(600);
-
+  font-size: clamp(0.5rem, 0.5rem + 1vw, 0.8rem);
+  height: auto;
   overflow: hidden;
   background-color: white;
   border-radius: $card_border_radius;
 
   box-shadow: $card_shadow;
 
-  h3 {
-    font-weight: 00;
+  h3,
+  .meal,
+  .price {
+    font-weight: 500;
   }
   figure {
     width: 100%;
@@ -27,20 +29,36 @@
     object-fit: cover;
   }
   .orderDetails {
-    padding: 0.5rem;
+    height: 100%;
+    padding: 1rem 1rem 0.5rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    gap: 0.3rem;
+  }
+  .price {
+    display: flex;
+    align-items: center;
+    font-size: clamp(0.8rem, 0.7rem + 1vw, 1.2rem);
+    font-weight: 600;
   }
   .quantitySection {
     display: flex;
     background-color: $nursh_light_gold;
-    padding: 0.2rem 0.3rem;
+
     justify-content: space-between;
     border-radius: 0.2rem;
+    width: 70%;
+    margin: 0.5rem auto;
+
+    padding: 0.3rem;
+
+    svg {
+      cursor: pointer;
+    }
   }
   .react-star-rate {
-    font-size: clamp(1.5rem, 1rem + 1vw, 2rem);
+    font-size: clamp(1.3rem, 1rem + 1vw, 2rem);
 
     li {
       margin-right: 0.1rem;

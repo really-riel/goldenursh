@@ -56,22 +56,25 @@ const Cart = () => {
           <p>
             Proceed with your <br /> Order
           </p>
+
           <div className="orderList">
             {cartItems.map((item, index) => (
               <CartOrderCard key={index} order={item} />
             ))}
           </div>
-          <button className="removeAll" onClick={() => clearCart()}>
-            <RiDeleteBinFill />
-            Remove All
-          </button>
-          <div className="subTotal">
-            <p>SubTotal</p>
-            <p>{subTotal}</p>
+          <div className="mainControls">
+            <button className="removeAll" onClick={() => clearCart()}>
+              <RiDeleteBinFill />
+              Remove All
+            </button>
+            <div className="subTotal">
+              <p>SubTotal</p>
+              <p>{subTotal}</p>
+            </div>
+            <button className="process" onClick={handleOrderProcess}>
+              Process
+            </button>
           </div>
-          <button className="process" onClick={handleOrderProcess}>
-            Process
-          </button>
         </section>
       ) : (
         <motion.section

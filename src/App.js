@@ -24,6 +24,7 @@ import Missing from "./pages/Missing/Missing";
 import SignUp from "./pages/auth/SignUp";
 import ProfileEdit from "./pages/Profile/ProfileEdit";
 import Checkout from "./pages/Cart/Checkout";
+import { RequireAuth } from "./components/RequireLinks";
 
 function App() {
   const router = createBrowserRouter(
@@ -39,7 +40,14 @@ function App() {
         </Route>
 
         <Route path="profile">
-          <Route index element={<Profile />} />
+          <Route
+            index
+            element={
+              <RequireAuth>
+                <Profile />
+              </RequireAuth>
+            }
+          />
           <Route path="edit" element={<ProfileEdit />} />
         </Route>
 

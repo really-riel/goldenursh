@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { user } from "../../utils/data";
+
 import { AiOutlineEdit } from "react-icons/ai";
 import { motion } from "framer-motion";
+import { useStoreState } from "easy-peasy";
 
 const ProfileEdit = () => {
+  const { user } = useStoreState((state) => state.auth);
   const [editName, setEditName] = useState(user.name);
   const [editEmail, setEditEmail] = useState(user.email);
   const [editPhone, setEditPhone] = useState(user.phone);

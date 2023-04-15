@@ -1,9 +1,12 @@
 import React from "react";
-import { user } from "../../utils/data";
+
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import profileImg from "../../assets/userProfile.png";
+import { useStoreState } from "easy-peasy";
 
 const Profile = () => {
+  const { user } = useStoreState((state) => state.auth);
   return (
     <main className="Profile">
       <section className="profileDetails">
@@ -47,14 +50,19 @@ const Profile = () => {
                 />
 
                 <label htmlFor="phone">Phone</label>
-                <input type="tel" id="phone" value={user.phone} readOnly />
+                <input
+                  type="tel"
+                  id="phone"
+                  value={user.phone ? user.phone : "ADD PHONE NUMBER"}
+                  readOnly
+                />
 
                 <label htmlFor="address">Address</label>
                 <input
                   type="text"
                   id="address"
                   readOnly
-                  value={user.address.length > 0 ? user.address : "ADD ADDRESS"}
+                  value={user.address ? user.address : "ADD ADDRESS"}
                 />
               </form>
               <Link to={"/profile/edit"}>

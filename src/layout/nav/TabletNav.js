@@ -7,7 +7,10 @@ import { useStoreState } from "easy-peasy";
 
 const TabletNav = () => {
   const [qty, setqty] = useState(null);
-  const { cartItems } = useStoreState((state) => state.cart);
+  const {
+    cart: { cartItems },
+    auth: { user },
+  } = useStoreState((state) => state);
 
   useEffect(() => {
     const total = cartItems.reduce((acc, item) => {
@@ -25,9 +28,13 @@ const TabletNav = () => {
         </motion.div>
       </Link>
       <NavLink to={"/profile"}>
-        <motion.button whileTap={{ scale: 0.8 }}>
-          <BsPerson />
-        </motion.button>
+        {user ? (
+          <img src={user.image} alt="" className="userImage" />
+        ) : (
+          <motion.button whileTap={{ scale: 0.8 }}>
+            <BsPerson />
+          </motion.button>
+        )}
       </NavLink>
     </div>
   );

@@ -8,17 +8,90 @@ import {
 
 import SmallLogo from "../../components/SmallLogo";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Switch from "react-switch";
+import {
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
+import { auth, db } from "../../utils/firebase";
+import { toast } from "react-toastify";
+import { action, useStoreActions, useStoreState } from "easy-peasy";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import useGetDocuments from "../../hooks/useGetDocuments";
+import GetDocuments from "../../utils/GetDocuments";
 
 const Login = () => {
   const [isPasswordvisible, setIsPasswordVisble] = useState(false);
-  const [istoggled, setIsToggled] = useState(false);
+  const [isRememberMe, setIsRememberMe] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { setUser, setIsUserInDataBase } = useStoreActions(
+    (actions) => actions.auth
+  );
+  const { isUserInDataBase } = useStoreState((state) => state.auth);
+  const navigate = useNavigate();
+  const { state } = useLocation();
+  console.log(state);
+
+  const setUsersInDatabase = async (user) => {
+    try {
+      await setDoc(doc(db, "users", user.uid), {
+        id: user.uid,
+        name: user.displayName,
+        email: user.email,
+        phone: user.phoneNumber,
+        image: user.photoURL,
+        timeStamp: serverTimestamp(),
+        address: null,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await signInWithEmailAndPassword(auth, email, password);
+      const { doc, error } = await GetDocuments("users", response.user.uid);
+      console.log(doc);
+
+      toast.success("Login Successful");
+    } catch (error) {
+      console.error(error);
+      toast.error(error.code.split("/")[1].replaceAll("-", " "));
+    }
+  };
+
+  const handleSignInWithGoogle = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      const response = await signInWithPopup(auth, provider);
+      console.log(response.user);
+      await setUsersInDatabase(response.user);
+      setUser({
+        id: response.user.uid,
+        name: response.user.displayName,
+        email: response.user.email,
+        phone: response.user.phoneNumber,
+        image: response.user.photoURL,
+        timeStamp: serverTimestamp(),
+        address: null,
+      });
+      state ? navigate(state) : navigate("/");
+      toast.success("Login Successful");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.code.split("/")[1]);
+    }
+  };
 
   return (
     <main className="Login">
       <AuthSectionDesign />
-
       <section className="loginSection2">
         <motion.div
           initial={{ opacity: 0, y: -500 }}
@@ -34,14 +107,22 @@ const Login = () => {
             <p className="mobileLogin">
               Hello, Welcome back. <br /> Good to have you
             </p>
-            <form>
+            <form onSubmit={handleSignIn}>
               <label htmlFor="loginEmail">E-mail Address</label>
-              <input type="email" id="loginEmail" required />
+              <input
+                type="email"
+                id="loginEmail"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
               <label htmlFor="password">password</label>
               <div className="passwordWrapper">
                 <input
                   type={isPasswordvisible ? "text" : "password"}
                   id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   required
                 />
 
@@ -82,10 +163,10 @@ const Login = () => {
                   <Switch
                     uncheckedIcon={false}
                     checkedIcon={false}
-                    checked={istoggled}
+                    checked={isRememberMe}
                     onColor="#084104"
                     className="switch"
-                    onChange={() => setIsToggled(!istoggled)}
+                    onChange={() => setIsRememberMe(!isRememberMe)}
                     width={30}
                     height={15}
                     /* #084104  #9acd32*/
@@ -104,6 +185,7 @@ const Login = () => {
             <motion.button
               whileTap={{ scale: 0.8 }}
               className="signInWithGoogle"
+              onClick={handleSignInWithGoogle}
             >
               Sign In With Google <AiOutlineGoogle />
             </motion.button>

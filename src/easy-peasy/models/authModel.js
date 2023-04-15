@@ -5,4 +5,11 @@ export const authModel = {
   setUser: action((state, payload) => {
     state.user = payload;
   }),
+  deleteUser: action((state) => {
+    state.user = null;
+  }),
+  isUserInDataBase: false,
+  setIsUserInDataBase: action((state, payload) => {
+    state.IsUserInDataBase = payload;
+  }),
 };

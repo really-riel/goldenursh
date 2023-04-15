@@ -6,16 +6,32 @@ import { HiOutlineViewGrid } from "react-icons/hi";
 import { MdOutlineConnectWithoutContact } from "react-icons/md";
 import { FiChevronDown, FiChevronRight, FiShoppingCart } from "react-icons/fi";
 import { BsPerson } from "react-icons/bs";
-import { HiOutlineArrowRightOnRectangle } from "react-icons/hi2";
+import {
+  HiOutlineArrowLeftOnRectangle,
+  HiOutlineArrowRightOnRectangle,
+} from "react-icons/hi2";
 import { FaTimes } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { ShowOnLogin, ShowOnLogout } from "../../components/RequireLinks";
+import { signOut } from "firebase/auth";
+import { auth } from "../../utils/firebase";
+import { toast } from "react-toastify";
+import { useStoreActions, useStoreState } from "easy-peasy";
 
 const SideNav = ({ setIsSideNavOpen }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { deleteUser } = useStoreActions((actions) => actions.auth);
 
-  const handleScrollTo = (location) => {
-    window.location.replace(`#${location}`);
-    setIsSideNavOpen(false);
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      setIsSideNavOpen(false);
+      deleteUser();
+      toast.success("logout Successful");
+    } catch (error) {
+      console.error(error);
+      toast.error(error.code.split("/")[1]);
+    }
   };
 
   return (
@@ -45,13 +61,9 @@ const SideNav = ({ setIsSideNavOpen }) => {
             </li>
             {isOpen && (
               <ul className="categoryList">
-                <li onClick={() => handleScrollTo("trendingOrders")}>
-                  Trending Orders
-                </li>
+                <li>Trending Orders</li>
 
-                <li onClick={() => handleScrollTo("yourChoice")}>
-                  Order based on your choice
-                </li>
+                <li>Order based on your choice</li>
               </ul>
             )}
 
@@ -79,11 +91,24 @@ const SideNav = ({ setIsSideNavOpen }) => {
                 Profile
               </li>
             </NavLink>
-            <NavLink to={"/auth/login"} onClick={() => setIsSideNavOpen(false)}>
-              <li>
-                <HiOutlineArrowRightOnRectangle /> Login
+            {/* login */}
+            <ShowOnLogout>
+              <NavLink
+                to={"/auth/login"}
+                onClick={() => setIsSideNavOpen(false)}
+              >
+                <li>
+                  <HiOutlineArrowRightOnRectangle /> Login
+                </li>
+              </NavLink>
+            </ShowOnLogout>
+
+            {/* logout */}
+            <ShowOnLogin>
+              <li onClick={handleLogout} style={{ cursor: "pointer" }}>
+                <HiOutlineArrowLeftOnRectangle /> Logout
               </li>
-            </NavLink>
+            </ShowOnLogin>
           </ul>
         </nav>
       </section>
