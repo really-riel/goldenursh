@@ -19,8 +19,6 @@ import { auth, db } from "../../utils/firebase";
 import { toast } from "react-toastify";
 import { action, useStoreActions, useStoreState } from "easy-peasy";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
-import useGetDocuments from "../../hooks/useGetDocuments";
-import GetDocuments from "../../utils/GetDocuments";
 
 const Login = () => {
   const [isPasswordvisible, setIsPasswordVisble] = useState(false);
@@ -56,8 +54,6 @@ const Login = () => {
 
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
-      const { doc, error } = await GetDocuments("users", response.user.uid);
-      console.log(doc);
 
       toast.success("Login Successful");
     } catch (error) {
