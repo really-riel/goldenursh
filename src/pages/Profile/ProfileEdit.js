@@ -9,9 +9,11 @@ const ProfileEdit = () => {
   const { user } = useStoreState((state) => state.auth);
   const [editName, setEditName] = useState(user.name);
   const [editEmail, setEditEmail] = useState(user.email);
-  const [editPhone, setEditPhone] = useState(user.phone);
+  const [editPhone, setEditPhone] = useState(user.phone ? user.phone : "");
   const [editImage, setEditImage] = useState(user.image ? user.image : avatar);
-  const [editAddress, setEditAddress] = useState(user.address);
+  const [editAddress, setEditAddress] = useState(
+    user.address ? user.address : ""
+  );
   return (
     <main className="Profile ProfileEdit">
       <section className="profileDetails">
