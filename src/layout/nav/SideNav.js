@@ -30,7 +30,9 @@ const SideNav = ({ setIsSideNavOpen }) => {
       toast.success("logout Successful");
     } catch (error) {
       console.error(error);
-      toast.error(error.code.split("/")[1]);
+      error.code === "auth/internal-error"
+        ? toast.error("check your Network")
+        : toast.error(error.code.split("/")[1]);
     }
   };
 
@@ -105,7 +107,7 @@ const SideNav = ({ setIsSideNavOpen }) => {
 
             {/* logout */}
             <ShowOnLogin>
-              <li onClick={handleLogout} style={{ cursor: "pointer" }}>
+              <li onClick={handleLogout}>
                 <HiOutlineArrowLeftOnRectangle /> Logout
               </li>
             </ShowOnLogin>

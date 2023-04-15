@@ -48,7 +48,14 @@ function App() {
               </RequireAuth>
             }
           />
-          <Route path="edit" element={<ProfileEdit />} />
+          <Route
+            path="edit"
+            element={
+              <RequireAuth>
+                <ProfileEdit />
+              </RequireAuth>
+            }
+          />
         </Route>
 
         <Route path="auth">
