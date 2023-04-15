@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import profileImg from "../../assets/userProfile.png";
 import { useStoreState } from "easy-peasy";
+import avatar from "../../assets/userProfile.png";
 
 const Profile = () => {
   const { user } = useStoreState((state) => state.auth);
@@ -29,7 +30,7 @@ const Profile = () => {
           >
             <div className="imageContainer">
               <h2 className="mobileHeading">Profile Details</h2>
-              <img src={user.image} alt="profile pic" />
+              <img src={user.image ? user.image : avatar} alt="profile pic" />
             </div>
             <div className="formContainer">
               <form>

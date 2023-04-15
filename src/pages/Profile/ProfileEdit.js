@@ -3,13 +3,14 @@ import React, { useState } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { motion } from "framer-motion";
 import { useStoreState } from "easy-peasy";
+import avatar from "../../assets/userProfile.png";
 
 const ProfileEdit = () => {
   const { user } = useStoreState((state) => state.auth);
   const [editName, setEditName] = useState(user.name);
   const [editEmail, setEditEmail] = useState(user.email);
   const [editPhone, setEditPhone] = useState(user.phone);
-  const [editImage, setEditImage] = useState(user.image);
+  const [editImage, setEditImage] = useState(user.image ? user.image : avatar);
   const [editAddress, setEditAddress] = useState(user.address);
   return (
     <main className="Profile ProfileEdit">

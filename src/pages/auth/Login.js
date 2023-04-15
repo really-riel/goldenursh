@@ -19,6 +19,7 @@ import { auth, db } from "../../utils/firebase";
 import { toast } from "react-toastify";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { setUsersInDatabase } from "../../utils/firebaseFunctions";
 
 const Login = () => {
   const [isPasswordvisible, setIsPasswordVisble] = useState(false);
@@ -32,22 +33,6 @@ const Login = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   console.log(state);
-
-  const setUsersInDatabase = async (user) => {
-    try {
-      await setDoc(doc(db, "users", user.uid), {
-        id: user.uid,
-        name: user.displayName,
-        email: user.email,
-        phone: user.phoneNumber,
-        image: user.photoURL,
-        timeStamp: serverTimestamp(),
-        address: null,
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   const handleSignIn = async (e) => {
     e.preventDefault();

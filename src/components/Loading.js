@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const Loader = () => {
+const Loading = () => {
   const variant = {
     animate: {
       rotate: [0, 360],
@@ -14,12 +14,19 @@ const Loader = () => {
     },
   };
   return (
-    <div className="loader">
+    <div
+      style={{
+        height: "100%",
+        display: "grid",
+        placeContent: "center",
+      }}
+    >
       <motion.svg
         variants={variant}
         animate="animate"
         aria-hidden="true"
         className="spinner"
+        style={{ margin: "0 auto", width: "30%" }}
         viewBox="0 0 100 101"
         fill="green"
         xmlns="http://www.w3.org/2000/svg"
@@ -37,4 +44,4 @@ const Loader = () => {
   );
 };
 
-export default Loader;
+export default Loading;

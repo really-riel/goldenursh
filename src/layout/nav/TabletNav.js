@@ -4,6 +4,7 @@ import { FiShoppingCart } from "react-icons/fi";
 import { Link, NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useStoreState } from "easy-peasy";
+import avatar from "../../assets/userProfile.png";
 
 const TabletNav = () => {
   const [qty, setqty] = useState(null);
@@ -29,7 +30,11 @@ const TabletNav = () => {
       </Link>
       <NavLink to={"/profile"}>
         {user ? (
-          <img src={user.image} alt="" className="userImage" />
+          <img
+            src={user.image ? user.image : avatar}
+            alt=""
+            className="userImage"
+          />
         ) : (
           <motion.button whileTap={{ scale: 0.8 }}>
             <BsPerson />
