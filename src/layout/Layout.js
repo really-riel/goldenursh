@@ -12,12 +12,10 @@ const Layout = () => {
   const { setUser } = useStoreActions((actions) => actions.auth);
   const { user } = useStoreState((state) => state.auth);
 
-  const { doc, error } = useGetDocuments();
-
-  useEffect(() => {
+  /*   useEffect(() => {
     setUser(doc);
   }, [doc]);
-
+ */
   return (
     <>
       <ToastContainer position="top-left" className={"toastMessage"} />

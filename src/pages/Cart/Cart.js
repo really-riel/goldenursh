@@ -42,7 +42,9 @@ const Cart = () => {
 
   const handleOrderProcess = () => {
     user
-      ? navigate("/cart/checkOut")
+      ? navigate("/cart/checkOut", {
+          state: { subTotal, user },
+        })
       : navigate("/auth/login", {
           state: "/cart",
         });

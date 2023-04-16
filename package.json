@@ -5,6 +5,7 @@
   "dependencies": {
     "easy-peasy": "^5.2.0",
     "firebase": "^9.19.1",
+    "flutterwave-react-v3": "^1.3.0",
     "framer-motion": "^10.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
