@@ -63,9 +63,15 @@ const SideNav = ({ setIsSideNavOpen }) => {
             </li>
             {isOpen && (
               <ul className="categoryList">
-                <li>Trending Orders</li>
-
-                <li>Order based on your choice</li>
+                <a
+                  href="#trendingOrders"
+                  onClick={() => setIsSideNavOpen(false)}
+                >
+                  <li>Trending Orders</li>
+                </a>
+                <a href="#yourChoice" onClick={() => setIsSideNavOpen(false)}>
+                  <li>Order based on your choice</li>
+                </a>
               </ul>
             )}
 
