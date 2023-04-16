@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import AuthSectionDesign from "../../components/AuthSectionDesign";
-import {
-  AiOutlineEye,
-  AiOutlineEyeInvisible,
-  AiOutlineGoogle,
-} from "react-icons/ai";
-
 import SmallLogo from "../../components/SmallLogo";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import Switch from "react-switch";
+import { sendPasswordResetEmail } from "firebase/auth";
+import { auth } from "../../utils/firebase";
+import { toast } from "react-toastify";
 
 const ResetPassword = () => {
+  const [email, setEmail] = useState("");
+
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
+    try {
+      await sendPasswordResetEmail(auth, email);
+      toast.success(
+        "An email with instructions to reset your password has been sent. Check your email."
+      );
+    } catch (error) {
+      console.error(error);
+      toast.error("Error occurred: try again🙇‍♂️");
+    }
+  };
+
   return (
     <main className="Login ResetPassword">
       <AuthSectionDesign />
@@ -27,9 +38,15 @@ const ResetPassword = () => {
           <div className="formContainer">
             <SmallLogo />
             <p className="mobileLogin">Reset Password</p>
-            <form>
+            <form onSubmit={handleResetPassword}>
               <label htmlFor="loginEmail">E-mail Address</label>
-              <input type="email" id="loginEmail" required />
+              <input
+                type="email"
+                id="loginEmail"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
 
               <motion.button whileTap={{ scale: 0.8 }} className="signIn">
                 Reset Password

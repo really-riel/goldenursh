@@ -42,7 +42,19 @@ const Login = () => {
 
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
+      console.log(response.user);
+
+      setUser({
+        id: response.user.uid,
+        name: response.user.displayName,
+        email: response.user.email,
+        phone: response.user.phoneNumber,
+        image: response.user.photoURL,
+        timeStamp: serverTimestamp(),
+        address: null,
+      });
       setIsLoading(false);
+      state ? navigate(state) : navigate("/");
       toast.success("Login Successful");
     } catch (error) {
       console.error(error);
