@@ -1,0 +1,7 @@
+.ErrorBoundary {
+  display: grid;
+  place-items: center;
+  color: red;
+
+  font-size: clamp(0.5rem, 0.2rem + 1vw, 1rem);
+}

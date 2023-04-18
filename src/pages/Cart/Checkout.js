@@ -7,21 +7,16 @@ import { AiOutlineLeft } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 import { pushOrdersToDatabase } from "../../utils/firebaseFunctions";
 import { useEffect } from "react";
+import { useStoreActions } from "easy-peasy";
+import Loader from "../../components/Loader";
 
 const Checkout = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const { clearCart } = useStoreActions((actions) => actions.cart);
+  const [address, setAddress] = useState("");
   const {
     state: { user, subTotal, totalItems, cartItems },
   } = useLocation();
-
-  console.log(cartItems);
-
-  /*  useEffect(() => {
-    const obj = cartItems.reduce((acc, item) => {
-      acc = { ...item };
-      return acc;
-    }, {});
-    console.log(obj);
-  }, []); */
 
   const navigate = useNavigate();
 
@@ -47,8 +42,37 @@ const Checkout = () => {
 
   const handleFlutterPayment = useFlutterwave(config);
 
+  const handleOrderPayment = () => {
+    setIsLoading(true);
+    try {
+      handleFlutterPayment({
+        callback: async (response) => {
+          console.log(response);
+          if (response.status === "successful") {
+            const ordersObj = {
+              orderItems: cartItems,
+              subTotal: subTotal,
+              deliveryFee: totalItems * 500,
+              total: subTotal + totalItems * 500,
+              address: address,
+              orderStatus: "pending",
+            };
+            await pushOrdersToDatabase(user.id, ordersObj);
+            clearCart();
+            setIsLoading(false);
+            navigate("/orders");
+          }
+        },
+      });
+    } catch (error) {
+      console.error(error);
+      setIsLoading(false);
+    }
+  };
+
   return (
     <main className="Checkout">
+      {isLoading && <Loader />}
       <div className="contentWrapper">
         <section className="orderSummary">
           <h2>Order summary</h2>
@@ -115,27 +139,7 @@ const Checkout = () => {
             </p>
           </Link>
 
-          <button
-            onClick={() => {
-              handleFlutterPayment({
-                callback: async (response) => {
-                  console.log(response);
-                  if (response.status === "successful") {
-                    const ordersObj = {
-                      orderItems: cartItems,
-                      subTotal: subTotal,
-                      deliveryFee: totalItems * 500,
-                      total: subTotal + totalItems * 500,
-                    };
-                    await pushOrdersToDatabase(user.id, ordersObj);
-                    navigate("/orders");
-                  }
-                },
-              });
-            }}
-          >
-            CONFIRM ORDER
-          </button>
+          <button onClick={handleOrderPayment}>CONFIRM ORDER</button>
         </section>
       </div>
     </main>

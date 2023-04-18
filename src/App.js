@@ -1,7 +1,6 @@
 import {
   Route,
   RouterProvider,
-  Routes,
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
@@ -25,6 +24,8 @@ import SignUp from "./pages/auth/SignUp";
 import ProfileEdit from "./pages/Profile/ProfileEdit";
 import Checkout from "./pages/Cart/Checkout";
 import { RequireAuth } from "./components/RequireLinks";
+import ErrorBoundary from "./components/ErrorBoundary";
+import CustomerOrders from "./pages/CustomerOrders/CustomerOrders";
 
 function App() {
   const router = createBrowserRouter(
@@ -36,7 +37,11 @@ function App() {
 
         <Route path="cart">
           <Route index element={<Cart />} />
-          <Route path="checkout" element={<Checkout />} />
+          <Route
+            path="checkout"
+            errorElement={<ErrorBoundary />}
+            element={<Checkout />}
+          />
         </Route>
 
         <Route path="profile">
@@ -62,7 +67,7 @@ function App() {
           path="orders"
           element={
             <RequireAuth>
-              <Orders />
+              <CustomerOrders />
             </RequireAuth>
           }
         />

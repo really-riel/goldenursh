@@ -2,9 +2,10 @@ import { collection, doc, onSnapshot, query } from "firebase/firestore";
 import { db } from "../utils/firebase";
 import { useEffect } from "react";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const useGetDocuments = (collectionName, docName) => {
-  const [doc, setDoc] = useState(null);
+  const [document, setDocument] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -13,13 +14,14 @@ const useGetDocuments = (collectionName, docName) => {
     const unsubscribe = onSnapshot(
       doc(db, collectionName, docName),
       (doc) => {
-        console.log(doc.data());
-        setDoc(doc.data());
+        setDocument(doc.data());
         setIsLoading(false);
       },
       (error) => {
         console.error(error);
+        setError(error);
         setIsLoading(false);
+        toast.error(error.code);
       }
     );
 
@@ -27,7 +29,7 @@ const useGetDocuments = (collectionName, docName) => {
       unsubscribe();
     };
   }, []);
-  return { doc, error, isLoading };
+  return { document, error, isLoading };
 };
 
 export default useGetDocuments;

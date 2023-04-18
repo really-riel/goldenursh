@@ -25,6 +25,8 @@ export const pushOrdersToDatabase = async (id, ordersObj) => {
       subTotal: ordersObj.subTotal,
       deliveryFee: ordersObj.deliveryFee,
       total: ordersObj.total,
+      address: ordersObj.address,
+      orderStatus: ordersObj.orderStatus,
       timeStamp: serverTimestamp(),
     });
   } catch (error) {
