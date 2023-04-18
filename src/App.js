@@ -58,6 +58,15 @@ function App() {
           />
         </Route>
 
+        <Route
+          path="orders"
+          element={
+            <RequireAuth>
+              <Orders />
+            </RequireAuth>
+          }
+        />
+
         <Route path="auth">
           <Route path="login" element={<Login />} />
           <Route path="reset-password" element={<ResetPassword />} />

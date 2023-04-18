@@ -1,7 +1,7 @@
 @use "functions" as f;
 $breakpoints-up: (
   "tablet": f.em(768),
-  "laptop": f.em(1024),
+  "laptop": f.em(1200),
   "xLarge": f.em(2100),
 );
 

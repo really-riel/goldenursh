@@ -34,6 +34,7 @@ const TabletNav = () => {
             src={user.image ? user.image : avatar}
             alt=""
             className="userImage"
+            referrerPolicy="no-referrer"
           />
         ) : (
           <motion.button whileTap={{ scale: 0.8 }}>

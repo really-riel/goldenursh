@@ -25,7 +25,7 @@ const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [imageUrl, setImageUrl] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(false);
@@ -49,10 +49,12 @@ const SignUp = () => {
     setIsLoading(true);
     if (password !== confirmPassword) {
       toast.error("Passwords don't match");
+      setIsLoading(false);
       return;
     }
     if (name.split(" ").length < 2) {
       toast.error("Enter both First Name and LastName");
+      setIsLoading(false);
       return;
     }
 
@@ -62,15 +64,8 @@ const SignUp = () => {
         email,
         password
       );
-      await setUsersInDatabase(response.user, name, imageUrl);
+      await handleImageUpload(response.user);
 
-      setUser({
-        name,
-        email,
-        phone: response.user.phoneNumber,
-        image: imageUrl,
-        address: "",
-      });
       setIsLoading(false);
       navigate("/");
       toast.success("account created");
@@ -81,10 +76,9 @@ const SignUp = () => {
     }
   };
 
-  const handleImageUpload = (e) => {
-    const imageFile = e.target.files[0];
-    setIsImageLoading(true);
-    const storageRef = ref(storage, `profileImages/${imageFile.name}`);
+  const handleImageUpload = async (user) => {
+    if (!imageFile) return;
+    const storageRef = ref(storage, `profileImages/${user.uid}`);
     const uploadTask = uploadBytesResumable(storageRef, imageFile);
 
     uploadTask.on(
@@ -94,33 +88,26 @@ const SignUp = () => {
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       },
       (error) => {
-        setIsImageLoading(false);
         console.error(error);
-
         toast.error("Error while uploading : Try Again 🙇‍♂️");
       },
       async () => {
-        const downloadUrl = await getDownloadURL(uploadTask.snapshot.ref);
-        setImageUrl(downloadUrl);
-        setIsImageLoading(false);
-        toast.success("image Uploaded successfully 😊");
+        const imageUrl = await getDownloadURL(uploadTask.snapshot.ref);
+        await setUsersInDatabase(user, name, imageUrl);
+        setUser({
+          id: user.uid,
+          name,
+          email,
+          phone: user.phoneNumber,
+          address: "",
+          image: imageUrl,
+        });
       }
     );
   };
 
   const handleDeleteImage = async () => {
-    setIsImageLoading(true);
-    try {
-      const deleteRef = ref(storage, imageUrl);
-      await deleteObject(deleteRef);
-      setIsImageLoading(false);
-      setImageUrl(null);
-      toast.success("image deleted successfully 😊");
-    } catch (error) {
-      console.log(error);
-      setIsImageLoading(false);
-      toast.error("Error occured while deleting: try again 🙇‍♂️");
-    }
+    setImageFile(null);
   };
 
   return (
@@ -148,10 +135,10 @@ const SignUp = () => {
             </p>
             <form onSubmit={handleSignUp}>
               <div className="uploadImage">
-                {imageUrl && !isImageLoading ? (
+                {imageFile ? (
                   <>
                     <figure>
-                      <img src={imageUrl} alt="image" />
+                      <img src={URL.createObjectURL(imageFile)} alt="image" />
                     </figure>
                     <button
                       className="deleteImage"
@@ -161,8 +148,6 @@ const SignUp = () => {
                       <MdDelete />
                     </button>
                   </>
-                ) : isImageLoading ? (
-                  <Loading />
                 ) : (
                   <div className="labelContainer">
                     <label htmlFor="image" className="image">
@@ -177,7 +162,7 @@ const SignUp = () => {
                 className="hidden"
                 id="image"
                 accept="image/*"
-                onChange={handleImageUpload}
+                onChange={(e) => setImageFile(e.target.files[0])}
               />
               <label htmlFor="name">Name</label>
 

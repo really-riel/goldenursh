@@ -8,9 +8,11 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import CartOrderCard from "../../components/CartOrderCard";
 import { useState } from "react";
 import { useEffect } from "react";
+import { AiOutlineLeft } from "react-icons/ai";
 
 const Cart = () => {
   const [subTotal, setSubTotal] = useState(null);
+  const [totalItems, setTotalItems] = useState(null);
   const {
     cart: { cartItems },
     auth: { user },
@@ -23,6 +25,10 @@ const Cart = () => {
       return acc + item.quantity * item.price;
     }, 0);
     setSubTotal(total);
+    const totalItems = cartItems.reduce((acc, item) => {
+      return acc + item.quantity;
+    }, 0);
+    setTotalItems(totalItems);
   }, [cartItems]);
 
   const variant = {
@@ -42,8 +48,8 @@ const Cart = () => {
 
   const handleOrderProcess = () => {
     user
-      ? navigate("/cart/checkOut", {
-          state: { subTotal, user },
+      ? navigate("/cart/checkout", {
+          state: { subTotal, user, totalItems, cartItems },
         })
       : navigate("/auth/login", {
           state: "/cart",
@@ -76,6 +82,20 @@ const Cart = () => {
             <button className="process" onClick={handleOrderProcess}>
               Process
             </button>
+            <Link to={"/"}>
+              <p
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.2rem",
+                  fontSize: "clamp(0.3rem, 0.8rem + 1vw, 1rem )",
+                  color: "green",
+                }}
+              >
+                <AiOutlineLeft /> Go back & continue ordering
+              </p>
+            </Link>
+            <br />
           </div>
         </section>
       ) : (

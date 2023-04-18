@@ -10,7 +10,7 @@ import {
   HiOutlineArrowLeftOnRectangle,
   HiOutlineArrowRightOnRectangle,
 } from "react-icons/hi2";
-import { FaTimes } from "react-icons/fa";
+import { FaBox, FaTimes } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { ShowOnLogin, ShowOnLogout } from "../../components/RequireLinks";
 import { signOut } from "firebase/auth";
@@ -97,6 +97,16 @@ const SideNav = ({ setIsSideNavOpen }) => {
               <li>
                 <BsPerson />
                 Profile
+              </li>
+            </NavLink>
+            <NavLink
+              className="orders"
+              to={"/orders"}
+              onClick={() => setIsSideNavOpen(false)}
+            >
+              <li>
+                <FaBox />
+                Orders
               </li>
             </NavLink>
             {/* login */}

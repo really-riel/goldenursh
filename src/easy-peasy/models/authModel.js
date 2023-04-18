@@ -1,15 +1,14 @@
 import { action } from "easy-peasy";
+import secureLocalStorage from "react-secure-storage";
 
 export const authModel = {
-  user: null,
+  user: secureLocalStorage.getItem("user") || null,
   setUser: action((state, payload) => {
     state.user = payload;
+    if (payload.rememberMe) secureLocalStorage.setItem("user", state.user);
   }),
   deleteUser: action((state) => {
     state.user = null;
-  }),
-  isUserInDataBase: false,
-  setIsUserInDataBase: action((state, payload) => {
-    state.IsUserInDataBase = payload;
+    secureLocalStorage.setItem("user", state.user);
   }),
 };

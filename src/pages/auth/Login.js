@@ -18,7 +18,7 @@ import {
 import { auth, db } from "../../utils/firebase";
 import { toast } from "react-toastify";
 import { useStoreActions, useStoreState } from "easy-peasy";
-import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import { setUsersInDatabase } from "../../utils/firebaseFunctions";
 import Loader from "../../components/Loader";
 
@@ -28,13 +28,10 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { setUser, setIsUserInDataBase } = useStoreActions(
-    (actions) => actions.auth
-  );
-  const { isUserInDataBase } = useStoreState((state) => state.auth);
+  const { setUser } = useStoreActions((actions) => actions.auth);
+
   const navigate = useNavigate();
   const { state } = useLocation();
-  console.log(state);
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -42,17 +39,24 @@ const Login = () => {
 
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
-      console.log(response.user);
 
-      setUser({
-        id: response.user.uid,
-        name: response.user.displayName,
-        email: response.user.email,
-        phone: response.user.phoneNumber,
-        image: response.user.photoURL,
-        timeStamp: serverTimestamp(),
-        address: null,
-      });
+      const docRef = doc(db, "users", response.user.uid);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        console.log(data);
+        setUser({
+          id: response.user.uid,
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          image: data.image,
+          address: data.address,
+          rememberMe: isRememberMe,
+        });
+      }
+
       setIsLoading(false);
       state ? navigate(state) : navigate("/");
       toast.success("Login Successful");
@@ -69,23 +73,39 @@ const Login = () => {
       const provider = new GoogleAuthProvider();
       const response = await signInWithPopup(auth, provider);
       console.log(response.user);
-      await setUsersInDatabase(response.user);
-      setUser({
-        id: response.user.uid,
-        name: response.user.displayName,
-        email: response.user.email,
-        phone: response.user.phoneNumber,
-        image: response.user.photoURL,
-        timeStamp: serverTimestamp(),
-        address: null,
-      });
+
+      const docRef = doc(db, "users", response.user.uid);
+      const docSnap = await getDoc(docRef);
+      const data = docSnap.data();
+
+      if (!docSnap.exists()) {
+        await setUsersInDatabase(response.user);
+        setUser({
+          id: response.user.uid,
+          name: response.user.displayName,
+          email: response.user.email,
+          phone: response.user.phoneNumber,
+          image: response.user.photoURL,
+          address: null,
+        });
+      } else {
+        setUser({
+          id: response.user.uid,
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          image: data.image,
+          address: data.address,
+        });
+      }
+
       setIsLoading(false);
       state ? navigate(state) : navigate("/");
       toast.success("Login Successful");
     } catch (error) {
       console.log(error);
       setIsLoading(false);
-      toast.error(error.code.split("/")[1].replaceAll("-", " "));
+      /*  toast.error(error.code.split("/")[1].replaceAll("-", " ")); */
     }
   };
 
