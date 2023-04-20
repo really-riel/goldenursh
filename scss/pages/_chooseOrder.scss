@@ -1,0 +1,133 @@
+@use "../abstract" as *;
+
+.ChooseOrder {
+  display: grid;
+  font-size: clamp(0.5rem, 0.5rem + 1vw, 1rem);
+  section:first-child {
+    background-color: $nursh_cream;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 2rem 0;
+  }
+  h2 {
+    text-align: left;
+  }
+
+  section:last-child {
+    display: none;
+  }
+
+  .chooseSectionWrapper {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.5rem, 1rem + 1vw, 1rem);
+  }
+
+  .chooseContainer {
+    background-color: white;
+    padding: clamp(0.5rem, 1rem + 1vw, 1rem);
+    border-radius: $card_border_radius;
+    box-shadow: $card_shadow2;
+    display: grid;
+    gap: 1rem;
+  }
+  .chooseDishes,
+  .chooseDrinks {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: clamp(0.5rem, 0.5rem + 1vw, 1rem);
+  }
+
+  .heading {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background-color: $nursh_cream;
+    padding: 0.5rem 0;
+    margin-bottom: 0.5rem;
+    p {
+      text-align: center;
+    }
+  }
+
+  .selectContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .selectWrapper {
+    display: grid;
+    place-items: center;
+  }
+  select {
+    width: 90%;
+    border-radius: 0.5rem;
+    box-shadow: $card_shadow;
+    border: none;
+    outline: none;
+    text-align: center;
+    font-size: inherit;
+  }
+  option {
+    width: min-content;
+  }
+  option:active,
+  option:hover {
+    background-color: $nursh_dark_gold;
+  }
+
+  .qtySelectorWrapper {
+    display: grid;
+    place-items: center;
+  }
+  .qtySelector {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    border-radius: 0.5rem;
+    box-shadow: $card_shadow;
+    overflow: hidden;
+
+    svg {
+      font-size: clamp(0.5rem, 0.2rem + 1vw, 1rem);
+    }
+
+    p {
+      flex: 1.5;
+      text-align: center;
+      background-color: $nursh_light_gold;
+    }
+  }
+  .minusQty,
+  .plusQty {
+    background-color: white;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .price {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      font-size: 1.2rem;
+    }
+
+    p {
+      width: 80%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0.5rem;
+      box-shadow: $card_shadow;
+    }
+  }
+}

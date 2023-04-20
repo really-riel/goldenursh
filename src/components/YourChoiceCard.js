@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const YourChoiceCard = ({ item }) => {
   return (
@@ -11,14 +12,12 @@ const YourChoiceCard = ({ item }) => {
           alt="foodImg"
         />
       </figure>
-
       <p className="category">Category</p>
       <div className="info">
         <p className="title">{item?.title}:</p>
         <p className="foodItems">{item?.foodItems}</p>
-      </div>
-
-      <button>View and Make your Order</button>
+      </div>{" "}
+      <Link to={"/choose-order"}>View and Make your Order </Link>{" "}
     </div>
   );
 };

@@ -247,3 +247,152 @@ export const user = {
   phone: "+2348183705147",
   address: "No 22, irepedon ti oluwani street, Adegbayi, lagos.",
 };
+
+export const chooseOrder = {
+  Dishes: {
+    mainDish: [
+      {
+        foodType: "rice",
+        foodPrice: "250",
+      },
+      {
+        foodType: "Jollof Rice",
+        foodPrice: "300",
+      },
+      {
+        foodType: "Fried Rice",
+        foodPrice: "350",
+      },
+      {
+        foodType: "Bean",
+        foodPrice: "150",
+      },
+      {
+        foodType: "Yam",
+        foodPrice: "200",
+      },
+      {
+        foodType: "Porridge",
+        foodPrice: "250",
+      },
+    ],
+
+    garnishing: [
+      {
+        foodType: "Beef",
+        foodPrice: "100",
+      },
+      {
+        foodType: "Turkey",
+        foodPrice: "300",
+      },
+      {
+        foodType: "Chicken",
+        foodPrice: "250",
+      },
+      {
+        foodType: "Goat meat",
+        foodPrice: "300",
+      },
+      {
+        foodType: "Snail",
+        foodPrice: "300",
+      },
+      {
+        foodType: "Fish",
+        foodPrice: "150",
+      },
+      {
+        foodType: "Gizzard",
+        foodPrice: "150",
+      },
+    ],
+
+    soup: [
+      {
+        foodType: "Pepper Soup",
+        foodPrice: "250",
+      },
+      {
+        foodType: "Goatmeat Soup",
+        foodPrice: "300",
+      },
+      {
+        foodType: "Ogbono Soup",
+        foodPrice: "350",
+      },
+      {
+        foodType: "Efo riro",
+        foodPrice: "150",
+      },
+      {
+        foodType: "Gbegiri",
+        foodPrice: "200",
+      },
+      {
+        foodType: "Afang Soup",
+        foodPrice: "250",
+      },
+    ],
+  },
+
+  Drinks: {
+    Drink: [
+      {
+        foodType: "Pepsi",
+        foodPrice: "150",
+      },
+      {
+        foodType: "Coca-Cola",
+        foodPrice: "200",
+      },
+      {
+        foodType: "Sprite",
+        foodPrice: "150",
+      },
+      {
+        foodType: "Maltina",
+        foodPrice: "300",
+      },
+      {
+        foodType: "Fanta",
+        foodPrice: "150",
+      },
+      {
+        foodType: "Nutri-milk",
+        foodPrice: "250",
+      },
+    ],
+
+    FruitJuice: [
+      {
+        foodType: "Smoothie",
+        foodPrice: "300",
+      },
+      {
+        foodType: "5-Alive",
+        foodPrice: "500",
+      },
+      {
+        foodType: "Chi Exotic",
+        foodPrice: "150",
+      },
+      {
+        foodType: "Chi Active",
+        foodPrice: "300",
+      },
+    ],
+  },
+};
+
+export const chooseOrderHeading = {
+  dishes: {
+    mainDish: ["Main Dish", "Quantity", "Price"],
+    garnishing: ["Garnishing", "Quantity", "Price"],
+    soup: ["Soup", "Quantity", "Price"],
+  },
+  drinks: {
+    drink: ["Drink", "Quantity", "Price"],
+    FruitJuice: ["Fruit Juice", "Quantity", "Price"],
+  },
+};

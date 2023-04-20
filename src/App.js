@@ -26,6 +26,7 @@ import Checkout from "./pages/Cart/Checkout";
 import { RequireAuth } from "./components/RequireLinks";
 import ErrorBoundary from "./components/ErrorBoundary";
 import CustomerOrders from "./pages/CustomerOrders/CustomerOrders";
+import ChooseOrder from "./pages/ChooseOrder/ChooseOrder";
 
 function App() {
   const router = createBrowserRouter(
@@ -71,6 +72,8 @@ function App() {
             </RequireAuth>
           }
         />
+
+        <Route path="choose-order" element={<ChooseOrder />} />
 
         <Route path="auth">
           <Route path="login" element={<Login />} />

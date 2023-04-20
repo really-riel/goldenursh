@@ -39,13 +39,18 @@
     grid-area: cat;
     padding: 0.5rem 0;
   }
-  button {
+  /*  a {
+    display: block;
+  } */
+  a {
     margin-top: 0.5rem;
     grid-area: btn;
     background-color: $nursh_dark_olive;
     color: $nursh_light_gold;
     font-size: clamp(0.5rem, 0.325rem + 1vw, 1.1rem);
-    padding: 0.5rem 0rem;
+    padding: 0.5rem 0;
     border-radius: $card_border_radius;
+    display: grid;
+    place-items: center;
   }
 }
