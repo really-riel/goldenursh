@@ -13,6 +13,14 @@ const chooseOrderModel = {
   setSoup: action((state, payload) => {
     state.soup = payload;
   }),
+  drink: "",
+  setDrink: action((state, payload) => {
+    state.drink = payload;
+  }),
+  fruitJuice: "",
+  setFruitJuice: action((state, payload) => {
+    state.fruitJuice = payload;
+  }),
 
   mainDishPrice: null,
   setMainDishPrice: action((state, payload) => {
@@ -26,6 +34,14 @@ const chooseOrderModel = {
   setSoupPrice: action((state, payload) => {
     state.soupPrice = payload;
   }),
+  drinkPrice: null,
+  setDrinkPrice: action((state, payload) => {
+    state.drinkPrice = payload;
+  }),
+  fruitJuicePrice: null,
+  setFruitJuicePrice: action((state, payload) => {
+    state.fruitJuicePrice = payload;
+  }),
 
   mainDishQty: 1,
   setMaindishQty: action((state, payload) => {
@@ -38,6 +54,14 @@ const chooseOrderModel = {
   soupQty: 1,
   setSoupQty: action((state, payload) => {
     state.soupQty = payload;
+  }),
+  drinkQty: 1,
+  setDrinkQty: action((state, payload) => {
+    state.drinkQty = payload;
+  }),
+  fruitJuiceQty: 1,
+  setFruitJuiceQty: action((state, payload) => {
+    state.fruitJuiceQty = payload;
   }),
 };
 

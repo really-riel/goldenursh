@@ -42,6 +42,8 @@ const ChooseDishes = ({ chooseDishes }) => {
           setDish={setMainDish}
           dishPrice={mainDishPrice}
           setDishPrice={setMainDishPrice}
+          dishQty={mainDishQty}
+          setDishQty={setMaindishQty}
         />
       </div>
       <div className="garnishing">
@@ -52,6 +54,8 @@ const ChooseDishes = ({ chooseDishes }) => {
           setDish={setGarnishing}
           dishPrice={garnishingPrice}
           setDishPrice={setGarnishingPrice}
+          dishQty={garnishingQty}
+          setDishQty={setGarnishingQty}
         />
       </div>
       <div className="soup">
@@ -62,6 +66,8 @@ const ChooseDishes = ({ chooseDishes }) => {
           setDish={setSoup}
           dishPrice={soupPrice}
           setDishPrice={setSoupPrice}
+          dishQty={soupQty}
+          setDishQty={setSoupQty}
         />
       </div>
     </div>

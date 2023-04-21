@@ -57,10 +57,10 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
   }
-  .selectWrapper {
+  /* .selectWrapper {
     display: grid;
     place-items: center;
-  }
+  } */
   select {
     width: 90%;
     border-radius: 0.5rem;
@@ -70,9 +70,7 @@
     text-align: center;
     font-size: inherit;
   }
-  option {
-    width: min-content;
-  }
+
   option:active,
   option:hover {
     background-color: $nursh_dark_gold;
@@ -83,9 +81,9 @@
     place-items: center;
   }
   .qtySelector {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+
     width: 80%;
     border-radius: 0.5rem;
     box-shadow: $card_shadow;
@@ -96,19 +94,20 @@
     }
 
     p {
-      flex: 1.5;
+      padding: 0.3rem 0;
       text-align: center;
       background-color: $nursh_light_gold;
     }
   }
   .minusQty,
   .plusQty {
-    background-color: white;
-    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
+    cursor: pointer;
+    border-radius: 0;
+    background-color: transparent;
   }
 
   .price {
@@ -118,12 +117,13 @@
     justify-content: center;
 
     svg {
-      font-size: 1.2rem;
+      font-size: 1rem;
     }
 
     p {
       width: 80%;
       display: flex;
+      padding: 0.3rem 0;
       align-items: center;
       justify-content: center;
       border-radius: 0.5rem;
