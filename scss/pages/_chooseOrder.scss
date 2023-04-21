@@ -3,20 +3,57 @@
 .ChooseOrder {
   display: grid;
   font-size: clamp(0.5rem, 0.5rem + 1vw, 1rem);
+
+  @include mq(tablet) {
+    grid-template-rows: 40% 60%;
+  }
+
   section:first-child {
     background-color: $nursh_cream;
     display: flex;
     flex-direction: column;
     align-items: center;
-
     padding: 2rem 0;
+
+    @include mq(tablet) {
+      background-color: $nursh_light_gold;
+      position: relative;
+    }
   }
+
+  section:first-child:before,
+  section:first-child:after {
+    @include mq(tablet) {
+      content: "";
+      position: absolute;
+      background-color: $nursh_light_gold;
+      width: 100%;
+      height: 60%;
+      bottom: -4rem;
+      transform-origin: bottom;
+    }
+  }
+
+  section:first-child::before {
+    left: 0;
+    transform: skewY(-3deg);
+  }
+  section:first-child::after {
+    right: 0;
+    transform: skewY(-3deg);
+  }
+
   h2 {
     text-align: left;
   }
 
   section:last-child {
     display: none;
+
+    @include mq(tablet) {
+      display: block;
+      background-color: $nursh_cream;
+    }
   }
 
   .chooseSectionWrapper {
@@ -24,6 +61,10 @@
     display: flex;
     flex-direction: column;
     gap: clamp(0.5rem, 1rem + 1vw, 1rem);
+
+    @include mq(tablet) {
+      gap: 2rem;
+    }
   }
 
   .chooseContainer {
@@ -33,12 +74,18 @@
     box-shadow: $card_shadow2;
     display: grid;
     gap: 1rem;
+
+    @include mq(tablet) {
+      z-index: 5;
+    }
+    @include mq(laptop) {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
   .chooseDishes,
   .chooseDrinks {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     gap: clamp(0.5rem, 0.5rem + 1vw, 1rem);
   }
 
@@ -57,10 +104,10 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
   }
-  /* .selectWrapper {
+  .selectWrapper {
     display: grid;
     place-items: center;
-  } */
+  }
   select {
     width: 90%;
     border-radius: 0.5rem;
@@ -108,6 +155,10 @@
     cursor: pointer;
     border-radius: 0;
     background-color: transparent;
+    color: #333;
+  }
+  .minusQty:disabled {
+    opacity: 0.3;
   }
 
   .price {

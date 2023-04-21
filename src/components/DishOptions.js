@@ -33,10 +33,8 @@ const DishOptions = ({
                 ...baseStyles,
                 border: "none",
                 boxShadow: " 0.1rem 0.2rem 0.6rem rgba(0, 0, 0, 0.363)",
+                fontSize: "1rem",
                 borderRadius: "1rem",
-                minHeight: "0.5rem",
-                padding: " 0",
-                margin: "0",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -57,6 +55,10 @@ const DishOptions = ({
               indicatorSeparator: (base) => ({
                 ...base,
                 display: "none",
+              }),
+              container: (base) => ({
+                ...base,
+                width: "80%",
               }),
             }}
             classNamePrefix={"react-select"}
@@ -83,9 +85,7 @@ const DishOptions = ({
           </div>
         </div>
         <div className="price">
-          <p
-            onChange={(e) => console.log(document.querySelector("p").innerText)}
-          >
+          <p>
             <TbCurrencyNaira display={dishPrice ? "inline" : "none"} />
             {dishPrice * dishQty}
           </p>
