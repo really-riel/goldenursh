@@ -1,0 +1,18 @@
+@use "../abstract" as *;
+
+.notAdmin {
+  background-color: $nursh_cream;
+  padding: 0 1rem;
+  .container {
+    margin-top: 2rem;
+    display: grid;
+    gap: 0.5rem;
+  }
+  h1 {
+    color: red;
+  }
+
+  a {
+    color: green;
+  }
+}

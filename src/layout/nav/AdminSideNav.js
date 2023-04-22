@@ -22,13 +22,14 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 
 const AdminSideNav = ({ setIsSideNavOpen }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { deleteUser } = useStoreActions((actions) => actions.auth);
+  const { deleteUser, setIsAdmin } = useStoreActions((actions) => actions.auth);
 
   const handleLogout = async () => {
     try {
       await signOut(auth);
       setIsSideNavOpen(false);
       deleteUser();
+      setIsAdmin(false);
       toast.success("logout Successful");
     } catch (error) {
       console.error(error);

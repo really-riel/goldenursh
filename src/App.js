@@ -23,7 +23,7 @@ import Missing from "./pages/Missing/Missing";
 import SignUp from "./pages/auth/SignUp";
 import ProfileEdit from "./pages/Profile/ProfileEdit";
 import Checkout from "./pages/Cart/Checkout";
-import { RequireAuth } from "./components/RequireLinks";
+import { RequireAdminRoute, RequireAuth } from "./components/RequireLinks";
 import ErrorBoundary from "./components/ErrorBoundary";
 import CustomerOrders from "./pages/CustomerOrders/CustomerOrders";
 import ChooseOrder from "./pages/ChooseOrder/ChooseOrder";
@@ -82,13 +82,62 @@ function App() {
         </Route>
 
         <Route path="admin">
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="staffs" element={<Staffs />} />
-          <Route path="orders" element={<Orders />} />
-          <Route path="dishes" element={<Dishes />} />
-          <Route path="inventory" element={<Inventory />} />
-          <Route path="message" element={<Message />} />
-          <Route path="notification" element={<Notification />} />
+          <Route
+            path="dashboard"
+            element={
+              <RequireAdminRoute>
+                <Dashboard />
+              </RequireAdminRoute>
+            }
+          />
+          <Route
+            path="staffs"
+            element={
+              <RequireAdminRoute>
+                <Staffs />
+              </RequireAdminRoute>
+            }
+          />
+          <Route
+            path="orders"
+            element={
+              <RequireAdminRoute>
+                <Orders />
+              </RequireAdminRoute>
+            }
+          />
+          <Route
+            path="dishes"
+            element={
+              <RequireAdminRoute>
+                <Dishes />
+              </RequireAdminRoute>
+            }
+          />
+          <Route
+            path="inventory"
+            element={
+              <RequireAdminRoute>
+                <Inventory />
+              </RequireAdminRoute>
+            }
+          />
+          <Route
+            path="message"
+            element={
+              <RequireAdminRoute>
+                <Message />{" "}
+              </RequireAdminRoute>
+            }
+          />
+          <Route
+            path="notification"
+            element={
+              <RequireAdminRoute>
+                <Notification />
+              </RequireAdminRoute>
+            }
+          />
         </Route>
 
         <Route path="*" element={<Missing />} />
