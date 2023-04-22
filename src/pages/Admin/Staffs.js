@@ -1,7 +1,7 @@
 import React from "react";
 
 const Staffs = () => {
-  return <div>Staffs</div>;
+  return <main>Staffs</main>;
 };
 
 export default Staffs;

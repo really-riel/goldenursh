@@ -1,7 +1,7 @@
 import React from "react";
 
 const Inventory = () => {
-  return <div>Inventory</div>;
+  return <main>Inventory</main>;
 };
 
 export default Inventory;

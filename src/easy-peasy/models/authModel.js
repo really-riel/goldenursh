@@ -11,4 +11,9 @@ export const authModel = {
     state.user = null;
     secureLocalStorage.setItem("user", state.user);
   }),
+
+  isAdmin: false,
+  setIsAdmin: action((state, payload) => {
+    state.isAdmin = payload;
+  }),
 };

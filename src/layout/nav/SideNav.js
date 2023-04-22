@@ -10,9 +10,13 @@ import {
   HiOutlineArrowLeftOnRectangle,
   HiOutlineArrowRightOnRectangle,
 } from "react-icons/hi2";
-import { FaBox, FaTimes } from "react-icons/fa";
+import { FaBox, FaTimes, FaUserCog } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { ShowOnLogin, ShowOnLogout } from "../../components/RequireLinks";
+import {
+  RequireAdminLink,
+  ShowOnLogin,
+  ShowOnLogout,
+} from "../../components/RequireLinks";
 import { signOut } from "firebase/auth";
 import { auth } from "../../utils/firebase";
 import { toast } from "react-toastify";
@@ -55,6 +59,16 @@ const SideNav = ({ setIsSideNavOpen }) => {
                 <SlHome /> Home
               </li>
             </NavLink>
+            <RequireAdminLink>
+              <NavLink
+                to={"/admin/dashboard"}
+                onClick={() => setIsSideNavOpen(false)}
+              >
+                <li>
+                  <FaUserCog /> Admin
+                </li>
+              </NavLink>
+            </RequireAdminLink>
 
             <li onClick={() => setIsOpen(!isOpen)}>
               <HiOutlineViewGrid />

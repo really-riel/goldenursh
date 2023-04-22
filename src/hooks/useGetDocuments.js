@@ -11,6 +11,7 @@ const useGetDocuments = (collectionName, docName) => {
 
   useEffect(() => {
     setIsLoading(true);
+    if (!collectionName || !docName) return;
     const unsubscribe = onSnapshot(
       doc(db, collectionName, docName),
       (doc) => {

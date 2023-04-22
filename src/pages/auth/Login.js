@@ -28,7 +28,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { setUser } = useStoreActions((actions) => actions.auth);
+  const { setUser, setIsAdmin } = useStoreActions((actions) => actions.auth);
 
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -45,7 +45,7 @@ const Login = () => {
 
       if (docSnap.exists()) {
         const data = docSnap.data();
-        console.log(data);
+
         setUser({
           id: response.user.uid,
           name: data.name,
@@ -56,6 +56,9 @@ const Login = () => {
           rememberMe: isRememberMe,
         });
       }
+
+      const document = await getDoc(doc(db, "admin", response.user.uid));
+      if (document.exists()) setIsAdmin(true);
 
       setIsLoading(false);
       state ? navigate(state) : navigate("/");
@@ -98,6 +101,9 @@ const Login = () => {
           address: data.address,
         });
       }
+
+      const document = await getDoc(doc(db, "admin", response.user.uid));
+      if (document.exists()) setIsAdmin(true);
 
       setIsLoading(false);
       state ? navigate(state) : navigate("/");
