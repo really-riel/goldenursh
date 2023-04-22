@@ -33,6 +33,12 @@ const Login = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
+  const checkIfUserIsAnAdmin = async (id) => {
+    const document = await getDoc(doc(db, "admin", id));
+
+    if (document.exists()) setIsAdmin(true);
+  };
+
   const handleSignIn = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -57,8 +63,7 @@ const Login = () => {
         });
       }
 
-      const document = await getDoc(doc(db, "admin", response.user.uid));
-      if (document.exists()) setIsAdmin(true);
+      await checkIfUserIsAnAdmin(response.user.uid);
 
       setIsLoading(false);
       state ? navigate(state) : navigate("/");
@@ -102,8 +107,7 @@ const Login = () => {
         });
       }
 
-      const document = await getDoc(doc(db, "admin", response.user.uid));
-      if (document.exists()) setIsAdmin(true);
+      await checkIfUserIsAnAdmin(response.user.uid);
 
       setIsLoading(false);
       state ? navigate(state) : navigate("/");
