@@ -3,6 +3,12 @@
   gap: 1rem;
   font-size: clamp(0.6rem, 0.6rem + 1vw, 1rem);
 
+  .dashboardWrapper {
+    width: 95%;
+
+    margin: 1rem auto;
+  }
+
   .summary {
     display: flex;
     flex-direction: column;
@@ -19,19 +25,6 @@
     }
   }
 
-  .cardWrapper {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: rem(10);
-
-    .number {
-      font-size: clamp(0.2rem, 0.4rem + 1vw, 1rem);
-    }
-    .title {
-      font-size: clamp(0.2rem, 0.2rem + 1vw, 0.6rem);
-    }
-  }
-
   .salesMainContainer {
     box-shadow: $card_shadow;
 
@@ -39,8 +32,8 @@
     padding: 1rem 0.5rem;
     display: grid;
     grid-template-areas:
-      "total  pie"
-      "card   card";
+      "total pie"
+      "card card";
     gap: 0.5rem;
 
     grid-template-columns: repeat(2, 1fr);
@@ -65,6 +58,16 @@
   }
   .cardWrapper {
     grid-area: card;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: rem(10);
+
+    .number {
+      font-size: clamp(0.2rem, 0.4rem + 1vw, 1rem);
+    }
+    .title {
+      font-size: clamp(0.2rem, 0.2rem + 1vw, 0.6rem);
+    }
   }
   .sales {
     display: grid;
@@ -72,6 +75,10 @@
     border-radius: $card_border_radius;
     padding: 2rem 0.7rem 0.5rem;
     box-shadow: $card_shadow;
+
+    .label {
+      font-size: clamp(0.4rem, 0.5rem + 1vw, 0.8rem);
+    }
   }
 
   .salesCalendarContainer {
@@ -97,9 +104,32 @@
   }
 
   .analytics {
-    display: flex;
-    flex-direction: column;
+    display: grid;
     gap: 1rem;
     margin-top: 1rem;
+  }
+  .analyticsDetails {
+    display: grid;
+    gap: 2rem;
+
+    @include mq(tablet) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: 300px;
+    }
+  }
+
+  .lineChartContainer {
+    border-radius: $card_border_radius;
+    box-shadow: $card_shadow;
+    padding: 0.3rem;
+    display: grid;
+    place-items: center;
+  }
+  .areaChartContainer {
+    display: grid;
+    place-items: center;
+    box-shadow: $card_shadow;
+    border-radius: $card_border_radius;
+    padding-top: 3rem;
   }
 }

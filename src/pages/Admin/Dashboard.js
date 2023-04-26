@@ -4,65 +4,86 @@ import SummaryCard from "../../components/Admin/SummaryCard";
 import { BiCalendar } from "react-icons/bi";
 import { BsChevronDown } from "react-icons/bs";
 import PieChart from "../../components/Admin/PieChart";
-import { pieData, summaryCardData } from "../../utils/data";
+import { orderSummaryData, pieData, summaryCardData } from "../../utils/data";
+import SalesTopCard from "../../components/Admin/SalesTopCard";
+import LineChart from "../../components/Admin/LineChart";
+import AreaChart from "../../components/Admin/AreaChart";
+import OrderCard from "../../components/Admin/OrderCard";
 
 const Dashboard = () => {
   const {} = useGetCollection("orders");
 
   return (
     <main className="Dashboard">
-      <h1>Dashboard</h1>
-      <p>
-        Welcome, Goldenursh Admin. <br /> Here's your restaurant <br />
-        Overview
-      </p>
-      <section className="summary">
-        <h2>Summary</h2>
-        <div className="summaryCardContainer">
-          {summaryCardData.map((data, index) => (
-            <SummaryCard
-              key={index}
-              total={data.total}
-              category={data.category}
-            />
-          ))}
-        </div>
-      </section>
-      <section className="analytics">
-        <h2>Analytics</h2>
-
-        <div className="salesSummaryContainer">
-          <div className="sales">
-            <p>Sales Summary</p>
-            <div className="salesCalendarContainer">
-              <button>Monthly</button>
-              <div className="salesCalendar">
-                <BiCalendar />
-                <BsChevronDown />
+      <div className="dashboardWrapper">
+        <h1>Dashboard</h1>
+        <p>
+          Welcome, Goldenursh Admin. <br /> Here's your restaurant <br />
+          Overview
+        </p>
+        <section className="summary">
+          <h2>Summary</h2>
+          <div className="summaryCardContainer">
+            {summaryCardData.map((data, index) => (
+              <SummaryCard
+                key={index}
+                total={data.total}
+                category={data.category}
+              />
+            ))}
+          </div>
+        </section>
+        <section className="analytics">
+          <h2>Analytics</h2>
+          <div className="analyticsDetails">
+            <div className="salesSummaryContainer">
+              <SalesTopCard title={"Sales Summary"} />
+              <div className="salesMainContainer">
+                <div className="salesTotal">
+                  <p className="number">5000</p>
+                  <p>Total Sales</p>
+                </div>
+                <div className="pieContainer">
+                  <PieChart />
+                </div>
+                <div className="cardWrapper">
+                  {pieData.map((data) => (
+                    <SummaryCard
+                      key={data.id}
+                      total={data.quantity}
+                      category={data.itemSold}
+                      type={data.type}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="revenue">
+              <SalesTopCard
+                title={"Revenue"}
+                label="Last 7 days VS prior week"
+              />
+              <div className="lineChartContainer">
+                <LineChart />
+              </div>
+            </div>
+            <div className="userMap">
+              <SalesTopCard title={"User Map"} />
+              <div className="areaChartContainer">
+                <AreaChart />
+              </div>
+            </div>
+            <div className="orderSummary">
+              <SalesTopCard title={"Order Summary"} />
+              <div className="orderSummaryDetails">
+                {orderSummaryData.map((data, index) => (
+                  <OrderCard data={data} key={index} />
+                ))}
               </div>
             </div>
           </div>
-          <div className="salesMainContainer">
-            <div className="salesTotal">
-              <p className="number">5000</p>
-              <p>Total Sales</p>
-            </div>
-            <div className="pieContainer">
-              <PieChart />
-            </div>
-            <div className="cardWrapper">
-              {pieData.map((data) => (
-                <SummaryCard
-                  key={data.id}
-                  total={data.quantity}
-                  category={data.itemSold}
-                  type={data.type}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </main>
   );
 };

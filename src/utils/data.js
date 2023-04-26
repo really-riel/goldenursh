@@ -474,3 +474,78 @@ export const pieData = [
 ];
 
 export const pieDataColor = ["#c4a838", "#edda8b", "#cbc4a5"];
+
+export const LineChartData = [
+  {
+    period: "Feb 10",
+    previousWeek: 20000,
+    currentWeek: 16000,
+  },
+  {
+    period: "Feb 11",
+    previousWeek: 2000,
+    currentWeek: 13000,
+  },
+  {
+    period: "Feb 12",
+    previousWeek: 24000,
+    currentWeek: 1600,
+  },
+  {
+    period: "Feb 13",
+    previousWeek: 23000,
+    currentWeek: 6000,
+  },
+  {
+    period: "Feb 14",
+    previousWeek: 2000,
+    currentWeek: 15000,
+  },
+  {
+    period: "Feb 15",
+    previousWeek: 2000,
+    currentWeek: 17000,
+  },
+];
+
+export const userMapData = [
+  {
+    period: "Jan",
+    users: "10",
+  },
+  {
+    period: "Feb",
+    users: "5",
+  },
+  {
+    period: "Mar",
+    users: "13",
+  },
+  {
+    period: "April",
+    users: "8",
+  },
+];
+
+export const orderSummaryData = [
+  {
+    id: 1,
+    quantity: 250,
+    label: "Ordered",
+  },
+  {
+    id: 2,
+    quantity: 20,
+    label: "Cancelled",
+  },
+  {
+    id: 3,
+    quantity: 30,
+    label: "Processed",
+  },
+  {
+    id: 4,
+    quantity: 50,
+    label: "Delivered",
+  },
+];
