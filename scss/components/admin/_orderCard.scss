@@ -1,0 +1,20 @@
+@use "../../abstract" as *;
+.orderCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: $card_shadow;
+  padding: 1rem 0;
+  border-radius: $card_border_radius;
+
+  .iconWrapper {
+    padding: clamp(0.5rem, 1rem + 1vw, 0.9rem);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background-color: green;
+    svg {
+      font-size: clamp(0.7rem, 1rem + 1vw, 2rem);
+    }
+  }
+}

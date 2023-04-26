@@ -132,4 +132,22 @@
     border-radius: $card_border_radius;
     padding-top: 3rem;
   }
+
+  .orderDetailsWrapper {
+    box-shadow: $card_shadow;
+    border-radius: $card_border_radius;
+  }
+  .orderSummaryDetails {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    padding: 1.5rem 0;
+  }
+  .totalOrders {
+    width: 100%;
+    background-color: $nursh_dark_olive;
+    color: white;
+    padding: 1rem 0;
+    font-size: clamp(0.8rem, 0.8rem + 1vw, 1.5rem);
+  }
 }

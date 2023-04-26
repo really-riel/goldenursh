@@ -75,10 +75,13 @@ const Dashboard = () => {
             </div>
             <div className="orderSummary">
               <SalesTopCard title={"Order Summary"} />
-              <div className="orderSummaryDetails">
-                {orderSummaryData.map((data, index) => (
-                  <OrderCard data={data} key={index} />
-                ))}
+              <div className="orderDetailsWrapper">
+                <div className="orderSummaryDetails">
+                  {orderSummaryData.map((data, index) => (
+                    <OrderCard data={data} key={index} />
+                  ))}
+                </div>
+                <button className="totalOrders">500 Total Orders</button>
               </div>
             </div>
           </div>
