@@ -1,0 +1,105 @@
+@use "../abstract" as *;
+.Dashboard {
+  gap: 1rem;
+  font-size: clamp(0.6rem, 0.6rem + 1vw, 1rem);
+
+  .summary {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .summaryCardContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+
+    @include mq(tablet) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .cardWrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: rem(10);
+
+    .number {
+      font-size: clamp(0.2rem, 0.4rem + 1vw, 1rem);
+    }
+    .title {
+      font-size: clamp(0.2rem, 0.2rem + 1vw, 0.6rem);
+    }
+  }
+
+  .salesMainContainer {
+    box-shadow: $card_shadow;
+
+    border-radius: $card_border_radius;
+    padding: 1rem 0.5rem;
+    display: grid;
+    grid-template-areas:
+      "total  pie"
+      "card   card";
+    gap: 0.5rem;
+
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .salesTotal {
+    grid-area: total;
+    /*  background-color: red; */
+    width: 100%;
+    font-size: 1rem;
+    padding-left: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .number {
+      font-size: clamp(2rem, 1rem + 1vw, 3rem);
+    }
+  }
+  .pieContainer {
+    grid-area: pie;
+    /*  background-color: green; */
+    width: 100%;
+  }
+  .cardWrapper {
+    grid-area: card;
+  }
+  .sales {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-radius: $card_border_radius;
+    padding: 2rem 0.7rem 0.5rem;
+    box-shadow: $card_shadow;
+  }
+
+  .salesCalendarContainer {
+    display: flex;
+    align-content: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    button {
+      font-size: clamp(0.4rem, 0.4rem + 1vw, 0.7rem);
+      padding: 0.4rem 0.6rem;
+      background-color: $nursh_dark_gold;
+    }
+  }
+
+  .salesCalendar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    svg {
+      font-size: clamp(0.4rem, 1rem + 1vw, 1rem);
+    }
+  }
+
+  .analytics {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+}

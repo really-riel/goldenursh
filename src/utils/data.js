@@ -396,3 +396,81 @@ export const chooseOrderHeading = {
     FruitJuice: ["Fruit Juice", "Quantity", "Price"],
   },
 };
+
+export const chartData = [
+  {
+    id: 1,
+    year: 2016,
+    userGain: 80000,
+    userLost: 823,
+  },
+  {
+    id: 2,
+    year: 2017,
+    userGain: 45677,
+    userLost: 82,
+  },
+  {
+    id: 3,
+    year: 2018,
+    userGain: 85000,
+    userLost: 863,
+  },
+  {
+    id: 4,
+    year: 2019,
+    userGain: 80000,
+    userLost: 555,
+  },
+  {
+    id: 5,
+    year: 2020,
+    userGain: 87000,
+    userLost: 55,
+  },
+];
+export const summaryCardData = [
+  {
+    id: 1,
+    total: 5000,
+    category: "Total Sales",
+  },
+  {
+    id: 2,
+    total: "100,000",
+    category: "Total Revenue",
+  },
+  {
+    id: 1,
+    total: 500,
+    category: "Total Orders",
+  },
+  {
+    id: 1,
+    total: 600,
+    category: "Total Users",
+  },
+];
+
+export const pieData = [
+  {
+    id: 1,
+    itemSold: "Juice Bottles",
+    quantity: 20,
+    type: "pieData",
+  },
+  {
+    id: 2,
+    itemSold: "Soft Drinks",
+    quantity: 45,
+    type: "pieData",
+  },
+  {
+    id: 3,
+    itemSold: "Dishes",
+    quantity: 67,
+    type: "pieData",
+  },
+];
+
+export const pieDataColor = ["#c4a838", "#edda8b", "#cbc4a5"];
