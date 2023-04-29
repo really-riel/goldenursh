@@ -81,11 +81,14 @@ const Dashboard = () => {
                     <OrderCard data={data} key={index} />
                   ))}
                 </div>
-                <button className="totalOrders">500 Total Orders</button>
+                <button className="dashboardBtn">500 Total Orders</button>
               </div>
             </div>
           </div>
         </section>
+        <button className="dashboardBtn">
+          Export each Category report in excel or CSV format
+        </button>
       </div>
     </main>
   );

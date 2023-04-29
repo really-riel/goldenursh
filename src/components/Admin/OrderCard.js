@@ -1,14 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { HiOutlineClipboardList } from "react-icons/hi";
 import { FcCancel } from "react-icons/fc";
 import { FaSyncAlt } from "react-icons/fa";
 import { RiHandCoinLine } from "react-icons/ri";
 
 const OrderCard = ({ data }) => {
-  console.log(data);
+  const [bgColor, setBgColor] = useState("");
+  const [icon, setIcon] = useState("");
+
+  useEffect(() => {
+    switch (data.label) {
+      case "Ordered":
+        return setBgColor("skyblue");
+      case "Cancelled":
+        return setBgColor("pink");
+      case "Processed":
+        return setBgColor("yellow");
+      case "Delivered":
+        return setBgColor("lightGreen");
+
+      default:
+        return null;
+    }
+  }, [data]);
+
   return (
     <div className="orderCard">
-      <div className="iconWrapper">
+      <div className="iconWrapper" style={{ backgroundColor: bgColor }}>
         {(() => {
           switch (data.label) {
             case "Ordered":

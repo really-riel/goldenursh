@@ -8,12 +8,15 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 import useGetDocuments from "../hooks/useGetDocuments";
 import { useEffect } from "react";
 import AdminHeader from "./header/AdminHeader";
+import AdminSideNav from "./nav/AdminSideNav";
+import useWindowSize from "../hooks/useWindowSize";
 
 const Layout = () => {
   const { setUser } = useStoreActions((actions) => actions.auth);
   const { user } = useStoreState((state) => state.auth);
 
   const { pathname } = useLocation();
+  const { width } = useWindowSize();
 
   /*   useEffect(() => {
     setUser(doc);
@@ -26,8 +29,20 @@ const Layout = () => {
         {pathname.includes("/admin") ? (
           <>
             <div className="Admin">
-              <AdminHeader />
-              <Outlet />
+              {width < 1200 ? (
+                <>
+                  <AdminHeader />
+                  <Outlet />
+                </>
+              ) : (
+                <>
+                  <AdminSideNav />
+                  <div className="adminMain">
+                    <AdminHeader />
+                    <Outlet />
+                  </div>
+                </>
+              )}
             </div>
           </>
         ) : (

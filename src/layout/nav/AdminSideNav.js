@@ -19,10 +19,12 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../utils/firebase";
 import { toast } from "react-toastify";
 import { useStoreActions, useStoreState } from "easy-peasy";
+import useWindowSize from "../../hooks/useWindowSize";
 
 const AdminSideNav = ({ setIsSideNavOpen }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { deleteUser, setIsAdmin } = useStoreActions((actions) => actions.auth);
+  const { width } = useWindowSize();
 
   const handleLogout = async () => {
     try {
@@ -39,34 +41,33 @@ const AdminSideNav = ({ setIsSideNavOpen }) => {
     }
   };
 
+  const handleClick = () => {
+    if (width >= 1200) return;
+    setIsSideNavOpen(false);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, x: -300 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 200 }}
-      className="sideNav"
+      className="sideNav adminSideNav"
     >
       <section>
         <div>
           <Logo />
-          <FaTimes onClick={() => setIsSideNavOpen(false)} />
+          <FaTimes className="cancelButton" onClick={handleClick} />
         </div>
         <nav>
           <h2>MENU</h2>
           <ul>
-            <NavLink
-              to={"/admin/dashboard"}
-              onClick={() => setIsSideNavOpen(false)}
-            >
+            <NavLink to={"/admin/dashboard"} onClick={handleClick}>
               <li>
                 <BsGrid1X2Fill /> Dashboard
               </li>
             </NavLink>
 
-            <NavLink
-              to={"/admin/staffs"}
-              onClick={() => setIsSideNavOpen(false)}
-            >
+            <NavLink to={"/admin/staffs"} onClick={handleClick}>
               <li>
                 <FaUsers /> Staffs
               </li>
@@ -74,7 +75,7 @@ const AdminSideNav = ({ setIsSideNavOpen }) => {
             <NavLink
               className="cart"
               to={"/admin/orders"}
-              onClick={() => setIsSideNavOpen(false)}
+              onClick={handleClick}
             >
               <li>
                 <FiShoppingBag /> Orders
@@ -83,7 +84,7 @@ const AdminSideNav = ({ setIsSideNavOpen }) => {
             <NavLink
               className="profile"
               to={"/admin/dishes"}
-              onClick={() => setIsSideNavOpen(false)}
+              onClick={handleClick}
             >
               <li>
                 <BiDish />
@@ -93,7 +94,7 @@ const AdminSideNav = ({ setIsSideNavOpen }) => {
             <NavLink
               className="orders"
               to={"/admin/inventory"}
-              onClick={() => setIsSideNavOpen(false)}
+              onClick={handleClick}
             >
               <li>
                 <MdOutlineInventory2 /> Inventory
@@ -102,7 +103,7 @@ const AdminSideNav = ({ setIsSideNavOpen }) => {
             <NavLink
               className="orders"
               to={"/admin/message"}
-              onClick={() => setIsSideNavOpen(false)}
+              onClick={handleClick}
             >
               <li>
                 <HiOutlineMail /> Message
@@ -111,7 +112,7 @@ const AdminSideNav = ({ setIsSideNavOpen }) => {
             <NavLink
               className="orders"
               to={"/admin/notification"}
-              onClick={() => setIsSideNavOpen(false)}
+              onClick={handleClick}
             >
               <li>
                 <BiBell />
@@ -121,10 +122,7 @@ const AdminSideNav = ({ setIsSideNavOpen }) => {
 
             {/* login */}
             <ShowOnLogout>
-              <NavLink
-                to={"/auth/login"}
-                onClick={() => setIsSideNavOpen(false)}
-              >
+              <NavLink to={"/auth/login"} onClick={handleClick}>
                 <li>
                   <HiOutlineArrowRightOnRectangle /> Login
                 </li>
@@ -140,7 +138,7 @@ const AdminSideNav = ({ setIsSideNavOpen }) => {
           </ul>
         </nav>
       </section>
-      <section onClick={() => setIsSideNavOpen(false)}></section>
+      <section onClick={handleClick}></section>
     </motion.div>
   );
 };

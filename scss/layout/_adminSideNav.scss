@@ -1,0 +1,17 @@
+@use "../abstract" as *;
+.adminSideNav {
+  @include mq(laptop) {
+    grid-template-columns: auto;
+
+    .cancelButton {
+      display: none;
+    }
+    .active {
+      border-right: 0.2rem solid $nursh_light_gold;
+      border-radius: 0;
+    }
+    section:last-child {
+      display: none;
+    }
+  }
+}

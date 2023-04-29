@@ -1,12 +1,14 @@
 @use "../abstract" as *;
 .Dashboard {
-  gap: 1rem;
   font-size: clamp(0.6rem, 0.6rem + 1vw, 1rem);
 
   .dashboardWrapper {
     width: 95%;
-
     margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
   }
 
   .summary {
@@ -114,8 +116,14 @@
 
     @include mq(tablet) {
       grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: 300px;
     }
+  }
+
+  .areaChartContainer,
+  .lineChartContainer,
+  .orderDetailsWrapper,
+  .salesMainContainer {
+    height: rem(300);
   }
 
   .lineChartContainer {
@@ -136,6 +144,7 @@
   .orderDetailsWrapper {
     box-shadow: $card_shadow;
     border-radius: $card_border_radius;
+    padding: 0 1rem 0.5rem;
   }
   .orderSummaryDetails {
     display: grid;
@@ -143,11 +152,11 @@
     gap: 0.5rem;
     padding: 1.5rem 0;
   }
-  .totalOrders {
+  .dashboardBtn {
     width: 100%;
     background-color: $nursh_dark_olive;
     color: white;
     padding: 1rem 0;
-    font-size: clamp(0.8rem, 0.8rem + 1vw, 1.5rem);
+    font-size: clamp(0.8rem, 0.8rem + 1vw, 1.2rem);
   }
 }
