@@ -9,10 +9,15 @@ import TabletNav from "../nav/TabletNav";
 import { Link } from "react-router-dom";
 import AdminSideNav from "../nav/AdminSideNav";
 import { RequireAdminLink } from "../../components/RequireLinks";
+import { HiOutlineMail } from "react-icons/hi";
+import { useStoreState } from "easy-peasy";
+import { BiBell } from "react-icons/bi";
 
 const AdminHeader = () => {
+  const { user } = useStoreState((state) => state.auth);
   const [isSideNavOpen, setIsSideNavOpen] = useState(false);
   const { width } = useWindowSize();
+
   return (
     <RequireAdminLink>
       <header className="adminHeader">
@@ -27,6 +32,26 @@ const AdminHeader = () => {
           <Link to={"/"}>
             <Logo />
           </Link>
+        </div>
+        <div className="laptopHeaderNav">
+          <ul>
+            <Link to={"/"}>
+              <li>Home</li>
+            </Link>
+            <li className="icon">
+              <HiOutlineMail />
+            </li>
+            <li className="icon">
+              <BiBell />
+            </li>
+            <li className="userDetails">
+              <img src={user.image} alt="" />
+              <p>
+                {user.name} <br />
+                <span>Admin</span>
+              </p>
+            </li>
+          </ul>
         </div>
 
         {isSideNavOpen && <AdminSideNav setIsSideNavOpen={setIsSideNavOpen} />}

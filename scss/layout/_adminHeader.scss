@@ -12,5 +12,46 @@
   @include mq(laptop) {
     background-color: white;
     box-shadow: $card_shadow;
+
+    .logoContainer {
+      display: none;
+    }
+  }
+
+  .laptopHeaderNav {
+    display: none;
+    margin-left: auto;
+    color: $nursh_green;
+
+    @include mq(laptop) {
+      display: flex;
+    }
+
+    img {
+      width: rem(35);
+      height: rem(35);
+      border-radius: 50%;
+    }
+    ul {
+      display: flex;
+      align-items: center;
+      gap: rem(10);
+    }
+    .userDetails {
+      display: flex;
+      align-items: center;
+    }
+    .icon {
+      padding: 0.5rem;
+      background-color: $nursh_light_gold;
+      border-radius: 0.3rem;
+      svg {
+        color: $nursh_green;
+        font-size: clamp(0.5rem, 1rem + 1vw, 1.5rem);
+      }
+    }
+    span {
+      font-size: clamp(0.4rem, 1rem + 1vw, 0.8rem);
+    }
   }
 }
