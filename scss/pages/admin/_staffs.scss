@@ -1,0 +1,13 @@
+@use "../../abstract" as *;
+
+.Staffs {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
+  p {
+    font-size: clamp(0.5rem, 0.5rem + 1vw, 1rem);
+  }
+  .staffsContainer {
+    width: 95%;
+  }
+}

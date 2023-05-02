@@ -11,8 +11,6 @@ import AreaChart from "../../components/Admin/AreaChart";
 import OrderCard from "../../components/Admin/OrderCard";
 
 const Dashboard = () => {
-  const {} = useGetCollection("orders");
-
   return (
     <main className="Dashboard">
       <div className="dashboardWrapper">

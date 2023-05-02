@@ -14,16 +14,16 @@ const SummaryCard = ({ total, category, type }) => {
   useEffect(() => {
     switch (category.split(" ")[1]) {
       case "Sales":
-        setIconBgColor("orange");
+        setIconBgColor("salesColor");
         break;
       case "Revenue":
-        setIconBgColor("skyblue");
+        setIconBgColor("revenueColor");
         break;
       case "Orders":
-        setIconBgColor("yellowgreen");
+        setIconBgColor("ordersColor");
         break;
       case "Users":
-        setIconBgColor("purple");
+        setIconBgColor("usersColor");
         break;
       default:
         break;
@@ -33,7 +33,7 @@ const SummaryCard = ({ total, category, type }) => {
   return (
     <div className="summaryCard">
       <div className="summaryIconContainer">
-        <div className="summaryIcon" style={{ backgroundColor: iconBgColor }}>
+        <div className={`summaryIcon ${iconBgColor}`}>
           {(() => {
             switch (category.split(" ")[1]) {
               case "Sales":

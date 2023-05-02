@@ -33,7 +33,7 @@ const AdminHeader = () => {
             <Logo />
           </Link>
         </div>
-        <div className="laptopHeaderNav">
+        <nav className="laptopHeaderNav">
           <ul>
             <Link to={"/"}>
               <li>Home</li>
@@ -52,7 +52,7 @@ const AdminHeader = () => {
               </p>
             </li>
           </ul>
-        </div>
+        </nav>
 
         {isSideNavOpen && <AdminSideNav setIsSideNavOpen={setIsSideNavOpen} />}
       </header>

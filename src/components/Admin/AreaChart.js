@@ -6,6 +6,7 @@ import {
   YAxis,
   Area,
   Tooltip,
+  Legend,
 } from "recharts";
 import { userMapData } from "../../utils/data";
 
@@ -15,13 +16,16 @@ const AreaChart = () => {
       <AreaChrt
         data={userMapData}
         margin={{
-          left: -40,
+          left: -30,
+          right: 10,
           bottom: 0,
+          top: 10,
         }}
       >
         <XAxis dataKey={"period"} />
         <YAxis />
         <Tooltip />
+        <Legend />
         <Area
           type={"monotone"}
           dataKey={"users"}

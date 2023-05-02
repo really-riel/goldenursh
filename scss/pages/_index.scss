@@ -9,4 +9,5 @@
 @forward "checkout";
 @forward "customerOrders";
 @forward "chooseOrder";
-@forward "adminDashboard";
+@forward "./admin/adminDashboard";
+@forward "./admin/staffs";

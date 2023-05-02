@@ -1,5 +1,9 @@
 @use "../abstract" as *;
 .adminSideNav {
+  h2 {
+    margin: 0 0 1rem 1rem;
+    font-size: clamp(0.7rem, 0.6rem + 1vw, 1.2rem);
+  }
   @include mq(laptop) {
     grid-template-columns: auto;
 

@@ -511,19 +511,19 @@ export const LineChartData = [
 export const userMapData = [
   {
     period: "Jan",
-    users: "10",
+    users: 10,
   },
   {
     period: "Feb",
-    users: "5",
+    users: 5,
   },
   {
     period: "Mar",
-    users: "13",
+    users: 13,
   },
   {
-    period: "April",
-    users: "8",
+    period: "Apr",
+    users: 8,
   },
 ];
 
