@@ -473,7 +473,7 @@ export const pieData = [
   },
 ];
 
-export const pieDataColor = ["#c4a838", "#edda8b", "#cbc4a5"];
+export const pieDataColor = ["#c4a838", "#edda8b", "#f9fbe1"];
 
 export const LineChartData = [
   {

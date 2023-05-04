@@ -9,6 +9,7 @@ import SalesTopCard from "../../components/Admin/SalesTopCard";
 import LineChart from "../../components/Admin/LineChart";
 import AreaChart from "../../components/Admin/AreaChart";
 import OrderCard from "../../components/Admin/OrderCard";
+import DrinksCard from "../../components/Admin/DrinksCard";
 
 const Dashboard = () => {
   return (
@@ -46,11 +47,10 @@ const Dashboard = () => {
                 </div>
                 <div className="cardWrapper">
                   {pieData.map((data) => (
-                    <SummaryCard
+                    <DrinksCard
                       key={data.id}
                       total={data.quantity}
                       category={data.itemSold}
-                      type={data.type}
                     />
                   ))}
                 </div>

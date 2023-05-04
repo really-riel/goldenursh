@@ -55,8 +55,10 @@
   }
   .pieContainer {
     grid-area: pie;
-    /*  background-color: green; */
     width: 100%;
+  }
+  .pieFig {
+    box-shadow: $card_shadow;
   }
   .cardWrapper {
     grid-area: card;

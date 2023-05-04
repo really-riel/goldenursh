@@ -1,0 +1,35 @@
+@use "../../abstract" as *;
+.drinksCard {
+  background-color: white;
+  box-shadow: $card_shadow;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: rem(10);
+  padding: 0.5rem;
+
+  .iconWrapper {
+    padding: clamp(0.2rem, 0.2rem + 1vw, 0.6rem);
+    border-radius: 50%;
+    box-shadow: $card_shadow;
+  }
+  .juice {
+    background-color: $nursh_dark_gold;
+  }
+  .softDrinks {
+    background-color: $nursh_cream;
+  }
+  .dishes {
+    background-color: $nursh_light_gold;
+  }
+
+  .detailsContainer {
+  }
+
+  p {
+    font-weight: 600;
+  }
+  .category {
+    font-size: clamp(0.3rem, 0.2rem + 1vw, 0.7rem);
+  }
+}
