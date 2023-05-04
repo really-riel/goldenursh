@@ -54,6 +54,9 @@ const DesktopNav = () => {
         <NavLink to={"/contact"}>
           <motion.li whileTap={{ scale: 0.8 }}>Contact</motion.li>
         </NavLink>
+        <NavLink to={"/orders"}>
+          <motion.li whileTap={{ scale: 0.8 }}>Orders</motion.li>
+        </NavLink>
         {user ? (
           <Link onClick={handleLogout}>Logout</Link>
         ) : (

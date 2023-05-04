@@ -12,6 +12,8 @@
     padding: clamp(0.2rem, 0.2rem + 1vw, 0.6rem);
     border-radius: 50%;
     box-shadow: $card_shadow;
+    display: grid;
+    place-items: center;
   }
   .juice {
     background-color: $nursh_dark_gold;

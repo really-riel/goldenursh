@@ -49,8 +49,9 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    color: $nursh_green;
     .number {
-      font-size: clamp(2rem, 1rem + 1vw, 3rem);
+      font-size: clamp(2rem, 1rem + 1vw, 5rem);
     }
   }
   .pieContainer {
