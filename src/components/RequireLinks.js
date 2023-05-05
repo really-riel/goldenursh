@@ -30,7 +30,6 @@ export const RequireAdminLink = ({ children }) => {
 
 export const RequireAdminRoute = ({ children }) => {
   const { isAdmin } = useStoreState((state) => state.auth);
-  console.log(isAdmin);
 
   return isAdmin ? (
     children

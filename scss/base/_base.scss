@@ -46,6 +46,10 @@ body {
     }
   }
 }
+.adminMain {
+  display: flex;
+  flex-direction: column;
+}
 
 main {
   display: flex;

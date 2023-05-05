@@ -29,7 +29,7 @@ const AdminSideNav = ({ setIsSideNavOpen }) => {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      setIsSideNavOpen(false);
+      if (width < 1200) setIsSideNavOpen(false);
       deleteUser();
       setIsAdmin(false);
       toast.success("logout Successful");
@@ -131,7 +131,7 @@ const AdminSideNav = ({ setIsSideNavOpen }) => {
 
             {/* logout */}
             <ShowOnLogin>
-              <li onClick={handleLogout}>
+              <li onClick={handleLogout} style={{ cursor: "pointer" }}>
                 <HiOutlineArrowLeftOnRectangle /> Logout
               </li>
             </ShowOnLogin>

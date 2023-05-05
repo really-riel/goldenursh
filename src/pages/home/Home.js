@@ -37,7 +37,9 @@ const Home = () => {
                 Order site.
               </p>
             </div>
-            <button>Order now</button>
+            <a href="#trendingOrders">
+              <button>Order now</button>
+            </a>
           </div>
         </div>
         <div className="featuresContainer">

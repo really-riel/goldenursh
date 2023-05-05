@@ -40,7 +40,7 @@ const Dashboard = () => {
               <div className="salesMainContainer">
                 <div className="salesTotal">
                   <p className="number">5000</p>
-                  <p>Total Sales</p>
+                  <p className="details">Total Sales</p>
                 </div>
                 <div className="pieContainer">
                   <PieChart />

@@ -51,7 +51,10 @@
     justify-content: center;
     color: $nursh_green;
     .number {
-      font-size: clamp(2rem, 1rem + 1vw, 5rem);
+      font-size: clamp(2rem, 1rem + 4vw, 4rem);
+    }
+    .details {
+      font-size: clamp(0.8rem, 0.7rem + 2vw, 4rem);
     }
   }
   .pieContainer {

@@ -138,7 +138,7 @@ const SideNav = ({ setIsSideNavOpen }) => {
 
             {/* logout */}
             <ShowOnLogin>
-              <li onClick={handleLogout}>
+              <li onClick={handleLogout} style={{ cursor: "pointer" }}>
                 <HiOutlineArrowLeftOnRectangle /> Logout
               </li>
             </ShowOnLogin>

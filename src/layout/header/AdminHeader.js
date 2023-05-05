@@ -28,7 +28,7 @@ const AdminHeader = () => {
           />
         </motion.div>
         <div className="logoContainer">
-          {width < 1024 && <TabletNav />}
+          {width < 1200 && <TabletNav />}
           <Link to={"/"}>
             <Logo />
           </Link>
@@ -45,9 +45,9 @@ const AdminHeader = () => {
               <BiBell />
             </li>
             <li className="userDetails">
-              <img src={user.image} alt="" />
+              <img src={user?.image} alt="" />
               <p>
-                {user.name} <br />
+                {user?.name} <br />
                 <span>Admin</span>
               </p>
             </li>

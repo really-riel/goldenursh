@@ -41,7 +41,6 @@ const CustomerOrders = () => {
             Ooops, You Haven't placed an Order yet 🙇‍♂️ <br />
             <Link to={"/"}>
               <span>
-                {" "}
                 Start Shopping now <AiOutlineShoppingCart />
               </span>
             </Link>

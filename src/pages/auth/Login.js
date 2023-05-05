@@ -18,8 +18,11 @@ import {
 import { auth, db } from "../../utils/firebase";
 import { toast } from "react-toastify";
 import { useStoreActions, useStoreState } from "easy-peasy";
-import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
-import { setUsersInDatabase } from "../../utils/firebaseFunctions";
+import { doc, getDoc } from "firebase/firestore";
+import {
+  setUsersInDatabase,
+  updateAdminLastLogin,
+} from "../../utils/firebaseFunctions";
 import Loader from "../../components/Loader";
 
 const Login = () => {
@@ -36,7 +39,10 @@ const Login = () => {
   const checkIfUserIsAnAdmin = async (id) => {
     const document = await getDoc(doc(db, "admin", id));
 
-    if (document.exists()) setIsAdmin(true);
+    if (document.exists()) {
+      setIsAdmin(true);
+      await updateAdminLastLogin(id);
+    }
   };
 
   const handleSignIn = async (e) => {

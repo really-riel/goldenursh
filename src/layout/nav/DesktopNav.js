@@ -7,6 +7,8 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 import { signOut } from "firebase/auth";
 import { auth } from "../../utils/firebase";
 import { toast } from "react-toastify";
+import { RequireAdminLink } from "../../components/RequireLinks";
+import { FaUserCog } from "react-icons/fa";
 
 const DesktopNav = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,6 +34,12 @@ const DesktopNav = () => {
         <NavLink to={"/"} onClick={() => setIsOpen(false)}>
           <motion.li whileTap={{ scale: 0.8 }}>Home</motion.li>
         </NavLink>
+
+        <RequireAdminLink>
+          <NavLink to={"/admin/dashboard"}>
+            <li>Admin</li>
+          </NavLink>
+        </RequireAdminLink>
 
         <motion.li
           whileTap={{ scale: 0.8 }}
