@@ -1,6 +1,7 @@
 import React from "react";
 import {
   CartesianGrid,
+  Legend,
   Line,
   LineChart as LineChrt,
   ResponsiveContainer,
@@ -9,7 +10,6 @@ import {
   YAxis,
 } from "recharts";
 import { LineChartData } from "../../utils/data";
-import { Legend } from "chart.js";
 
 const LineChart = () => {
   return (

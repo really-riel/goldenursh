@@ -7,7 +7,11 @@ import { MdAddCircleOutline } from "react-icons/md";
 import addNewStaffIcon from "../../assets/addNewStaff.png";
 import { useRef } from "react";
 import { useEffect } from "react";
-import { getStaffId } from "../../utils/firebaseFunctions";
+import {
+  GetStaffId,
+  getStaffId,
+  useGetStaffId,
+} from "../../utils/firebaseFunctions";
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
 import { db } from "../../utils/firebase";
 import { toast } from "react-toastify";
@@ -19,12 +23,12 @@ const Staffs = () => {
   const [newStaffName, setNewStaffName] = useState("");
   const [newStaffEmail, setNewStaffEmail] = useState("");
   const [newStaffRole, setNewStaffRole] = useState("");
-  const [newStaffId, setNewStaffId] = useState("");
-  const [newStaffImage, setNewStaffImage] = useState("");
+  /*  const [newStaffId, setNewStaffId] = useState("");
+  const [newStaffImage, setNewStaffImage] = useState(""); */
 
   const { isLoading, docItems } = useGetCollection("admin");
 
-  const { user } = useStoreState((state) => state.auth);
+  const { user, adminRole } = useStoreState((state) => state.auth);
 
   const divRef = useRef(null);
 
@@ -64,7 +68,13 @@ const Staffs = () => {
 
     setIsHandlingAFunction(true);
     try {
-      await getStaffId(newStaffEmail, setNewStaffId, setNewStaffImage);
+      const { newStaffId, newStaffImage, errorMsg } = await getStaffId(
+        newStaffEmail
+      );
+      if (errorMsg) {
+        toast.info(errorMsg);
+        throw Error(errorMsg);
+      }
       await setDoc(doc(db, "admin", newStaffId), {
         id: Date.now(),
         name: newStaffName,
@@ -74,8 +84,7 @@ const Staffs = () => {
         lastLogin: null,
       });
       setIsHandlingAFunction(false);
-      setNewStaffId("");
-      setNewStaffImage("");
+
       setNewStaffEmail("");
       setNewStaffName("");
       setNewStaffRole("");
@@ -92,9 +101,9 @@ const Staffs = () => {
     setIsHandlingAFunction(true);
 
     try {
-      await getStaffId(email, setNewStaffId, setNewStaffImage);
+      const { newStaffId } = await getStaffId(email);
       await deleteDoc(doc(db, "admin", newStaffId));
-      setNewStaffId("");
+
       setIsHandlingAFunction(false);
       toast.success("staff succeffully removed 😊");
     } catch (error) {
@@ -133,7 +142,14 @@ const Staffs = () => {
                     <p>{item.name}</p>
                   </div>
                 </div>
-                <div className="staffMainDetails">
+                <div
+                  className="staffMainDetails"
+                  style={
+                    adminRole.toLowerCase() === "admin"
+                      ? { gridTemplateColumns: " repeat(4, 1fr)" }
+                      : { gridTemplateColumns: " repeat(3, 1fr)" }
+                  }
+                >
                   <div className="emailContainer staffCardSections">
                     <p>Email</p>
                     <p className="bold">{item.email}</p>
@@ -142,21 +158,28 @@ const Staffs = () => {
                     <p>Role</p>
                     <p className="bold">{item.role}</p>
                   </div>
-                  <div className="lastLoginContainer staffCardSections">
+                  <div
+                    className="lastLoginContainer staffCardSections"
+                    style={
+                      adminRole === "Admin" ? null : { borderRight: " none" }
+                    }
+                  >
                     <p>last login</p>
                     <p className="bold">{timestampConverter(item.lastLogin)}</p>
                   </div>
 
-                  <div className="actionContainer staffCardSections">
-                    <p>Action</p>
-                    <button
-                      className="deleteContainer"
-                      disabled={user.email === item.email ? true : false}
-                      onClick={() => handleDeleteStaff(item.email)}
-                    >
-                      <FaTrashAlt />
-                    </button>
-                  </div>
+                  {adminRole.toLowerCase() === "admin" && (
+                    <div className="actionContainer staffCardSections">
+                      <p>Action</p>
+                      <button
+                        className="deleteContainer"
+                        disabled={user.email === item.email ? true : false}
+                        onClick={() => handleDeleteStaff(item.email)}
+                      >
+                        <FaTrashAlt />
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
@@ -217,12 +240,14 @@ const Staffs = () => {
             </div>
           </section>
         )}
-        <button
-          className="addNewButton"
-          onClick={() => setIsDisplayed(!isDisplayed)}
-        >
-          Add new <MdAddCircleOutline />
-        </button>
+        {adminRole.toLowerCase() === "admin" && (
+          <button
+            className="addNewButton"
+            onClick={() => setIsDisplayed(!isDisplayed)}
+          >
+            Add new <MdAddCircleOutline />
+          </button>
+        )}
       </div>
     </main>
   );

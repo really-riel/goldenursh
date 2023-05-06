@@ -31,7 +31,9 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { setUser, setIsAdmin } = useStoreActions((actions) => actions.auth);
+  const { setUser, setIsAdmin, setAdminRole } = useStoreActions(
+    (actions) => actions.auth
+  );
 
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -41,6 +43,7 @@ const Login = () => {
 
     if (document.exists()) {
       setIsAdmin(true);
+      setAdminRole(document.data().role);
       await updateAdminLastLogin(id);
     }
   };

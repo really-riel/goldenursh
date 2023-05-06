@@ -16,4 +16,8 @@ export const authModel = {
   setIsAdmin: action((state, payload) => {
     state.isAdmin = payload;
   }),
+  adminRole: "",
+  setAdminRole: action((state, payload) => {
+    state.adminRole = payload;
+  }),
 };

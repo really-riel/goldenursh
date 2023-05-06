@@ -57,7 +57,6 @@
 
   .staffMainDetails {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
 
     @include mq(tablet) {
       flex-grow: 1;

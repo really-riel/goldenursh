@@ -9,6 +9,7 @@ import {
   where,
 } from "firebase/firestore";
 import { db } from "./firebase";
+import { useState } from "react";
 
 export const setUsersInDatabase = async (user, name, imageUrl) => {
   try {
@@ -53,17 +54,25 @@ export const pushOrdersToDatabase = async (id, ordersObj) => {
   }
 };
 
-export const getStaffId = async (email, setUserId, setUserImage) => {
-  console.log(email);
+export const getStaffId = async (email) => {
+  let newStaffId;
+  let newStaffImage;
+  let errorMsg;
   try {
     const q = query(collection(db, "users"), where("email", "==", email));
 
     const querySnapshot = await getDocs(q);
+    console.log(querySnapshot.empty);
+
+    if (querySnapshot.empty) {
+      errorMsg = "you can only add registered users to the staff list";
+    }
     querySnapshot.forEach((doc) => {
-      setUserId(doc.data().id);
-      if (setUserImage) setUserImage(doc.data().image);
+      newStaffId = doc.data().id;
+      newStaffImage = doc.data().image;
     });
   } catch (error) {
     console.error(error);
   }
+  return { newStaffId, newStaffImage, errorMsg };
 };

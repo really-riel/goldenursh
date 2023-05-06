@@ -17,7 +17,7 @@ const DrinksCard = ({ total, category }) => {
         return setIconBgColor("dishes");
     }
   }, [category]);
-  console.log(category);
+
   return (
     <div className="drinksCard">
       <div className={`iconWrapper ${iconBgColor}`}>

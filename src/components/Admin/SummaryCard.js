@@ -9,8 +9,6 @@ const SummaryCard = ({ total, category, type }) => {
   const [icon, setIcon] = useState("");
   const [iconBgColor, setIconBgColor] = useState("");
 
-  console.log(category.split(" ")[1]);
-
   useEffect(() => {
     switch (category.split(" ")[1]) {
       case "Sales":
