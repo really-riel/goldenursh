@@ -121,10 +121,12 @@ const Staffs = () => {
         <div className="staffsContainer">
           {isHandlingAFunction && <Loader />}
           <h2>Staff Lists</h2>
-          <p>
-            Add or remove From existing <br />
-            Staff List
-          </p>
+          {adminRole.toLowerCase() === "admin" && (
+            <p>
+              Add or remove From existing <br />
+              Staff List
+            </p>
+          )}
 
           <section className="staffsList">
             {docItems?.map((item, index) => (
