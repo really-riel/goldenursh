@@ -41,7 +41,11 @@ function App() {
           <Route
             path="checkout"
             errorElement={<ErrorBoundary />}
-            element={<Checkout />}
+            element={
+              <RequireAuth>
+                <Checkout />
+              </RequireAuth>
+            }
           />
         </Route>
 
