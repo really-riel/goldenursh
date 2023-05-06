@@ -15,6 +15,7 @@ import {
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
 import { db } from "../../utils/firebase";
 import { toast } from "react-toastify";
+import { BiWifiOff } from "react-icons/bi";
 
 const Staffs = () => {
   const [isDisplayed, setIsDisplayed] = useState(false);
@@ -115,15 +116,16 @@ const Staffs = () => {
 
   return (
     <main className="Staffs">
-      <div className="staffsContainer">
-        {isLoading && <Loader />}
-        {isHandlingAFunction && <Loader />}
-        <h2>Staff Lists</h2>
-        <p>
-          Add or remove From existing <br />
-          Staff List
-        </p>
-        {docItems?.length > 0 ? (
+      {isLoading && <Loader />}
+      {docItems?.length > 0 ? (
+        <div className="staffsContainer">
+          {isHandlingAFunction && <Loader />}
+          <h2>Staff Lists</h2>
+          <p>
+            Add or remove From existing <br />
+            Staff List
+          </p>
+
           <section className="staffsList">
             {docItems?.map((item, index) => (
               <div
@@ -184,71 +186,72 @@ const Staffs = () => {
               </div>
             ))}
           </section>
-        ) : (
-          <section>
-            <p style={{ color: "red" }}>
-              No Staff list available <br /> Check Internet Connection
-            </p>
-          </section>
-        )}
 
-        {isDisplayed && (
-          <section className="addNewStaff">
-            <div className="addNewStaffContainer" ref={divRef}>
-              <div className="headerContainer">
-                <div className="header">
-                  <figure>
-                    <img src={addNewStaffIcon} alt="" />
-                  </figure>
-                  <div className="heading">
-                    <p>ADD NEW STAFF</p>
+          {isDisplayed && (
+            <section className="addNewStaff">
+              <div className="addNewStaffContainer" ref={divRef}>
+                <div className="headerContainer">
+                  <div className="header">
+                    <figure>
+                      <img src={addNewStaffIcon} alt="" />
+                    </figure>
+                    <div className="heading">
+                      <p>ADD NEW STAFF</p>
+                    </div>
                   </div>
                 </div>
+                <div className="formContainer">
+                  <form onSubmit={handleAddStaff}>
+                    <label htmlFor="name">Name:</label>
+                    <input
+                      type="text"
+                      id="name"
+                      placeholder="Last name First name"
+                      value={newStaffName}
+                      onChange={(e) => setNewStaffName(e.target.value)}
+                      required
+                    />
+                    <label htmlFor="email">E-mail:</label>
+                    <input
+                      type="email"
+                      id="email"
+                      placeholder="Email"
+                      value={newStaffEmail}
+                      onChange={(e) => setNewStaffEmail(e.target.value)}
+                      required
+                    />
+                    <label htmlFor="role">Role:</label>
+                    <input
+                      type="text"
+                      id="role"
+                      placeholder="Role"
+                      value={newStaffRole}
+                      onChange={(e) => setNewStaffRole(e.target.value)}
+                      required
+                    />
+                    <button>Add Staff</button>
+                  </form>
+                </div>
               </div>
-              <div className="formContainer">
-                <form onSubmit={handleAddStaff}>
-                  <label htmlFor="name">Name:</label>
-                  <input
-                    type="text"
-                    id="name"
-                    placeholder="Last name First name"
-                    value={newStaffName}
-                    onChange={(e) => setNewStaffName(e.target.value)}
-                    required
-                  />
-                  <label htmlFor="email">E-mail:</label>
-                  <input
-                    type="email"
-                    id="email"
-                    placeholder="Email"
-                    value={newStaffEmail}
-                    onChange={(e) => setNewStaffEmail(e.target.value)}
-                    required
-                  />
-                  <label htmlFor="role">Role:</label>
-                  <input
-                    type="text"
-                    id="role"
-                    placeholder="Role"
-                    value={newStaffRole}
-                    onChange={(e) => setNewStaffRole(e.target.value)}
-                    required
-                  />
-                  <button>Add Staff</button>
-                </form>
-              </div>
-            </div>
-          </section>
-        )}
-        {adminRole.toLowerCase() === "admin" && (
-          <button
-            className="addNewButton"
-            onClick={() => setIsDisplayed(!isDisplayed)}
-          >
-            Add new <MdAddCircleOutline />
-          </button>
-        )}
-      </div>
+            </section>
+          )}
+          {adminRole.toLowerCase() === "admin" && (
+            <button
+              className="addNewButton"
+              onClick={() => setIsDisplayed(!isDisplayed)}
+            >
+              Add new <MdAddCircleOutline />
+            </button>
+          )}
+        </div>
+      ) : docItems?.length === 0 ? (
+        <section className="errorMsg">
+          <p>No Staff list available</p>
+          <p>
+            Check Internet Connection <BiWifiOff />
+          </p>
+        </section>
+      ) : null}
     </main>
   );
 };

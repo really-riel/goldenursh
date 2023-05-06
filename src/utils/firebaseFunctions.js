@@ -62,7 +62,6 @@ export const getStaffId = async (email) => {
     const q = query(collection(db, "users"), where("email", "==", email));
 
     const querySnapshot = await getDocs(q);
-    console.log(querySnapshot.empty);
 
     if (querySnapshot.empty) {
       errorMsg = "you can only add registered users to the staff list";

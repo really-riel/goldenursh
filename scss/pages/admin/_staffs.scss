@@ -196,4 +196,15 @@
       padding: 0.7rem 0.8rem;
     }
   }
+
+  .errorMsg {
+    p {
+      color: red;
+      display: flex;
+      align-items: center;
+
+      font-size: clamp(1rem, 1rem + 1vw, 3rem);
+      font-weight: 600;
+    }
+  }
 }
