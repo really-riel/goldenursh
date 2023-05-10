@@ -40,7 +40,6 @@ const Chat = () => {
   console.log(user);
   const { document } = useGetDocuments("chats", `${user.id}${adminId}`);
 
-  console.log(chatImageFile);
   useEffect(() => {
     setIsInitialLoading(true);
     const preLoadFunctions = async () => {
