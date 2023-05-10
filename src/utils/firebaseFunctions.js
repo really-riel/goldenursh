@@ -1,6 +1,7 @@
 import {
   collection,
   doc,
+  getDoc,
   getDocs,
   query,
   serverTimestamp,
@@ -74,4 +75,42 @@ export const getStaffId = async (email) => {
     console.error(error);
   }
   return { newStaffId, newStaffImage, errorMsg };
+};
+
+export const checkIfUserChatDoesNotExistAndSetUserChatToDb = async (user) => {
+  try {
+    const res = await getDoc(db, "userChat", user.id);
+    if (!res.exists()) {
+      await setDoc(doc(db, "userChat", user.id), {
+        id: user.id,
+        name: user.name,
+        image: user.image,
+        lastMessage: "",
+        date: serverTimestamp(),
+      });
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getAdminId = async () => {
+  let admindetails;
+
+  try {
+    const q = query(collection(db, "admin"), where("role", "==", "admin"));
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+
+      admindetails = {
+        adminImg: data.image,
+        adminId: doc.id,
+      };
+    });
+  } catch (error) {
+    console.error(error);
+  }
+  return { admindetails };
 };

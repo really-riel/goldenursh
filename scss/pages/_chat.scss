@@ -1,0 +1,60 @@
+@use "../abstract" as *;
+
+.Chat {
+  background-color: $nursh_cream;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0;
+  .mainChatContainer {
+    height: 80vh;
+    width: 90%;
+    max-width: rem(700);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  .chatBox {
+    overflow-y: auto;
+    height: 70vh;
+  }
+  .inputSection {
+    height: 10vh;
+  }
+  .inputForm {
+    width: 100%;
+    display: flex;
+    box-shadow: $card_shadow;
+    border-radius: $card_border_radius;
+    overflow: hidden;
+  }
+  input {
+    width: 100%;
+    outline: none;
+    border: none;
+    padding: 0.8rem;
+    background-color: transparent;
+  }
+  input::placeholder {
+    text-align: center;
+  }
+  .chatInputMsgLabel {
+    position: absolute;
+    left: rem(-10000);
+  }
+  .chatInputFileLabel {
+    display: grid;
+    place-items: center;
+    font-size: clamp(0.8rem, 1rem + 1vw, 1.1rem);
+  }
+  .chatFileInput {
+    display: none;
+  }
+  .sendMsgBtn {
+    background-color: transparent;
+    padding: 0.8rem;
+    font-size: clamp(0.8rem, 1rem + 1vw, 1.1rem);
+    display: grid;
+    place-items: center;
+  }
+}

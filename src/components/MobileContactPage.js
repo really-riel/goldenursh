@@ -3,8 +3,11 @@ import contactImg from "../assets/connectImg2.png";
 import { BsInstagram, BsTwitter, BsWhatsapp } from "react-icons/bs";
 import { FaFacebookF } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const MobileContactPage = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="mobileContactPage">
       <motion.div
@@ -44,7 +47,9 @@ const MobileContactPage = () => {
           </p>
         </div>
       </motion.div>
-      <button className="messageBtn">Message</button>
+      <button className="messageBtn" onClick={() => navigate("/contact/chat")}>
+        Message
+      </button>
     </section>
   );
 };

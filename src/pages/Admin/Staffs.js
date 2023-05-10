@@ -81,7 +81,7 @@ const Staffs = () => {
         name: newStaffName,
         email: newStaffEmail,
         image: newStaffImage,
-        role: newStaffRole,
+        role: newStaffRole.toLowerCase(),
         lastLogin: null,
       });
       setIsHandlingAFunction(false);
@@ -121,10 +121,10 @@ const Staffs = () => {
         <div className="staffsContainer">
           {isHandlingAFunction && <Loader />}
           <h2>Staff Lists</h2>
-          {adminRole.toLowerCase() === "admin" && (
+          {adminRole === "admin" && (
             <p>
               Add or remove From existing <br />
-              Staff List
+              Staff List.
             </p>
           )}
 
@@ -149,7 +149,7 @@ const Staffs = () => {
                 <div
                   className="staffMainDetails"
                   style={
-                    adminRole.toLowerCase() === "admin"
+                    adminRole === "admin"
                       ? { gridTemplateColumns: " repeat(4, 1fr)" }
                       : { gridTemplateColumns: " repeat(3, 1fr)" }
                   }
@@ -172,7 +172,7 @@ const Staffs = () => {
                     <p className="bold">{timestampConverter(item.lastLogin)}</p>
                   </div>
 
-                  {adminRole.toLowerCase() === "admin" && (
+                  {adminRole === "admin" && (
                     <div className="actionContainer staffCardSections">
                       <p>Action</p>
                       <button
@@ -237,7 +237,7 @@ const Staffs = () => {
               </div>
             </section>
           )}
-          {adminRole.toLowerCase() === "admin" && (
+          {adminRole === "admin" && (
             <button
               className="addNewButton"
               onClick={() => setIsDisplayed(!isDisplayed)}

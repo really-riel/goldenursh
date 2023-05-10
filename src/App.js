@@ -27,6 +27,7 @@ import { RequireAdminRoute, RequireAuth } from "./components/RequireLinks";
 import ErrorBoundary from "./components/ErrorBoundary";
 import CustomerOrders from "./pages/CustomerOrders/CustomerOrders";
 import ChooseOrder from "./pages/ChooseOrder/ChooseOrder";
+import Chat from "./pages/Contact/Chat";
 
 function App() {
   const router = createBrowserRouter(
@@ -34,7 +35,17 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
 
-        <Route path="contact" element={<Contact />} />
+        <Route path="contact">
+          <Route index element={<Contact />} />
+          <Route
+            path="chat"
+            element={
+              <RequireAuth>
+                <Chat />
+              </RequireAuth>
+            }
+          />
+        </Route>
 
         <Route path="cart">
           <Route index element={<Cart />} />
