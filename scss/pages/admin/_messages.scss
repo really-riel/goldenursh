@@ -1,0 +1,50 @@
+@use "../../abstract" as *;
+.Messages {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
+  font-size: clamp(0.7rem, 0.5rem + 1vw, 1rem);
+  .mainMessagesContainer {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .messagesContainer {
+    box-shadow: $card_shadow2;
+    padding: 0.5rem;
+    border-radius: $card_border_radius;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .filterOptionsContainer {
+    display: flex;
+    align-items: center;
+
+    gap: 0.8rem;
+  }
+  .filterOptions {
+    cursor: pointer;
+    padding: 0.3rem 0.5rem;
+  }
+  .selected {
+    background-color: $nursh_light_gold;
+    border-radius: 1rem;
+  }
+  .briefing {
+    text-align: center;
+  }
+  .messages {
+    background-color: $nursh_cream;
+    padding: 0.3rem 0.6rem;
+  }
+  .clearAllMsgsBtn {
+    background-color: $nursh_dark_olive;
+    color: whitesmoke;
+    width: fit-content;
+    padding: 0.4rem 1.2rem;
+    margin-left: auto;
+    border-radius: 0.5rem;
+  }
+}

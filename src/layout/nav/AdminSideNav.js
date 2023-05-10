@@ -102,11 +102,11 @@ const AdminSideNav = ({ setIsSideNavOpen }) => {
             </NavLink>
             <NavLink
               className="orders"
-              to={"/admin/message"}
+              to={"/admin/messages"}
               onClick={handleClick}
             >
               <li>
-                <HiOutlineMail /> Message
+                <HiOutlineMail /> Messages
               </li>
             </NavLink>
             <NavLink

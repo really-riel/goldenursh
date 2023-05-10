@@ -78,8 +78,9 @@ export const getStaffId = async (email) => {
 };
 
 export const checkIfUserChatDoesNotExistAndSetUserChatToDb = async (user) => {
+  console.log(user);
   try {
-    const res = await getDoc(db, "userChat", user.id);
+    const res = await getDoc(doc(db, "userChat", user.id));
     if (!res.exists()) {
       await setDoc(doc(db, "userChat", user.id), {
         id: user.id,
@@ -113,4 +114,18 @@ export const getAdminId = async () => {
     console.error(error);
   }
   return { admindetails };
+};
+
+export const checktAndSetUserChatMessages = async (user, adminDetails) => {
+  const combinedId = user.id + adminDetails.adminId;
+  try {
+    const response = await getDoc(doc(db, "chats", combinedId));
+    if (!response.exists()) {
+      await setDoc(doc(db, "chats", combinedId), {
+        messages: [],
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
 };

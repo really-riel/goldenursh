@@ -1,0 +1,23 @@
+@use "../../abstract" as *;
+.messageItem {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  img {
+    width: rem(40);
+    height: rem(40);
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .messageMainContent {
+    flex-grow: 1;
+  }
+
+  .messageStatus {
+    padding: 0.5rem;
+    background-color: rgb(236, 178, 178);
+    border-radius: 0.7rem;
+    color: rgb(100, 5, 5);
+  }
+}

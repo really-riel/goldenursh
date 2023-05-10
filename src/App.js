@@ -11,7 +11,7 @@ import Staffs from "./pages/Admin/Staffs";
 import Orders from "./pages/Admin/Orders";
 import Dishes from "./pages/Admin/Dishes";
 import Inventory from "./pages/Admin/Inventory";
-import Message from "./pages/Admin/Message";
+import Message from "./pages/Admin/Messages";
 import Notification from "./pages/Admin/Notification";
 import Home from "./pages/home/Home";
 import Contact from "./pages/Contact/Contact";
@@ -28,6 +28,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import CustomerOrders from "./pages/CustomerOrders/CustomerOrders";
 import ChooseOrder from "./pages/ChooseOrder/ChooseOrder";
 import Chat from "./pages/Contact/Chat";
+import Messages from "./pages/Admin/Messages";
 
 function App() {
   const router = createBrowserRouter(
@@ -138,10 +139,10 @@ function App() {
             }
           />
           <Route
-            path="message"
+            path="messages"
             element={
               <RequireAdminRoute>
-                <Message />{" "}
+                <Messages />{" "}
               </RequireAdminRoute>
             }
           />

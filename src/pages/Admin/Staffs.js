@@ -165,7 +165,7 @@ const Staffs = () => {
                   <div
                     className="lastLoginContainer staffCardSections"
                     style={
-                      adminRole === "Admin" ? null : { borderRight: " none" }
+                      adminRole === "admin" ? null : { borderRight: "none" }
                     }
                   >
                     <p>last login</p>
