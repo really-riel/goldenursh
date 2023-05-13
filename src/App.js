@@ -23,12 +23,19 @@ import Missing from "./pages/Missing/Missing";
 import SignUp from "./pages/auth/SignUp";
 import ProfileEdit from "./pages/Profile/ProfileEdit";
 import Checkout from "./pages/Cart/Checkout";
-import { RequireAdminRoute, RequireAuth } from "./components/RequireLinks";
+import {
+  RequireAdminRoleToBeAdmin,
+  RequireAdminRoleToNotBeAdmin,
+  RequireAdminRoute,
+  RequireAuth,
+  RequireAuthAndNonAdminRole,
+} from "./components/RequireLinks";
 import ErrorBoundary from "./components/ErrorBoundary";
 import CustomerOrders from "./pages/CustomerOrders/CustomerOrders";
 import ChooseOrder from "./pages/ChooseOrder/ChooseOrder";
 import Chat from "./pages/Contact/Chat";
 import Messages from "./pages/Admin/Messages";
+import SupportChat from "./pages/Admin/SupportChat";
 
 function App() {
   const router = createBrowserRouter(
@@ -41,9 +48,9 @@ function App() {
           <Route
             path="chat"
             element={
-              <RequireAuth>
+              <RequireAuthAndNonAdminRole>
                 <Chat />
-              </RequireAuth>
+              </RequireAuthAndNonAdminRole>
             }
           />
         </Route>
@@ -138,14 +145,24 @@ function App() {
               </RequireAdminRoute>
             }
           />
-          <Route
-            path="messages"
-            element={
-              <RequireAdminRoute>
-                <Messages />{" "}
-              </RequireAdminRoute>
-            }
-          />
+          <Route path="messages">
+            <Route
+              index
+              element={
+                <RequireAdminRoleToNotBeAdmin>
+                  <Messages />
+                </RequireAdminRoleToNotBeAdmin>
+              }
+            />
+            <Route
+              path="support-chat"
+              element={
+                <RequireAdminRoleToNotBeAdmin>
+                  <SupportChat />
+                </RequireAdminRoleToNotBeAdmin>
+              }
+            />
+          </Route>
           <Route
             path="notification"
             element={

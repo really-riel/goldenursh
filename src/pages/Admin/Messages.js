@@ -7,6 +7,7 @@ const Messages = () => {
   const { docItems, isLoading } = useGetCollection("userChat");
   const [selectedOption, setSelectedOption] = useState("all chats");
   const [data, setData] = useState(null);
+
   useEffect(() => {
     selectedOption === "responded"
       ? setData([])
@@ -68,9 +69,11 @@ const Messages = () => {
             <>
               {" "}
               <div className="messages">
-                {data.map((data, index) => (
-                  <MessageItem key={index} data={data} />
-                ))}
+                {data
+                  .sort((a, b) => b.date - a.date)
+                  .map((data, index) => (
+                    <MessageItem key={index} data={data} />
+                  ))}
               </div>
               <button className="clearAllMsgsBtn" onClick={handleClearMessages}>
                 Clear all

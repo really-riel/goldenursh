@@ -1,0 +1,16 @@
+@use "../abstract" as *;
+
+.Missing {
+  background-color: $nursh_cream;
+  padding: 2rem;
+
+  h1 {
+    font-size: clamp(1rem, 1rem + 1vw, 3rem);
+    color: red;
+  }
+  p {
+    text-decoration: underline;
+    margin-top: 3rem;
+    color: $nursh_green;
+  }
+}

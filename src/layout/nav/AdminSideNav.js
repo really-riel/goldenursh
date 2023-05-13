@@ -14,7 +14,11 @@ import { FaTimes, FaUsers } from "react-icons/fa";
 
 import { HiOutlineMail } from "react-icons/hi";
 import { motion } from "framer-motion";
-import { ShowOnLogin, ShowOnLogout } from "../../components/RequireLinks";
+import {
+  HideForNoneAdminRole,
+  ShowOnLogin,
+  ShowOnLogout,
+} from "../../components/RequireLinks";
 import { signOut } from "firebase/auth";
 import { auth } from "../../utils/firebase";
 import { toast } from "react-toastify";
@@ -100,15 +104,17 @@ const AdminSideNav = ({ setIsSideNavOpen }) => {
                 <MdOutlineInventory2 /> Inventory
               </li>
             </NavLink>
-            <NavLink
-              className="orders"
-              to={"/admin/messages"}
-              onClick={handleClick}
-            >
-              <li>
-                <HiOutlineMail /> Messages
-              </li>
-            </NavLink>
+            <HideForNoneAdminRole>
+              <NavLink
+                className="orders"
+                to={"/admin/messages"}
+                onClick={handleClick}
+              >
+                <li>
+                  <HiOutlineMail /> Messages
+                </li>
+              </NavLink>
+            </HideForNoneAdminRole>
             <NavLink
               className="orders"
               to={"/admin/notification"}

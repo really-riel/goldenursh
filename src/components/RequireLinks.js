@@ -18,8 +18,45 @@ export const ShowOnLogout = ({ children }) => {
 
 export const RequireAuth = ({ children }) => {
   const { user } = useStoreState((state) => state.auth);
+  console.log(children.type.name);
+  let targetUrl;
+  switch (children.type.name) {
+    case "CustomerOrders":
+      targetUrl = "/orders";
+      break;
+    case "ProfileEdit":
+      targetUrl = "/profile/edit";
+      break;
+    case "Chat":
+      targetUrl = "/contact/chat";
+      break;
+    case "Checkout":
+      targetUrl = "/cart";
+      break;
+    default:
+      targetUrl = `/${children.type.name.toLowerCase()}`;
+  }
+  return user ? children : <Navigate to={"/auth/login"} state={targetUrl} />;
+};
 
-  return user ? children : <Navigate to={"/auth/login"} />;
+export const RequireAuthAndNonAdminRole = ({ children }) => {
+  const { user } = useStoreState((state) => state.auth);
+  const { adminRole } = useStoreState((state) => state.auth);
+
+  return user && adminRole !== "admin" ? (
+    children
+  ) : !user ? (
+    <Navigate to={"/auth/login"} state={"/contact/chat"} />
+  ) : adminRole === "admin" ? (
+    <main className="notAdmin">
+      <div className="container">
+        <h1>Permission Denied.</h1>
+        <p>This page can only be viewed by an Admin user.</p>
+        <br />
+        <Link to="/">&larr; Back To Home</Link>
+      </div>
+    </main>
+  ) : null;
 };
 
 export const RequireAdminLink = ({ children }) => {
@@ -37,10 +74,33 @@ export const RequireAdminRoute = ({ children }) => {
     <main className="notAdmin">
       <div className="container">
         <h1>Permission Denied.</h1>
-        <p>This page can only be view by an Admin user.</p>
+        <p>This page can only be viewed by an Admin user.</p>
         <br />
         <Link to="/">&larr; Back To Home</Link>
       </div>
     </main>
   );
+};
+
+export const RequireAdminRoleToNotBeAdmin = ({ children }) => {
+  const { adminRole, isAdmin } = useStoreState((state) => state.auth);
+  console.log(adminRole);
+  return adminRole !== "admin" && isAdmin ? (
+    children
+  ) : (
+    <main className="notAdmin">
+      <div className="container">
+        <h1>Permission Denied.</h1>
+        <p>This page can only be viewed by an Admin user.</p>
+        <br />
+        <Link to="/">&larr; Back To Home</Link>
+      </div>
+    </main>
+  );
+};
+
+export const HideForNoneAdminRole = ({ children }) => {
+  const { adminRole } = useStoreState((state) => state.auth);
+
+  return adminRole === "admin" ? children : null;
 };

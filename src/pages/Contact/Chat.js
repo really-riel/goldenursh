@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ChatMessages from "../../components/ChatMessages";
 import { TbSend } from "react-icons/tb";
 import { BsImages } from "react-icons/bs";
-import { useStoreState } from "easy-peasy";
+import { useStoreRehydrated, useStoreState } from "easy-peasy";
 import {
   Timestamp,
   addDoc,
@@ -24,11 +24,13 @@ import { toast } from "react-toastify";
 import {
   checkIfUserChatDoesNotExistAndSetUserChatToDb,
   checktAndSetUserChatMessages,
-  getAdminId,
 } from "../../utils/firebaseFunctions";
 import useGetDocuments from "../../hooks/useGetDocuments";
 import { v4 as randomId } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { MdArrowBackIos } from "react-icons/md";
+import { Link } from "react-router-dom";
+import { useRef } from "react";
 
 const Chat = () => {
   const [adminId, setAdminId] = useState("");
@@ -36,18 +38,30 @@ const Chat = () => {
   const [chatImageFile, setChatImageFile] = useState(null);
   const [isInitialLoading, setIsInitialLoading] = useState(false);
   const [isShowField, setIsShowfield] = useState(false);
-  const { user } = useStoreState((state) => state.auth);
-  console.log(user);
-  const { document } = useGetDocuments("chats", `${user.id}${adminId}`);
+
+  const {
+    auth: { user },
+    chat: { chatAdminDetails },
+  } = useStoreState((state) => state);
+
+  console.log(chatAdminDetails);
+
+  const { document, error } = useGetDocuments(
+    "chats",
+    `${user.id}${chatAdminDetails.adminId}`
+  );
+
+  console.log(document, error);
+  console.log(chatAdminDetails);
 
   useEffect(() => {
     setIsInitialLoading(true);
     const preLoadFunctions = async () => {
       try {
         await checkIfUserChatDoesNotExistAndSetUserChatToDb(user);
-        const { admindetails } = await getAdminId(user);
-        await checktAndSetUserChatMessages(user, admindetails);
-        setAdminId(admindetails.adminId);
+
+        await checktAndSetUserChatMessages(user, chatAdminDetails.adminId);
+
         setIsShowfield(true);
         setIsInitialLoading(false);
       } catch (error) {
@@ -67,14 +81,20 @@ const Chat = () => {
       if (chatImageFile) {
         await handleImageUpload();
       } else {
-        await updateDoc(doc(db, "chats", `${user.id}${adminId}`), {
-          messages: arrayUnion({
-            id: randomId(),
-            text: chatMessage,
-            senderId: user.id,
-            date: Timestamp.now(),
-          }),
-        });
+        if (!chatMessage) return;
+        await updateDoc(
+          doc(db, "chats", `${user.id}${chatAdminDetails.adminId}`),
+          {
+            messages: arrayUnion({
+              id: randomId(),
+              text: chatMessage,
+              senderId: user.id,
+              date: Timestamp.now(),
+            }),
+          }
+        );
+
+        await updateUserChat();
       }
       setChatImageFile(null);
       setChatMessage("");
@@ -112,12 +132,28 @@ const Chat = () => {
     );
   };
 
+  const updateUserChat = async () => {
+    try {
+      await updateDoc(doc(db, "userChat", user.id), {
+        lastMessage: chatMessage,
+        date: serverTimestamp(),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <main className="Chat">
       {isInitialLoading && <Loader />}
 
       {isShowField && (
         <div className="mainChatContainer">
+          <Link to={"/contact"}>
+            <p className="backBtn">
+              <MdArrowBackIos /> Back
+            </p>
+          </Link>
           <section className="chatBox">
             {document?.messages.map((message, index) => (
               <ChatMessages message={message} key={index} />

@@ -88,6 +88,7 @@ export const checkIfUserChatDoesNotExistAndSetUserChatToDb = async (user) => {
         image: user.image,
         lastMessage: "",
         date: serverTimestamp(),
+        status: "pending",
       });
     }
   } catch (error) {
@@ -95,9 +96,7 @@ export const checkIfUserChatDoesNotExistAndSetUserChatToDb = async (user) => {
   }
 };
 
-export const getAdminId = async () => {
-  let admindetails;
-
+export const getChatAdminDetails = async (setChatAdminDetails) => {
   try {
     const q = query(collection(db, "admin"), where("role", "==", "admin"));
     const querySnapshot = await getDocs(q);
@@ -105,19 +104,18 @@ export const getAdminId = async () => {
     querySnapshot.forEach((doc) => {
       const data = doc.data();
 
-      admindetails = {
+      setChatAdminDetails({
         adminImg: data.image,
         adminId: doc.id,
-      };
+      });
     });
   } catch (error) {
     console.error(error);
   }
-  return { admindetails };
 };
 
-export const checktAndSetUserChatMessages = async (user, adminDetails) => {
-  const combinedId = user.id + adminDetails.adminId;
+export const checktAndSetUserChatMessages = async (user, adminId) => {
+  const combinedId = user.id + adminId;
   try {
     const response = await getDoc(doc(db, "chats", combinedId));
     if (!response.exists()) {

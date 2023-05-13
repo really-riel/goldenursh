@@ -14,9 +14,14 @@
     flex-direction: column;
     flex-grow: 1;
   }
+  .backBtn {
+    display: flex;
+    align-items: center;
+  }
   .chatBox {
     overflow-y: auto;
     height: 70vh;
+    padding-top: rem(10);
   }
   .inputSection {
     height: 10vh;

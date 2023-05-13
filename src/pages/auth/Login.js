@@ -20,6 +20,7 @@ import { toast } from "react-toastify";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { doc, getDoc } from "firebase/firestore";
 import {
+  getChatAdminDetails,
   setUsersInDatabase,
   updateAdminLastLogin,
 } from "../../utils/firebaseFunctions";
@@ -31,12 +32,14 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { setUser, setIsAdmin, setAdminRole } = useStoreActions(
-    (actions) => actions.auth
-  );
+  const {
+    auth: { setUser, setIsAdmin, setAdminRole },
+    chat: { setChatAdminDetails },
+  } = useStoreActions((actions) => actions);
 
   const navigate = useNavigate();
   const { state } = useLocation();
+  console.log(state);
 
   const checkIfUserIsAnAdmin = async (id) => {
     const document = await getDoc(doc(db, "admin", id));
@@ -73,6 +76,7 @@ const Login = () => {
       }
 
       await checkIfUserIsAnAdmin(response.user.uid);
+      await getChatAdminDetails(setChatAdminDetails);
 
       setIsLoading(false);
       state ? navigate(state) : navigate("/");
@@ -117,6 +121,7 @@ const Login = () => {
       }
 
       await checkIfUserIsAnAdmin(response.user.uid);
+      await getChatAdminDetails(setChatAdminDetails);
 
       setIsLoading(false);
       state ? navigate(state) : navigate("/");
@@ -124,7 +129,7 @@ const Login = () => {
     } catch (error) {
       console.log(error);
       setIsLoading(false);
-      /*  toast.error(error.code.split("/")[1].replaceAll("-", " ")); */
+      toast.error("an error occured, try again later 🙇‍♂️");
     }
   };
 

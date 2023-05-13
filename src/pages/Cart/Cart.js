@@ -17,6 +17,7 @@ const Cart = () => {
     cart: { cartItems },
     auth: { user },
   } = useStoreState((state) => state);
+
   const { clearCart } = useStoreActions((actions) => actions.cart);
   const navigate = useNavigate();
 
