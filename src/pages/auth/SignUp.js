@@ -71,7 +71,20 @@ const SignUp = () => {
         email,
         password
       );
-      await handleImageUpload(response.user);
+      if (imageFile) {
+        await handleImageUpload(response.user);
+      } else {
+        await setUsersInDatabase(response.user, name);
+        setUser({
+          id: response.user.uid,
+          name,
+          email,
+          phone: response.user.phoneNumber,
+          address: "",
+          image: "",
+        });
+      }
+
       await getChatAdminDetails(setChatAdminDetails);
       setIsLoading(false);
       navigate("/");
@@ -84,7 +97,6 @@ const SignUp = () => {
   };
 
   const handleImageUpload = async (user) => {
-    if (!imageFile) return;
     const storageRef = ref(storage, `profileImages/${user.uid}`);
     const uploadTask = uploadBytesResumable(storageRef, imageFile);
 
@@ -208,6 +220,7 @@ const SignUp = () => {
                 id="confirmPassword"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
+                required
               />
 
               <motion.button
