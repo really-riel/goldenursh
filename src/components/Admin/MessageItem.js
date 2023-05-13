@@ -28,12 +28,7 @@ const MessageItem = ({ data, className }) => {
       </div>
       <div className="messageMainContent">
         <p className="name">{data.name}</p>
-        <p className="lastMessage">
-          {truncatedText(
-            "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate nisi exercitationem mollitia, perspiciatis sit dolorem laboriosam pariatur deserunt debitis voluptates id accusantium impedit dolor cum. Mollitia eum dolor vero ullam? ",
-            10
-          )}
-        </p>
+        <p className="lastMessage">{truncatedText(data.text, 10)}</p>
       </div>
       <div className={`messageStatus ${data.status.toLowerCase()}`}>
         {data.status === "pending" ? "Respond" : "Responded"}
