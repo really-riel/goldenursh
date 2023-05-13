@@ -41,6 +41,8 @@
     width: 100%;
     max-width: rem(1000);
     margin: 0 auto;
+    box-shadow: $card_shadow;
+    border-radius: $card_border_radius;
   }
   .clearAllMsgsBtn {
     background-color: $nursh_dark_olive;
