@@ -2,7 +2,7 @@
 .messageItem {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: clamp(0.8rem, 1.5rem + 1vw, 1.8rem);
   padding: 1rem 0;
   cursor: pointer;
 
