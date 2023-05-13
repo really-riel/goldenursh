@@ -8,7 +8,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { toast } from "react-toastify";
 import { auth, storage } from "../../utils/firebase";
-import { setUsersInDatabase } from "../../utils/firebaseFunctions";
+import {
+  getChatAdminDetails,
+  setUsersInDatabase,
+} from "../../utils/firebaseFunctions";
 import {
   deleteObject,
   getDownloadURL,
@@ -30,7 +33,11 @@ const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(false);
 
-  const { setUser } = useStoreActions((actions) => actions.auth);
+  const {
+    auth: { setUser },
+    chat: { setChatAdminDetails },
+  } = useStoreActions((actions) => actions);
+
   const navigate = useNavigate();
 
   const handleNameFormatting = (e) => {
@@ -65,7 +72,7 @@ const SignUp = () => {
         password
       );
       await handleImageUpload(response.user);
-
+      await getChatAdminDetails(setChatAdminDetails);
       setIsLoading(false);
       navigate("/");
       toast.success("account created");
