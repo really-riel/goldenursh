@@ -56,6 +56,13 @@
     border-radius: 0.5rem;
   }
 
+  .noMessages {
+    padding: 1rem 0;
+    font-weight: 500;
+    text-align: center;
+    color: red;
+  }
+
   .loading {
     display: grid;
     place-items: center;

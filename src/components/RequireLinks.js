@@ -84,7 +84,7 @@ export const RequireAdminRoute = ({ children }) => {
 
 export const RequireAdminRoleToBeAdmin = ({ children }) => {
   const { adminRole, isAdmin } = useStoreState((state) => state.auth);
-  console.log(adminRole);
+
   return adminRole === "admin" && isAdmin ? (
     children
   ) : (

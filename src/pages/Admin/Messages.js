@@ -20,12 +20,11 @@ const Messages = () => {
     const pendingMessages = docItems?.filter(
       (item) => item.status === "pending"
     );
-    setTotalPendingMsgs(pendingMessages.length);
+    setTotalPendingMsgs(pendingMessages?.length);
   }, [docItems]);
 
   const handleSelect = (e) => {
     setSelectedOption(e.target.innerText.toLowerCase());
-    console.log(e.target.innerText.toLowerCase());
   };
 
   const handleClearMessages = () => {
@@ -71,8 +70,12 @@ const Messages = () => {
             You have{" "}
             <span className="highlight">
               {" "}
-              {totalPendingMsgs} pending Messages
-            </span>{" "}
+              {totalPendingMsgs < 1
+                ? "no pending Messages "
+                : totalPendingMsgs === 1
+                ? `${totalPendingMsgs} pending Message `
+                : `${totalPendingMsgs}  pending Messages `}
+            </span>
             to respond to
           </p>
 
@@ -88,6 +91,7 @@ const Messages = () => {
                   .map((dataItem, index) => (
                     <MessageItem key={index} data={dataItem} />
                   ))}
+                {data.length < 1 && <p className="noMessages">No messages</p>}
               </div>
               <button className="clearAllMsgsBtn" onClick={handleClearMessages}>
                 Clear all
