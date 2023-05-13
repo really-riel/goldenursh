@@ -51,7 +51,7 @@ export const RequireAuthAndNonAdminRole = ({ children }) => {
     <main className="notAdmin">
       <div className="container">
         <h1>Permission Denied.</h1>
-        <p>This page can only be viewed by an Admin user.</p>
+        <p>This page can not be viewed by an Admin role user.</p>
         <br />
         <Link to="/">&larr; Back To Home</Link>
       </div>
