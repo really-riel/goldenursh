@@ -54,6 +54,14 @@ const Chat = () => {
   console.log(document, error);
   console.log(chatAdminDetails);
 
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    }
+  }, [document?.messages]);
+
   useEffect(() => {
     setIsInitialLoading(true);
     const preLoadFunctions = async () => {
@@ -137,6 +145,7 @@ const Chat = () => {
       await updateDoc(doc(db, "userChat", user.id), {
         lastMessage: chatMessage,
         date: serverTimestamp(),
+        status: "pending",
       });
     } catch (error) {
       console.error(error);
@@ -154,7 +163,14 @@ const Chat = () => {
               <MdArrowBackIos /> Back
             </p>
           </Link>
-          <section className="chatBox">
+          <div className="senderDetails">
+            <img src={chatAdminDetails.adminImg} alt="" />
+            <div className="detailsContainer">
+              <h2>{chatAdminDetails.adminName}</h2>
+              <p>Support</p>
+            </div>
+          </div>
+          <section className="chatBox" ref={containerRef}>
             {document?.messages.map((message, index) => (
               <ChatMessages message={message} key={index} />
             ))}

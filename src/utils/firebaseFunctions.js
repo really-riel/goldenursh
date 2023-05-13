@@ -107,6 +107,7 @@ export const getChatAdminDetails = async (setChatAdminDetails) => {
       setChatAdminDetails({
         adminImg: data.image,
         adminId: doc.id,
+        adminName: data.name,
       });
     });
   } catch (error) {

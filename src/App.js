@@ -149,17 +149,17 @@ function App() {
             <Route
               index
               element={
-                <RequireAdminRoleToNotBeAdmin>
+                <RequireAdminRoleToBeAdmin>
                   <Messages />
-                </RequireAdminRoleToNotBeAdmin>
+                </RequireAdminRoleToBeAdmin>
               }
             />
             <Route
               path="support-chat"
               element={
-                <RequireAdminRoleToNotBeAdmin>
+                <RequireAdminRoleToBeAdmin>
                   <SupportChat />
-                </RequireAdminRoleToNotBeAdmin>
+                </RequireAdminRoleToBeAdmin>
               }
             />
           </Route>

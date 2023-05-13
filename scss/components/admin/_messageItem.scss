@@ -2,8 +2,13 @@
 .messageItem {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.8rem;
+  padding: 1rem 0;
+  cursor: pointer;
 
+  .line {
+    border-bottom: rem(2) solid $nursh_dark_olive;
+  }
   img {
     width: rem(40);
     height: rem(40);
@@ -12,12 +17,27 @@
   }
   .messageMainContent {
     flex-grow: 1;
+    margin-bottom: auto;
   }
 
   .messageStatus {
     padding: 0.5rem;
-    background-color: rgb(236, 178, 178);
+
     border-radius: 0.7rem;
+  }
+  .name {
+    font-weight: 600;
+  }
+  .lastMessage {
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+  }
+  .pending {
+    background-color: rgb(236, 178, 178);
     color: rgb(100, 5, 5);
+  }
+  .responded {
+    background-color: rgb(166, 240, 166);
+    color: rgb(2, 68, 2);
   }
 }

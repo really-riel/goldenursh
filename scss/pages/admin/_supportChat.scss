@@ -1,0 +1,9 @@
+@use "../../abstract" as *;
+
+.SupportChat {
+  background-color: white;
+
+  .inputForm {
+    background-color: $nursh_cream;
+  }
+}

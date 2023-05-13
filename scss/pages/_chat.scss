@@ -6,6 +6,7 @@
   flex-direction: column;
   align-items: center;
   padding: 1rem 0;
+
   .mainChatContainer {
     height: 80vh;
     width: 90%;
@@ -18,10 +19,34 @@
     display: flex;
     align-items: center;
   }
+  .senderDetails {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: rem(8);
+    background-color: $nursh_light_gold;
+    padding: 0.5rem 0;
+    border-radius: 0.8rem 0.8rem 0 0;
+    margin-top: 1rem;
+
+    img {
+      width: rem(40);
+      height: rem(40);
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+  .detailsContainer {
+    display: flex;
+    flex-direction: column;
+    p {
+      font-size: clamp(0.5rem, 0.5rem + 1vw, 1rem);
+    }
+  }
   .chatBox {
     overflow-y: auto;
     height: 70vh;
-    padding-top: rem(10);
+    padding: rem(10);
   }
   .inputSection {
     height: 10vh;

@@ -1,7 +1,7 @@
 import { action } from "easy-peasy";
 
 const chatModel = {
-  chatAdminDetails: "",
+  chatAdminDetails: {},
   setChatAdminDetails: action((state, payload) => {
     state.chatAdminDetails = payload;
   }),

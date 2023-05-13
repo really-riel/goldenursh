@@ -2,26 +2,14 @@
 .chatMessages {
   margin-bottom: 1rem;
   display: flex;
-  gap: rem(20);
+  flex-direction: column;
+  gap: rem(5);
   width: 80%;
 
-  .messageSenderInfo {
-    font-size: clamp(0.3rem, 0.5rem + 1vw, 0.8rem);
-    color: rgb(132, 125, 125);
-
-    img {
-      width: rem(40);
-      height: rem(40);
-      border-radius: 50%;
-      object-fit: cover;
-    }
-  }
   .messageContent {
     max-width: 80%;
     display: flex;
     flex-direction: column;
-
-    gap: 0.5rem;
 
     img {
       width: 80%;
@@ -36,20 +24,20 @@
     }
   }
   &.owner {
-    flex-direction: row-reverse;
+    flex-direction: column;
     margin-left: auto;
-
-    .messageSenderInfo {
-      display: none;
-    }
-
+    align-items: flex-end;
     .messageContent {
       align-items: flex-end;
       margin-right: 0.5rem;
       p {
         background-color: $nursh_light_gold;
-        border-radius: rem(10) 0 rem(10) rem(10);
+        border-radius: rem(10) rem(10) 0 rem(10);
       }
     }
+  }
+
+  .time {
+    font-size: clamp(0.3rem, 0.4rem + 1vw, 0.8rem);
   }
 }

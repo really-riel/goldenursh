@@ -38,6 +38,8 @@
   .messages {
     background-color: $nursh_cream;
     padding: 0.3rem 0.6rem;
+    max-width: rem(1000);
+    margin: 0 auto;
   }
   .clearAllMsgsBtn {
     background-color: $nursh_dark_olive;
@@ -46,5 +48,12 @@
     padding: 0.4rem 1.2rem;
     margin-left: auto;
     border-radius: 0.5rem;
+  }
+
+  .loading {
+    display: grid;
+    place-items: center;
+
+    padding: 4rem;
   }
 }

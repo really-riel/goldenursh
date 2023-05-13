@@ -63,7 +63,7 @@ const Messages = () => {
 
           {isLoading && !data ? (
             <div className="loading">
-              <p>loading...</p>
+              <h2>loading...</h2>
             </div>
           ) : !isLoading && data ? (
             <>
@@ -72,7 +72,11 @@ const Messages = () => {
                 {data
                   .sort((a, b) => b.date - a.date)
                   .map((data, index) => (
-                    <MessageItem key={index} data={data} />
+                    <MessageItem
+                      key={index}
+                      data={data}
+                      className={data.length > 1 ? "line" : null}
+                    />
                   ))}
               </div>
               <button className="clearAllMsgsBtn" onClick={handleClearMessages}>

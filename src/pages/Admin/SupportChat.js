@@ -11,6 +11,10 @@ import { useStoreState } from "easy-peasy";
 import { BsImages } from "react-icons/bs";
 import { v4 as randomId } from "uuid";
 import useGetDocuments from "../../hooks/useGetDocuments";
+import { useRef } from "react";
+import { useEffect } from "react";
+import Loader from "../../components/Loader";
+import { toast } from "react-toastify";
 
 const SupportChat = () => {
   const [chatMessage, setChatMessage] = useState("");
@@ -19,8 +23,23 @@ const SupportChat = () => {
   const { state } = useLocation();
   console.log(state.id, user.id);
 
-  const { document } = useGetDocuments("chats", `${state.id}${user.id}`);
+  const { document, isLoading, error } = useGetDocuments(
+    "chats",
+    `${state.id}${user.id}`
+  );
   console.log(document);
+
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    }
+  }, [document?.messages]);
+
+  useEffect(() => {
+    if (error) toast.error("error occured, reload page 🙇‍♂️");
+  }, [error]);
 
   const handleChatMsgSubmit = async (e) => {
     e.preventDefault();
@@ -29,7 +48,7 @@ const SupportChat = () => {
       if (chatImageFile) {
         await handleImageUpload();
       } else {
-        await updateDoc(doc(db, "chats", `${user.id}${"ok"}`), {
+        await updateDoc(doc(db, "chats", `${state.id}${user.id}`), {
           messages: arrayUnion({
             id: randomId(),
             text: chatMessage,
@@ -38,6 +57,7 @@ const SupportChat = () => {
           }),
         });
       }
+      await updateUserChat();
       setChatImageFile(null);
       setChatMessage("");
     } catch (error) {
@@ -61,7 +81,7 @@ const SupportChat = () => {
       async () => {
         const imageUrl = await getDownloadURL(uploadTask.snapshot.ref);
         console.log(imageUrl);
-        await updateDoc(doc(db, "chats", `${user.id}${"ok"}`), {
+        await updateDoc(doc(db, "chats", `${state.id}${user.id}`), {
           messages: arrayUnion({
             id: randomId(),
             text: chatMessage,
@@ -73,15 +93,30 @@ const SupportChat = () => {
       }
     );
   };
+
+  const updateUserChat = async () => {
+    try {
+      await updateDoc(doc(db, "userChat", state.id), {
+        status: "responded",
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <main className="Chat SupportChat">
+      {isLoading && <Loader />}
       <div className="mainChatContainer">
         <Link to={"/admin/messages"}>
           <p className="backBtn">
             <MdArrowBackIos /> Back
           </p>
+          <div className="senderDetails">
+            <img src={state.image} alt="" />
+            <h2>{state.name}</h2>
+          </div>
         </Link>
-        <section className="chatBox">
+        <section className="chatBox" ref={containerRef}>
           {document?.messages.map((message, index) => (
             <ChatMessages message={message} key={index} />
           ))}
