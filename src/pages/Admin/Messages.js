@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import useGetDocuments from "../../hooks/useGetDocuments";
+
 import useGetCollection from "../../hooks/useGetCollection";
 import MessageItem from "../../components/Admin/MessageItem";
 
@@ -7,6 +7,7 @@ const Messages = () => {
   const { docItems, isLoading } = useGetCollection("userChat");
   const [selectedOption, setSelectedOption] = useState("all chats");
   const [data, setData] = useState(null);
+  const [totalPendingMsgs, setTotalPendingMsgs] = useState("");
 
   useEffect(() => {
     selectedOption === "responded"
@@ -15,6 +16,12 @@ const Messages = () => {
       ? setData(docItems.filter((item) => item.status === "pending"))
       : setData(docItems);
   }, [docItems, selectedOption]);
+  useEffect(() => {
+    const pendingMessages = docItems?.filter(
+      (item) => item.status === "pending"
+    );
+    setTotalPendingMsgs(pendingMessages.length);
+  }, [docItems]);
 
   const handleSelect = (e) => {
     setSelectedOption(e.target.innerText.toLowerCase());
@@ -60,7 +67,14 @@ const Messages = () => {
               Pending
             </div>
           </div>
-          <p className="briefing">You have 5 pending Messages to respond to</p>
+          <p className="briefing">
+            You have{" "}
+            <span className="highlight">
+              {" "}
+              {totalPendingMsgs} pending Messages
+            </span>{" "}
+            to respond to
+          </p>
 
           {isLoading && !data ? (
             <div className="loading">

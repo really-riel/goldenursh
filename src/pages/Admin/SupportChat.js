@@ -46,6 +46,8 @@ const SupportChat = () => {
     e.preventDefault();
 
     try {
+      setChatMessage("");
+      setChatImageFile(null);
       if (chatImageFile) {
         await handleImageUpload();
       } else {
@@ -58,9 +60,8 @@ const SupportChat = () => {
           }),
         });
       }
+
       await updateUserChat();
-      setChatImageFile(null);
-      setChatMessage("");
     } catch (error) {
       console.error(error);
     }

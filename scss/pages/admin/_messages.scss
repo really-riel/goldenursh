@@ -28,6 +28,9 @@
     cursor: pointer;
     padding: 0.3rem 0.5rem;
   }
+  .highlight {
+    font-weight: 500;
+  }
   .selected {
     background-color: $nursh_light_gold;
     border-radius: 1rem;

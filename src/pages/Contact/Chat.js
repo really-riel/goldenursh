@@ -87,6 +87,8 @@ const Chat = () => {
     e.preventDefault();
 
     try {
+      setChatImageFile(null);
+      setChatMessage("");
       if (chatImageFile) {
         await handleImageUpload();
       } else {
@@ -105,8 +107,6 @@ const Chat = () => {
 
         await updateUserChat();
       }
-      setChatImageFile(null);
-      setChatMessage("");
     } catch (error) {
       console.error(error);
     }
