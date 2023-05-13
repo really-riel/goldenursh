@@ -15,6 +15,7 @@ import { useRef } from "react";
 import { useEffect } from "react";
 import Loader from "../../components/Loader";
 import { toast } from "react-toastify";
+import profileImg from "../../assets/userProfile.png";
 
 const SupportChat = () => {
   const [chatMessage, setChatMessage] = useState("");
@@ -112,7 +113,7 @@ const SupportChat = () => {
             <MdArrowBackIos /> Back
           </p>
           <div className="senderDetails">
-            <img src={state.image} alt="" />
+            <img src={state.image ? state.image : profileImg} alt="" />
             <h2>{state.name}</h2>
           </div>
         </Link>

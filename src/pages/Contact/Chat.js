@@ -31,6 +31,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { MdArrowBackIos } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
+import profileImg from "../../assets/userProfile.png";
 
 const Chat = () => {
   const [adminId, setAdminId] = useState("");
@@ -164,7 +165,14 @@ const Chat = () => {
             </p>
           </Link>
           <div className="senderDetails">
-            <img src={chatAdminDetails.adminImg} alt="" />
+            <img
+              src={
+                chatAdminDetails.adminImg
+                  ? chatAdminDetails.adminImg
+                  : profileImg
+              }
+              alt=""
+            />
             <div className="detailsContainer">
               <h2>{chatAdminDetails.adminName}</h2>
               <p>Support</p>

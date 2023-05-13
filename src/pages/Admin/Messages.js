@@ -10,14 +10,15 @@ const Messages = () => {
 
   useEffect(() => {
     selectedOption === "responded"
-      ? setData([])
+      ? setData(docItems.filter((item) => item.status === "responded"))
       : selectedOption === "pending"
-      ? setData([])
+      ? setData(docItems.filter((item) => item.status === "pending"))
       : setData(docItems);
-  }, [docItems]);
+  }, [docItems, selectedOption]);
 
   const handleSelect = (e) => {
     setSelectedOption(e.target.innerText.toLowerCase());
+    console.log(e.target.innerText.toLowerCase());
   };
 
   const handleClearMessages = () => {
@@ -67,16 +68,11 @@ const Messages = () => {
             </div>
           ) : !isLoading && data ? (
             <>
-              {" "}
               <div className="messages">
                 {data
                   .sort((a, b) => b.date - a.date)
-                  .map((data, index) => (
-                    <MessageItem
-                      key={index}
-                      data={data}
-                      className={data.length > 1 ? "line" : null}
-                    />
+                  .map((dataItem, index) => (
+                    <MessageItem key={index} data={dataItem} />
                   ))}
               </div>
               <button className="clearAllMsgsBtn" onClick={handleClearMessages}>

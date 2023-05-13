@@ -1,7 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import profileImg from "../../assets/userProfile.png";
 
-const MessageItem = ({ data, className }) => {
+const MessageItem = ({ data }) => {
   const navigate = useNavigate();
 
   const truncatedText = (text, maxWords) => {
@@ -16,7 +17,7 @@ const MessageItem = ({ data, className }) => {
 
   return (
     <div
-      className={`messageItem ${className}`}
+      className={`messageItem `}
       onClick={() =>
         navigate("support-chat", {
           state: data,
@@ -24,7 +25,7 @@ const MessageItem = ({ data, className }) => {
       }
     >
       <div className="imageContainer">
-        <img src={data.image} alt="customerImage" />
+        <img src={data.image ? data.image : profileImg} alt="customerImage" />
       </div>
       <div className="messageMainContent">
         <p className="name">{data.name}</p>
