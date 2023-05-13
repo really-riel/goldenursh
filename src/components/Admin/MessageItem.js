@@ -28,7 +28,7 @@ const MessageItem = ({ data, className }) => {
       </div>
       <div className="messageMainContent">
         <p className="name">{data.name}</p>
-        <p className="lastMessage">{truncatedText(data.text, 10)}</p>
+        <p className="lastMessage">{truncatedText(data.lastMessage, 10)}</p>
       </div>
       <div className={`messageStatus ${data.status.toLowerCase()}`}>
         {data.status === "pending" ? "Respond" : "Responded"}
