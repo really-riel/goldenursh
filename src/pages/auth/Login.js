@@ -79,12 +79,13 @@ const Login = () => {
       await getChatAdminDetails(setChatAdminDetails);
 
       setIsLoading(false);
+
       state ? navigate(state) : navigate("/");
       toast.success("Login Successful");
     } catch (error) {
       console.error(error);
       setIsLoading(false);
-      toast.error(error.code.split("/")[1].replaceAll("-", " "));
+      toast.error(error.code.split("/")[1]?.replaceAll("-", " "));
     }
   };
 
