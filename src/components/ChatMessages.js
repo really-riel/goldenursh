@@ -1,41 +1,38 @@
 import React from "react";
-import person from "../assets/profilePic2.jpg";
-import media from "../assets/grilled_meat.jpeg";
 
 import { useStoreState } from "easy-peasy";
-import { useRef } from "react";
+
 import { useEffect } from "react";
+import { useState } from "react";
 
 const ChatMessages = ({ message }) => {
   const { user } = useStoreState((state) => state.auth);
 
-  function formatTimestamp(timestamp) {
-    const date = timestamp.toDate();
-    const now = new Date();
-    const diffInSeconds = Math.floor((now - date) / 1000);
+  const [elapsedTime, setElapsedTime] = useState("");
+  useEffect(() => {
+    // Format the timestamp to a human-readable string
+    const date = message.date.toDate();
 
-    if (diffInSeconds < 60) {
-      return `${diffInSeconds} secs ago`;
-    }
+    // Start a timer to update the elapsed time every second
+    const intervalId = setInterval(() => {
+      const secondsAgo = Math.floor((Date.now() - date.getTime()) / 1000);
+      const minutesAgo = Math.floor(secondsAgo / 60);
+      const hoursAgo = Math.floor(minutesAgo / 60);
+      const daysAgo = Math.floor(hoursAgo / 24);
+      if (secondsAgo < 60) {
+        setElapsedTime(`secs ago`);
+      } else if (minutesAgo < 60) {
+        setElapsedTime(`${minutesAgo} min ago`);
+      } else if (hoursAgo < 24) {
+        setElapsedTime(`${hoursAgo} hr ago`);
+      } else {
+        setElapsedTime(`${daysAgo} ${daysAgo === 1 ? "day" : "days"} ago`);
+      }
+    }, 1000);
 
-    const diffInMinutes = Math.floor(diffInSeconds / 60);
-
-    if (diffInMinutes < 60) {
-      return `${diffInMinutes} mins ago`;
-    }
-
-    const diffInHours = Math.floor(diffInMinutes / 60);
-
-    if (diffInHours < 24) {
-      return `${diffInHours} hrs ago`;
-    }
-
-    const diffInDays = Math.floor(diffInHours / 24);
-
-    return `${diffInDays} days ago`;
-  }
-
-  console.log(message);
+    // Clean up the timer when the component unmounts
+    return () => clearInterval(intervalId);
+  }, [message.date]);
 
   return (
     <div
@@ -47,7 +44,7 @@ const ChatMessages = ({ message }) => {
         <img src={message.image} alt="" />
       </div>
       <div className="time">
-        <span>{formatTimestamp(message.date)}</span>
+        <span>{elapsedTime}</span>
       </div>
     </div>
   );

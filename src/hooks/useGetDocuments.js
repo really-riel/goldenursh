@@ -8,7 +8,6 @@ const useGetDocuments = (collectionName, docName) => {
   const [document, setDocument] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  console.log(docName);
 
   useEffect(() => {
     setIsLoading(true);

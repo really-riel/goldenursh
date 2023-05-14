@@ -22,13 +22,11 @@ const SupportChat = () => {
   const [chatImageFile, setChatImageFile] = useState(null);
   const { user } = useStoreState((state) => state.auth);
   const { state } = useLocation();
-  console.log(state.id, user.id);
 
   const { document, isLoading, error } = useGetDocuments(
     "chats",
     `${state.id}${user.id}`
   );
-  console.log(document);
 
   const containerRef = useRef(null);
 
