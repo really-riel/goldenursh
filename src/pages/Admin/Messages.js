@@ -16,11 +16,14 @@ const Messages = () => {
       ? setData(docItems.filter((item) => item.status === "pending"))
       : setData(docItems);
   }, [docItems, selectedOption]);
+
   useEffect(() => {
-    const pendingMessages = docItems?.filter(
-      (item) => item.status === "pending"
-    );
-    setTotalPendingMsgs(pendingMessages?.length);
+    if (docItems) {
+      const pendingMessages = docItems?.filter(
+        (item) => item.status === "pending"
+      );
+      setTotalPendingMsgs(pendingMessages?.length);
+    }
   }, [docItems]);
 
   const handleSelect = (e) => {

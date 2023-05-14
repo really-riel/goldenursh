@@ -27,13 +27,16 @@ import useWindowSize from "../../hooks/useWindowSize";
 
 const AdminSideNav = ({ setIsSideNavOpen }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { deleteUser, setIsAdmin } = useStoreActions((actions) => actions.auth);
+  const { deleteUser, setIsAdmin, setAdminRole } = useStoreActions(
+    (actions) => actions.auth
+  );
   const { width } = useWindowSize();
 
   const handleLogout = async () => {
     try {
       await signOut(auth);
       if (width < 1200) setIsSideNavOpen(false);
+      setAdminRole("");
       deleteUser();
       setIsAdmin(false);
       toast.success("logout Successful");

@@ -13,12 +13,15 @@ import { FaUserCog } from "react-icons/fa";
 const DesktopNav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user } = useStoreState((state) => state.auth);
-  const { setIsAdmin, deleteUser } = useStoreActions((actions) => actions.auth);
+  const { setIsAdmin, deleteUser, setAdminRole } = useStoreActions(
+    (actions) => actions.auth
+  );
 
   const handleLogout = async () => {
     try {
       await signOut(auth);
       setIsAdmin(false);
+      setAdminRole("");
       deleteUser();
       toast.success("logout Successful");
     } catch (error) {
