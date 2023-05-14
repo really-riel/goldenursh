@@ -7,7 +7,7 @@ const Messages = () => {
   const { docItems, isLoading } = useGetCollection("userChat");
   const [selectedOption, setSelectedOption] = useState("all chats");
   const [data, setData] = useState(null);
-  const [totalPendingMsgs, setTotalPendingMsgs] = useState("");
+  const [totalPendingMsgs, setTotalPendingMsgs] = useState(0);
 
   useEffect(() => {
     selectedOption === "responded"

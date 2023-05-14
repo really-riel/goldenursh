@@ -1,9 +1,10 @@
 import { useStoreState } from "easy-peasy";
 import { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import React from "react";
 import useGetDocuments from "../hooks/useGetDocuments";
 import { doc } from "firebase/firestore";
+import { useEffect } from "react";
 
 export const ShowOnLogin = ({ children }) => {
   const { user } = useStoreState((state) => state.auth);
@@ -18,6 +19,7 @@ export const ShowOnLogout = ({ children }) => {
 
 export const RequireAuth = ({ children }) => {
   const { user } = useStoreState((state) => state.auth);
+  const navigate = useNavigate();
   console.log(children.type.name);
   let targetUrl;
   switch (children.type.name) {
@@ -36,7 +38,12 @@ export const RequireAuth = ({ children }) => {
     default:
       targetUrl = `/${children.type.name.toLowerCase()}`;
   }
-  return user ? children : <Navigate to={"/auth/login"} state={targetUrl} />;
+  useEffect(() => {
+    if (!user) {
+      navigate("/auth/login", { state: targetUrl });
+    }
+  }, [user, navigate, targetUrl]);
+  return user ? children : null;
 };
 
 export const RequireAuthAndNonAdminRole = ({ children }) => {
