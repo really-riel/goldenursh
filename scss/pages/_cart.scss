@@ -49,6 +49,7 @@
     margin: 1rem 0;
     display: grid;
     gap: 2rem;
+    grid-template-rows: min-content;
 
     @include mq(tablet) {
       grid-template-columns: repeat(2, 1fr);

@@ -20,7 +20,7 @@ const Header = () => {
         />
       </motion.div>
       <div className="logoContainer">
-        {width < 1024 && <TabletNav />}
+        {width < 1200 && <TabletNav />}
         <Link to={"/"}>
           <Logo />
         </Link>
