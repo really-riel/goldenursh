@@ -57,11 +57,11 @@ const Chat = () => {
 
   const containerRef = useRef(null);
 
-  useEffect(() => {
+  /*  useEffect(() => {
     if (containerRef.current) {
       containerRef.current.scrollTop = containerRef.current.scrollHeight;
     }
-  }, [document?.messages]);
+  }, [document?.messages]); */
 
   useEffect(() => {
     setIsInitialLoading(true);

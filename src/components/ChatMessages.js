@@ -4,9 +4,17 @@ import { useStoreState } from "easy-peasy";
 
 import { useEffect } from "react";
 import { useState } from "react";
+import { useRef } from "react";
+import { ref } from "firebase/storage";
 
 const ChatMessages = ({ message }) => {
   const { user } = useStoreState((state) => state.auth);
+
+  const msgRef = useRef();
+
+  useEffect(() => {
+    msgRef.current?.scrollIntoView();
+  }, [message]);
 
   const [elapsedTime, setElapsedTime] = useState("");
   useEffect(() => {
@@ -36,6 +44,7 @@ const ChatMessages = ({ message }) => {
 
   return (
     <div
+      ref={msgRef}
       className={`chatMessages ${user.id === message.senderId ? "owner" : ""}`}
     >
       <div className="messageContent">

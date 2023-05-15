@@ -30,11 +30,11 @@ const SupportChat = () => {
 
   const containerRef = useRef(null);
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (containerRef.current) {
       containerRef.current.scrollTop = containerRef.current.scrollHeight;
     }
-  }, [document?.messages]);
+  }, [document?.messages]); */
 
   useEffect(() => {
     if (error) toast.error("error occured, reload page 🙇‍♂️");
