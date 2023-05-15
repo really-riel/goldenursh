@@ -49,7 +49,7 @@ const Layout = () => {
           <>
             <Header />
             <Outlet />
-            <Footer />
+            {pathname !== "/contact/chat" && <Footer />}
           </>
         )}
 
