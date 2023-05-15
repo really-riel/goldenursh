@@ -8,7 +8,7 @@
   grid-template-columns: repeat(2, 1fr);
   font-size: clamp(0.5rem, 0.5rem + 1vw, 0.8rem);
   min-height: fit-content;
-  height: auto;
+  height: min-content;
   overflow: hidden;
   background-color: white;
   border-radius: $card_border_radius;
