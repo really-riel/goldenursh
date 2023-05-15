@@ -30,11 +30,9 @@ import { v4 as randomId } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { MdArrowBackIos } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { useRef } from "react";
 import profileImg from "../../assets/userProfile.png";
 
 const Chat = () => {
-  const [adminId, setAdminId] = useState("");
   const [chatMessage, setChatMessage] = useState("");
   const [chatImageFile, setChatImageFile] = useState(null);
   const [isInitialLoading, setIsInitialLoading] = useState(false);
@@ -54,14 +52,6 @@ const Chat = () => {
 
   console.log(document, error);
   console.log(chatAdminDetails);
-
-  const containerRef = useRef(null);
-
-  /*  useEffect(() => {
-    if (containerRef.current) {
-      containerRef.current.scrollTop = containerRef.current.scrollHeight;
-    }
-  }, [document?.messages]); */
 
   useEffect(() => {
     setIsInitialLoading(true);
@@ -128,15 +118,18 @@ const Chat = () => {
       async () => {
         const imageUrl = await getDownloadURL(uploadTask.snapshot.ref);
         console.log(imageUrl);
-        await updateDoc(doc(db, "chats", `${user.id}${adminId}`), {
-          messages: arrayUnion({
-            id: randomId(),
-            text: chatMessage,
-            senderId: user.id,
-            date: Timestamp.now(),
-            image: imageUrl,
-          }),
-        });
+        await updateDoc(
+          doc(db, "chats", `${user.id}${chatAdminDetails.adminId}`),
+          {
+            messages: arrayUnion({
+              id: randomId(),
+              text: chatMessage,
+              senderId: user.id,
+              date: Timestamp.now(),
+              image: imageUrl,
+            }),
+          }
+        );
       }
     );
   };
@@ -178,7 +171,7 @@ const Chat = () => {
               <p>Support</p>
             </div>
           </div>
-          <section className="chatBox" ref={containerRef}>
+          <section className="chatBox">
             {document?.messages.map((message, index) => (
               <ChatMessages message={message} key={index} />
             ))}

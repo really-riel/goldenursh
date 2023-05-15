@@ -5,7 +5,6 @@ import { useStoreState } from "easy-peasy";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useRef } from "react";
-import { ref } from "firebase/storage";
 
 const ChatMessages = ({ message }) => {
   const { user } = useStoreState((state) => state.auth);
@@ -17,6 +16,7 @@ const ChatMessages = ({ message }) => {
   }, [message]);
 
   const [elapsedTime, setElapsedTime] = useState("");
+
   useEffect(() => {
     // Format the timestamp to a human-readable string
     const date = message.date.toDate();

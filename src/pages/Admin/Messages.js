@@ -91,9 +91,11 @@ const Messages = () => {
               <div className="messages">
                 {data
                   .sort((a, b) => b.date - a.date)
-                  .map((dataItem, index) => (
-                    <MessageItem key={index} data={dataItem} />
-                  ))}
+                  .map((dataItem, index) => {
+                    if (dataItem.lastMessage) {
+                      return <MessageItem key={index} data={dataItem} />;
+                    }
+                  })}
                 {data.length < 1 && <p className="noMessages">No messages</p>}
               </div>
               <button className="clearAllMsgsBtn" onClick={handleClearMessages}>

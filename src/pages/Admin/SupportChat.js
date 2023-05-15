@@ -11,7 +11,6 @@ import { useStoreState } from "easy-peasy";
 import { BsImages } from "react-icons/bs";
 import { v4 as randomId } from "uuid";
 import useGetDocuments from "../../hooks/useGetDocuments";
-import { useRef } from "react";
 import { useEffect } from "react";
 import Loader from "../../components/Loader";
 import { toast } from "react-toastify";
@@ -27,14 +26,6 @@ const SupportChat = () => {
     "chats",
     `${state.id}${user.id}`
   );
-
-  const containerRef = useRef(null);
-
-  /* useEffect(() => {
-    if (containerRef.current) {
-      containerRef.current.scrollTop = containerRef.current.scrollHeight;
-    }
-  }, [document?.messages]); */
 
   useEffect(() => {
     if (error) toast.error("error occured, reload page 🙇‍♂️");
@@ -116,7 +107,7 @@ const SupportChat = () => {
             <h2>{state.name}</h2>
           </div>
         </Link>
-        <section className="chatBox" ref={containerRef}>
+        <section className="chatBox">
           {document?.messages.map((message, index) => (
             <ChatMessages message={message} key={index} />
           ))}
