@@ -9,6 +9,7 @@ import { auth } from "../../utils/firebase";
 import { toast } from "react-toastify";
 import { RequireAdminLink } from "../../components/RequireLinks";
 import { FaUserCog } from "react-icons/fa";
+import OptionsPopUp from "../../components/OptionsPopUp";
 
 const DesktopNav = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,6 +17,8 @@ const DesktopNav = () => {
   const { setIsAdmin, deleteUser, setAdminRole } = useStoreActions(
     (actions) => actions.auth
   );
+
+  const [isLogoutOptOpen, setIsLogOutOptOpen] = useState(false);
 
   const handleLogout = async () => {
     try {
@@ -32,58 +35,67 @@ const DesktopNav = () => {
     }
   };
   return (
-    <nav className="desktopNav">
-      <ul>
-        <NavLink to={"/"} onClick={() => setIsOpen(false)}>
-          <motion.li whileTap={{ scale: 0.8 }}>Home</motion.li>
-        </NavLink>
-
-        <RequireAdminLink>
-          <NavLink to={"/admin/dashboard"}>
-            <li>Admin</li>
+    <>
+      <nav className="desktopNav">
+        <ul>
+          <NavLink to={"/"} onClick={() => setIsOpen(false)}>
+            <motion.li whileTap={{ scale: 0.8 }}>Home</motion.li>
           </NavLink>
-        </RequireAdminLink>
 
-        <motion.li
-          whileTap={{ scale: 0.8 }}
-          className="category"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          <span>Categories</span>
-          {isOpen ? <FiChevronDown /> : <FiChevronRight />}
-          {isOpen && (
-            <div className="categoryList">
-              <ul>
-                <li onClick={() => setIsOpen(false)}>Trending List</li>
-                <li onClick={() => setIsOpen(false)}>
-                  Order based on your choice
-                </li>
-              </ul>
-            </div>
+          <RequireAdminLink>
+            <NavLink to={"/admin/dashboard"}>
+              <li>Admin</li>
+            </NavLink>
+          </RequireAdminLink>
+
+          <motion.li
+            whileTap={{ scale: 0.8 }}
+            className="category"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            <span>Categories</span>
+            {isOpen ? <FiChevronDown /> : <FiChevronRight />}
+            {isOpen && (
+              <div className="categoryList">
+                <ul>
+                  <li onClick={() => setIsOpen(false)}>Trending List</li>
+                  <li onClick={() => setIsOpen(false)}>
+                    Order based on your choice
+                  </li>
+                </ul>
+              </div>
+            )}
+          </motion.li>
+          <NavLink to={"/contact"}>
+            <motion.li whileTap={{ scale: 0.8 }}>Contact</motion.li>
+          </NavLink>
+          <NavLink to={"/orders"}>
+            <motion.li whileTap={{ scale: 0.8 }}>Orders</motion.li>
+          </NavLink>
+          {user ? (
+            <Link onClick={() => setIsLogOutOptOpen(true)}>Logout</Link>
+          ) : (
+            <NavLink to={"auth/login"}>
+              <motion.li
+                whileTap={{ scale: 0.8 }}
+                onClick={() => setIsOpen(false)}
+              >
+                Login
+              </motion.li>
+            </NavLink>
           )}
-        </motion.li>
-        <NavLink to={"/contact"}>
-          <motion.li whileTap={{ scale: 0.8 }}>Contact</motion.li>
-        </NavLink>
-        <NavLink to={"/orders"}>
-          <motion.li whileTap={{ scale: 0.8 }}>Orders</motion.li>
-        </NavLink>
-        {user ? (
-          <Link onClick={handleLogout}>Logout</Link>
-        ) : (
-          <NavLink to={"auth/login"}>
-            <motion.li
-              whileTap={{ scale: 0.8 }}
-              onClick={() => setIsOpen(false)}
-            >
-              Login
-            </motion.li>
-          </NavLink>
-        )}
 
-        <TabletNav />
-      </ul>
-    </nav>
+          <TabletNav />
+        </ul>
+      </nav>
+      {isLogoutOptOpen && (
+        <OptionsPopUp
+          handleLogout={handleLogout}
+          setIsLogOutOptOpen={setIsLogOutOptOpen}
+          type={"logout"}
+        />
+      )}
+    </>
   );
 };
 

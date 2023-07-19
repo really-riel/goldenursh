@@ -21,9 +21,12 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../utils/firebase";
 import { toast } from "react-toastify";
 import { useStoreActions, useStoreState } from "easy-peasy";
+import ClickOutside from "../../components/OptionsPopUp";
+import OptionsPopUp from "../../components/OptionsPopUp";
 
 const SideNav = ({ setIsSideNavOpen }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLogoutOptOpen, setIsLogOutOptOpen] = useState(false);
   const { deleteUser, setIsAdmin, setAdminRole } = useStoreActions(
     (actions) => actions.auth
   );
@@ -45,111 +48,126 @@ const SideNav = ({ setIsSideNavOpen }) => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, x: -300 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: 200 }}
-      className="sideNav"
-    >
-      <section>
-        <div>
-          <Logo />
-          <FaTimes onClick={() => setIsSideNavOpen(false)} />
-        </div>
-        <nav>
-          <ul>
-            <NavLink to={"/"} onClick={() => setIsSideNavOpen(false)}>
-              <li>
-                <SlHome /> Home
-              </li>
-            </NavLink>
-            <RequireAdminLink>
-              <NavLink
-                to={"/admin/dashboard"}
-                onClick={() => setIsSideNavOpen(false)}
-              >
+    <>
+      <motion.div
+        initial={{ opacity: 0, x: -300 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: 200 }}
+        className="sideNav"
+      >
+        <section>
+          <div>
+            <Logo />
+            <FaTimes onClick={() => setIsSideNavOpen(false)} />
+          </div>
+          <nav>
+            <ul>
+              <NavLink to={"/"} onClick={() => setIsSideNavOpen(false)}>
                 <li>
-                  <FaUserCog /> Admin
+                  <SlHome /> Home
                 </li>
               </NavLink>
-            </RequireAdminLink>
-
-            <li onClick={() => setIsOpen(!isOpen)}>
-              <HiOutlineViewGrid />
-              Categories
-              {isOpen ? <FiChevronDown /> : <FiChevronRight />}
-            </li>
-            {isOpen && (
-              <ul className="categoryList">
-                <a
-                  href="#trendingOrders"
+              <RequireAdminLink>
+                <NavLink
+                  to={"/admin/dashboard"}
                   onClick={() => setIsSideNavOpen(false)}
                 >
-                  <li>Trending Orders</li>
-                </a>
-                <a href="#yourChoice" onClick={() => setIsSideNavOpen(false)}>
-                  <li>Order based on your choice</li>
-                </a>
-              </ul>
-            )}
+                  <li>
+                    <FaUserCog /> Admin
+                  </li>
+                </NavLink>
+              </RequireAdminLink>
 
-            <NavLink to={"/contact"} onClick={() => setIsSideNavOpen(false)}>
-              <li>
-                <MdOutlineConnectWithoutContact /> Contact
+              <li onClick={() => setIsOpen(!isOpen)}>
+                <HiOutlineViewGrid />
+                Categories
+                {isOpen ? <FiChevronDown /> : <FiChevronRight />}
               </li>
-            </NavLink>
-            <NavLink
-              className="cart"
-              to={"/cart"}
-              onClick={() => setIsSideNavOpen(false)}
-            >
-              <li>
-                <FiShoppingCart /> Cart
-              </li>
-            </NavLink>
-            <NavLink
-              className="profile"
-              to={"/profile"}
-              onClick={() => setIsSideNavOpen(false)}
-            >
-              <li>
-                <BsPerson />
-                Profile
-              </li>
-            </NavLink>
-            <NavLink
-              className="orders"
-              to={"/orders"}
-              onClick={() => setIsSideNavOpen(false)}
-            >
-              <li>
-                <FaBox />
-                Orders
-              </li>
-            </NavLink>
-            {/* login */}
-            <ShowOnLogout>
+              {isOpen && (
+                <ul className="categoryList">
+                  <a
+                    href="#trendingOrders"
+                    onClick={() => setIsSideNavOpen(false)}
+                  >
+                    <li>Trending Orders</li>
+                  </a>
+                  <a href="#yourChoice" onClick={() => setIsSideNavOpen(false)}>
+                    <li>Order based on your choice</li>
+                  </a>
+                </ul>
+              )}
+
+              <NavLink to={"/contact"} onClick={() => setIsSideNavOpen(false)}>
+                <li>
+                  <MdOutlineConnectWithoutContact /> Contact
+                </li>
+              </NavLink>
               <NavLink
-                to={"/auth/login"}
+                className="cart"
+                to={"/cart"}
                 onClick={() => setIsSideNavOpen(false)}
               >
                 <li>
-                  <HiOutlineArrowRightOnRectangle /> Login
+                  <FiShoppingCart /> Cart
                 </li>
               </NavLink>
-            </ShowOnLogout>
+              <NavLink
+                className="profile"
+                to={"/profile"}
+                onClick={() => setIsSideNavOpen(false)}
+              >
+                <li>
+                  <BsPerson />
+                  Profile
+                </li>
+              </NavLink>
+              <NavLink
+                className="orders"
+                to={"/orders"}
+                onClick={() => setIsSideNavOpen(false)}
+              >
+                <li>
+                  <FaBox />
+                  Orders
+                </li>
+              </NavLink>
+              {/* login */}
+              <ShowOnLogout>
+                <NavLink
+                  to={"/auth/login"}
+                  onClick={() => setIsSideNavOpen(false)}
+                >
+                  <li>
+                    <HiOutlineArrowRightOnRectangle /> Login
+                  </li>
+                </NavLink>
+              </ShowOnLogout>
 
-            {/* logout */}
-            <ShowOnLogin>
-              <li onClick={handleLogout} style={{ cursor: "pointer" }}>
-                <HiOutlineArrowLeftOnRectangle /> Logout
-              </li>
-            </ShowOnLogin>
-          </ul>
-        </nav>
-      </section>
-      <section onClick={() => setIsSideNavOpen(false)}></section>
-    </motion.div>
+              {/* logout */}
+              <ShowOnLogin>
+                <li
+                  onClick={() => {
+                    setIsLogOutOptOpen(true);
+                  }}
+                  style={{ cursor: "pointer" }}
+                >
+                  <HiOutlineArrowLeftOnRectangle /> Logout
+                </li>
+              </ShowOnLogin>
+            </ul>
+          </nav>
+        </section>
+        <section onClick={() => setIsSideNavOpen(false)}></section>
+      </motion.div>
+
+      {isLogoutOptOpen && (
+        <OptionsPopUp
+          handleLogout={handleLogout}
+          setIsLogOutOptOpen={setIsLogOutOptOpen}
+          type={"logout"}
+        />
+      )}
+    </>
   );
 };
 

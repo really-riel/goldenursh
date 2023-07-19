@@ -24,9 +24,11 @@ import { auth } from "../../utils/firebase";
 import { toast } from "react-toastify";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import useWindowSize from "../../hooks/useWindowSize";
+import OptionsPopUp from "../../components/OptionsPopUp";
 
 const AdminSideNav = ({ setIsSideNavOpen }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLogoutOptOpen, setIsLogOutOptOpen] = useState(false);
   const { deleteUser, setIsAdmin, setAdminRole } = useStoreActions(
     (actions) => actions.auth
   );
@@ -54,101 +56,114 @@ const AdminSideNav = ({ setIsSideNavOpen }) => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, x: -300 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: 200 }}
-      className="sideNav adminSideNav"
-    >
-      <section>
-        <div>
-          <Logo />
-          <FaTimes className="cancelButton" onClick={handleClick} />
-        </div>
-        <nav>
-          <h2>MENU</h2>
-          <ul>
-            <NavLink to={"/admin/dashboard"} onClick={handleClick}>
-              <li>
-                <BsGrid1X2Fill /> Dashboard
-              </li>
-            </NavLink>
+    <>
+      <motion.div
+        initial={{ opacity: 0, x: -300 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: 200 }}
+        className="sideNav adminSideNav"
+      >
+        <section>
+          <div>
+            <Logo />
+            <FaTimes className="cancelButton" onClick={handleClick} />
+          </div>
+          <nav>
+            <h2>MENU</h2>
+            <ul>
+              <NavLink to={"/admin/dashboard"} onClick={handleClick}>
+                <li>
+                  <BsGrid1X2Fill /> Dashboard
+                </li>
+              </NavLink>
 
-            <NavLink to={"/admin/staffs"} onClick={handleClick}>
-              <li>
-                <FaUsers /> Staffs
-              </li>
-            </NavLink>
-            <NavLink
-              className="cart"
-              to={"/admin/orders"}
-              onClick={handleClick}
-            >
-              <li>
-                <FiShoppingBag /> Orders
-              </li>
-            </NavLink>
-            <NavLink
-              className="profile"
-              to={"/admin/dishes"}
-              onClick={handleClick}
-            >
-              <li>
-                <BiDish />
-                Dishes
-              </li>
-            </NavLink>
-            <NavLink
-              className="orders"
-              to={"/admin/inventory"}
-              onClick={handleClick}
-            >
-              <li>
-                <MdOutlineInventory2 /> Inventory
-              </li>
-            </NavLink>
-            <HideForNoneAdminRole>
+              <NavLink to={"/admin/staffs"} onClick={handleClick}>
+                <li>
+                  <FaUsers /> Staffs
+                </li>
+              </NavLink>
               <NavLink
-                className="orders"
-                to={"/admin/messages"}
+                className="cart"
+                to={"/admin/orders"}
                 onClick={handleClick}
               >
                 <li>
-                  <HiOutlineMail /> Messages
+                  <FiShoppingBag /> Orders
                 </li>
               </NavLink>
-            </HideForNoneAdminRole>
-            <NavLink
-              className="orders"
-              to={"/admin/notification"}
-              onClick={handleClick}
-            >
-              <li>
-                <BiBell />
-                Notification
-              </li>
-            </NavLink>
-
-            {/* login */}
-            <ShowOnLogout>
-              <NavLink to={"/auth/login"} onClick={handleClick}>
+              <NavLink
+                className="profile"
+                to={"/admin/dishes"}
+                onClick={handleClick}
+              >
                 <li>
-                  <HiOutlineArrowRightOnRectangle /> Login
+                  <BiDish />
+                  Dishes
                 </li>
               </NavLink>
-            </ShowOnLogout>
+              <NavLink
+                className="orders"
+                to={"/admin/inventory"}
+                onClick={handleClick}
+              >
+                <li>
+                  <MdOutlineInventory2 /> Inventory
+                </li>
+              </NavLink>
+              <HideForNoneAdminRole>
+                <NavLink
+                  className="orders"
+                  to={"/admin/messages"}
+                  onClick={handleClick}
+                >
+                  <li>
+                    <HiOutlineMail /> Messages
+                  </li>
+                </NavLink>
+              </HideForNoneAdminRole>
+              <NavLink
+                className="orders"
+                to={"/admin/notification"}
+                onClick={handleClick}
+              >
+                <li>
+                  <BiBell />
+                  Notification
+                </li>
+              </NavLink>
 
-            {/* logout */}
-            <ShowOnLogin>
-              <li onClick={handleLogout} style={{ cursor: "pointer" }}>
-                <HiOutlineArrowLeftOnRectangle /> Logout
-              </li>
-            </ShowOnLogin>
-          </ul>
-        </nav>
-      </section>
-      <section onClick={handleClick}></section>
-    </motion.div>
+              {/* login */}
+              <ShowOnLogout>
+                <NavLink to={"/auth/login"} onClick={handleClick}>
+                  <li>
+                    <HiOutlineArrowRightOnRectangle /> Login
+                  </li>
+                </NavLink>
+              </ShowOnLogout>
+
+              {/* logout */}
+              <ShowOnLogin>
+                <li
+                  onClick={() => setIsLogOutOptOpen(true)}
+                  style={{ cursor: "pointer" }}
+                >
+                  <HiOutlineArrowLeftOnRectangle /> Logout
+                </li>
+              </ShowOnLogin>
+            </ul>
+          </nav>
+        </section>
+        <section onClick={handleClick}></section>
+      </motion.div>
+
+      {isLogoutOptOpen && (
+        <OptionsPopUp
+          handleLogout={handleLogout}
+          setIsLogOutOptOpen={setIsLogOutOptOpen}
+          type={"logout"}
+        />
+      )}
+    </>
   );
 };
 

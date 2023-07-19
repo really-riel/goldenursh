@@ -16,10 +16,13 @@ import { deleteDoc, doc, setDoc } from "firebase/firestore";
 import { db } from "../../utils/firebase";
 import { toast } from "react-toastify";
 import { BiWifiOff } from "react-icons/bi";
+import OptionsPopUp from "../../components/OptionsPopUp";
 
 const Staffs = () => {
   const [isDisplayed, setIsDisplayed] = useState(false);
   const [isHandlingAFunction, setIsHandlingAFunction] = useState(false);
+  const [isLogoutOptOpen, setIsLogOutOptOpen] = useState(false);
+  const [deleteStaff, setDeleteStaff] = useState({});
 
   const [newStaffName, setNewStaffName] = useState("");
   const [newStaffEmail, setNewStaffEmail] = useState("");
@@ -115,146 +118,161 @@ const Staffs = () => {
   };
 
   return (
-    <main className="Staffs">
-      {isLoading && <Loader />}
-      {docItems?.length > 0 ? (
-        <div className="staffsContainer">
-          {isHandlingAFunction && <Loader />}
-          <h2>Staff Lists</h2>
-          {adminRole === "admin" && (
-            <p>
-              Add or remove From existing <br />
-              Staff List.
-            </p>
-          )}
+    <>
+      <main className="Staffs">
+        {isLoading && <Loader />}
+        {docItems?.length > 0 ? (
+          <div className="staffsContainer">
+            {isHandlingAFunction && <Loader />}
+            <h2>Staff Lists</h2>
+            {adminRole === "admin" && (
+              <p>
+                Add or remove From existing <br />
+                Staff List.
+              </p>
+            )}
 
-          <section className="staffsList">
-            {docItems?.map((item, index) => (
-              <div
-                className={
-                  user.email === item.email
-                    ? `staffCard activeUser `
-                    : "staffCard"
-                }
-                key={index}
-              >
-                <div className="staffMain">
-                  <figure>
-                    <img src={item.image} alt="" />
-                  </figure>
-                  <div className="nameContainer">
-                    <p>{item.name}</p>
-                  </div>
-                </div>
+            <section className="staffsList">
+              {docItems?.map((item, index) => (
                 <div
-                  className="staffMainDetails"
-                  style={
-                    adminRole === "admin"
-                      ? { gridTemplateColumns: " repeat(4, 1fr)" }
-                      : { gridTemplateColumns: " repeat(3, 1fr)" }
+                  className={
+                    user.email === item.email
+                      ? `staffCard activeUser `
+                      : "staffCard"
                   }
+                  key={index}
                 >
-                  <div className="emailContainer staffCardSections">
-                    <p>Email</p>
-                    <p className="bold">{item.email}</p>
-                  </div>
-                  <div className="roleContainer staffCardSections">
-                    <p>Role</p>
-                    <p className="bold">{item.role}</p>
+                  <div className="staffMain">
+                    <figure>
+                      <img src={item.image} alt="" />
+                    </figure>
+                    <div className="nameContainer">
+                      <p>{item.name}</p>
+                    </div>
                   </div>
                   <div
-                    className="lastLoginContainer staffCardSections"
+                    className="staffMainDetails"
                     style={
-                      adminRole === "admin" ? null : { borderRight: "none" }
+                      adminRole === "admin"
+                        ? { gridTemplateColumns: " repeat(4, 1fr)" }
+                        : { gridTemplateColumns: " repeat(3, 1fr)" }
                     }
                   >
-                    <p>last login</p>
-                    <p className="bold">{timestampConverter(item.lastLogin)}</p>
-                  </div>
-
-                  {adminRole === "admin" && (
-                    <div className="actionContainer staffCardSections">
-                      <p>Action</p>
-                      <button
-                        className="deleteContainer"
-                        disabled={user.email === item.email ? true : false}
-                        onClick={() => handleDeleteStaff(item.email)}
-                      >
-                        <FaTrashAlt />
-                      </button>
+                    <div className="emailContainer staffCardSections">
+                      <p>Email</p>
+                      <p className="bold">{item.email}</p>
                     </div>
-                  )}
-                </div>
-              </div>
-            ))}
-          </section>
-
-          {isDisplayed && (
-            <section className="addNewStaff">
-              <div className="addNewStaffContainer" ref={divRef}>
-                <div className="headerContainer">
-                  <div className="header">
-                    <figure>
-                      <img src={addNewStaffIcon} alt="" />
-                    </figure>
-                    <div className="heading">
-                      <p>ADD NEW STAFF</p>
+                    <div className="roleContainer staffCardSections">
+                      <p>Role</p>
+                      <p className="bold">{item.role}</p>
                     </div>
+                    <div
+                      className="lastLoginContainer staffCardSections"
+                      style={
+                        adminRole === "admin" ? null : { borderRight: "none" }
+                      }
+                    >
+                      <p>last login</p>
+                      <p className="bold">
+                        {timestampConverter(item.lastLogin)}
+                      </p>
+                    </div>
+
+                    {adminRole === "admin" && (
+                      <div className="actionContainer staffCardSections">
+                        <p>Action</p>
+                        <button
+                          className="deleteContainer"
+                          disabled={user.email === item.email ? true : false}
+                          onClick={() => {
+                            setIsLogOutOptOpen(true);
+                            setDeleteStaff(item);
+                          }}
+                        >
+                          <FaTrashAlt />
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
-                <div className="formContainer">
-                  <form onSubmit={handleAddStaff}>
-                    <label htmlFor="name">Name:</label>
-                    <input
-                      type="text"
-                      id="name"
-                      placeholder="Last name First name"
-                      value={newStaffName}
-                      onChange={(e) => setNewStaffName(e.target.value)}
-                      required
-                    />
-                    <label htmlFor="email">E-mail:</label>
-                    <input
-                      type="email"
-                      id="email"
-                      placeholder="Email"
-                      value={newStaffEmail}
-                      onChange={(e) => setNewStaffEmail(e.target.value)}
-                      required
-                    />
-                    <label htmlFor="role">Role:</label>
-                    <input
-                      type="text"
-                      id="role"
-                      placeholder="Role"
-                      value={newStaffRole}
-                      onChange={(e) => setNewStaffRole(e.target.value)}
-                      required
-                    />
-                    <button>Add Staff</button>
-                  </form>
-                </div>
-              </div>
+              ))}
             </section>
-          )}
-          {adminRole === "admin" && (
-            <button
-              className="addNewButton"
-              onClick={() => setIsDisplayed(!isDisplayed)}
-            >
-              Add new <MdAddCircleOutline />
-            </button>
-          )}
-        </div>
-      ) : docItems?.length === 0 ? (
-        <section className="errorMsg">
-          <p>No Staff list available</p>
-          <p>
-            Check Internet Connection <BiWifiOff />
-          </p>
-        </section>
-      ) : null}
-    </main>
+
+            {isDisplayed && (
+              <section className="addNewStaff">
+                <div className="addNewStaffContainer" ref={divRef}>
+                  <div className="headerContainer">
+                    <div className="header">
+                      <figure>
+                        <img src={addNewStaffIcon} alt="" />
+                      </figure>
+                      <div className="heading">
+                        <p>ADD NEW STAFF</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="formContainer">
+                    <form onSubmit={handleAddStaff}>
+                      <label htmlFor="name">Name:</label>
+                      <input
+                        type="text"
+                        id="name"
+                        placeholder="Last name First name"
+                        value={newStaffName}
+                        onChange={(e) => setNewStaffName(e.target.value)}
+                        required
+                      />
+                      <label htmlFor="email">E-mail:</label>
+                      <input
+                        type="email"
+                        id="email"
+                        placeholder="Email"
+                        value={newStaffEmail}
+                        onChange={(e) => setNewStaffEmail(e.target.value)}
+                        required
+                      />
+                      <label htmlFor="role">Role:</label>
+                      <input
+                        type="text"
+                        id="role"
+                        placeholder="Role"
+                        value={newStaffRole}
+                        onChange={(e) => setNewStaffRole(e.target.value)}
+                        required
+                      />
+                      <button>Add Staff</button>
+                    </form>
+                  </div>
+                </div>
+              </section>
+            )}
+            {adminRole === "admin" && (
+              <button
+                className="addNewButton"
+                onClick={() => setIsDisplayed(!isDisplayed)}
+              >
+                Add new <MdAddCircleOutline />
+              </button>
+            )}
+          </div>
+        ) : docItems?.length === 0 ? (
+          <section className="errorMsg">
+            <p>No Staff list available</p>
+            <p>
+              Check Internet Connection <BiWifiOff />
+            </p>
+          </section>
+        ) : null}
+      </main>
+      {isLogoutOptOpen && (
+        <OptionsPopUp
+          handleDeleteStaff={handleDeleteStaff}
+          deleteStaff={deleteStaff}
+          setIsLogOutOptOpen={setIsLogOutOptOpen}
+          type={"staffs"}
+        />
+      )}
+    </>
   );
 };
 

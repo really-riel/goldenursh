@@ -1,0 +1,91 @@
+@use "../abstract" as *;
+.OptionsPopUp {
+  position: fixed;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.54);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+
+  .optContainer {
+    background-color: white;
+    padding: 1rem;
+    display: grid;
+    place-items: center;
+    font-size: clamp(0.9rem, 0.7rem + 1vw, 1.2rem);
+    gap: 2rem;
+    width: 80%;
+    max-width: rem(450);
+    color: black;
+    border-radius: $card_border_radius;
+    p {
+      text-align: center;
+    }
+    .icon {
+      font-size: clamp(2rem, 1.2rem + 1vw, 3rem);
+      color: $nursh_dark_gold;
+    }
+    .btnContainer {
+      color: white;
+      width: 80%;
+
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    button {
+      color: white;
+      font-size: inherit;
+      padding: 0.7rem;
+    }
+    .yesBtn {
+      background-color: $nursh_green;
+      flex: 1;
+    }
+    .noBtn {
+      background-color: red;
+      flex: 1;
+    }
+
+    .warningNote {
+      font-weight: 400;
+      text-align: start;
+      padding: 0.5rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(0.6rem, 0.4rem + 1vw, 1rem);
+    }
+  }
+
+  .deleteStaffContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: clamp(0.9rem, 0.45rem + 1vw, 1.2rem);
+  }
+
+  .deleteStaffInfo {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+
+    gap: 1rem;
+    img {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+
+  .bold {
+    font-weight: 600;
+  }
+  .red {
+    color: red;
+  }
+}
