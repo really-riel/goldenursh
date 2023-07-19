@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import Logo from "../../components/Logo";
 import { SlHome } from "react-icons/sl";
 import { BiBell, BiDish } from "react-icons/bi";
+import { RiShoppingBag3Line } from "react-icons/ri";
 import { BsGrid1X2Fill } from "react-icons/bs";
 import { MdOutlineInventory2 } from "react-icons/md";
 import { FiShoppingBag } from "react-icons/fi";
@@ -80,6 +81,12 @@ const AdminSideNav = ({ setIsSideNavOpen }) => {
               <NavLink to={"/admin/staffs"} onClick={handleClick}>
                 <li>
                   <FaUsers /> Staffs
+                </li>
+              </NavLink>
+
+              <NavLink to={"/admin/orders"} onClick={handleClick}>
+                <li>
+                  <RiShoppingBag3Line /> Orders
                 </li>
               </NavLink>
               <NavLink

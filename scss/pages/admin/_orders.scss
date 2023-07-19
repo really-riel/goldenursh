@@ -1,0 +1,118 @@
+@use "../../abstract" as *;
+
+.Orders {
+  align-items: center;
+  font-size: clamp(0.6rem, 0.6rem + 1vw, 1rem);
+  padding: 1rem 0;
+  .OrderWrapper {
+    width: 95%;
+
+    display: flex;
+    flex-direction: column;
+    gap: rem(10);
+  }
+
+  .orderSummary {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    box-shadow: $card_shadow;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+
+    @include mq(tablet) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .sect {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: rem(5);
+      align-items: center;
+    }
+
+    .borderBtm {
+      border-bottom: rem(2) solid rgba(128, 128, 128, 0.552);
+    }
+    .borderRgt {
+      border-right: rem(2) solid rgba(128, 128, 128, 0.552);
+    }
+  }
+  .RecentOrders {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  .filterOptionsContainer {
+    display: grid;
+    gap: rem(10);
+
+    @include mq(tablet) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .containerOne {
+      display: flex;
+      align-items: center;
+    }
+
+    .containerTwo {
+      display: flex;
+      align-items: center;
+      gap: clamp(0.2rem, 1rem + 1vw, 1rem);
+    }
+  }
+  .filterOption {
+    padding: 0.3rem 0.4rem;
+    cursor: pointer;
+  }
+
+  .searchForm {
+    box-shadow: $card_shadow;
+    border-radius: 2rem;
+    padding: 0.3rem 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: rem(400);
+  }
+  input {
+    outline: none;
+    border: none;
+  }
+  input::placeholder {
+    font-size: inherit;
+  }
+
+  .selected {
+    background-color: $nursh_light_gold;
+    border-radius: 1rem;
+  }
+  .monthlyBtn {
+    background-color: $nursh_light_gold;
+    font-size: inherit;
+    padding: 0.4rem 0.3rem;
+  }
+
+  .orderCalender {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .calenderWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+
+    /* @include mq(tablet) {
+      flex-direction: column;
+    } */
+    @media only screen and (min-width: em(700)) {
+      flex-direction: row;
+    }
+  }
+}

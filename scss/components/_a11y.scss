@@ -11,6 +11,10 @@
   }
 }
 
+.bold {
+  font-weight: 600;
+}
+
 .active > button {
   background-color: $nursh_dark_olive;
   svg {
