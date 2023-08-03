@@ -23,68 +23,6 @@ const Dishes = () => {
   const drinksData = useGetCollection("drinks");
   const [isShowOptions, setIsShowOptions] = useState(false);
 
-  const dishes = [
-    {
-      id: 1,
-      mainMeal: "Rice & Chicken",
-      extra: "plus a drink",
-      image: I1,
-      price: 3500,
-      rating: 5,
-      category: "Trending Orders",
-      quantity: 1,
-    },
-    {
-      id: 2,
-      mainMeal: "Rice & Chicken",
-      extra: "plus a drink",
-      image: I3,
-      price: 3500,
-      rating: 5,
-      category: "Trending Orders",
-      quantity: 1,
-    },
-    {
-      id: 3,
-      mainMeal: "Rice & Chicken",
-      extra: "plus a drink",
-      image: I2,
-      price: 3500,
-      rating: 5,
-      category: "Trending Orders",
-      quantity: 1,
-    },
-  ];
-  const drinks = [
-    {
-      id: 1,
-      drink: "Coca - Cola",
-      image: I1,
-      price: 500,
-      rating: 5,
-      category: "Trending Orders",
-      quantity: 1,
-    },
-    {
-      id: 1,
-      drink: "Fanta",
-      image: I1,
-      price: 500,
-      rating: 5,
-      category: "Trending Orders",
-      quantity: 1,
-    },
-    {
-      id: 1,
-      drink: "Fruit juice",
-      image: I1,
-      price: 500,
-      rating: 5,
-      category: "Trending Orders",
-      quantity: 1,
-    },
-  ];
-
   console.log(itemType);
 
   const handleDeleteItem = async (item) => {
