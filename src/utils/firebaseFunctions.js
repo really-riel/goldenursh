@@ -128,3 +128,7 @@ export const checktAndSetUserChatMessages = async (user, adminId) => {
     console.log(error);
   }
 };
+
+export const saveItem = async (data, itemType) => {
+  await setDoc(doc(db, itemType, `${Date.now()}`), data, { merge: true });
+};

@@ -7,9 +7,9 @@ const OptionsPopUp = ({
   handleLogout,
   handleDeleteStaff,
   deleteStaff,
+  handleDeleteItem,
+  deleteItem,
 }) => {
-  console.log(deleteStaff);
-  console.log("ok");
   const divRef = useRef(null);
 
   useEffect(() => {
@@ -51,9 +51,14 @@ const OptionsPopUp = ({
             </div>
             <p className="bold">Confirm removal?</p>
           </div>
-        ) : (
+        ) : type === "logout" ? (
           <p className="bold">
             You are about to log out.🙇‍♂️
+            <br /> <br /> Continue?
+          </p>
+        ) : (
+          <p className="bold">
+            You are about to delete {deleteItem?.mainMeal} .🙇‍♂️
             <br /> <br /> Continue?
           </p>
         )}
@@ -64,8 +69,10 @@ const OptionsPopUp = ({
             onClick={() => {
               setIsLogOutOptOpen(false);
               type === "staffs"
-                ? handleDeleteStaff(deleteStaff.email)
-                : handleLogout();
+                ? handleDeleteStaff(deleteStaff?.email)
+                : type === "logout"
+                ? handleLogout()
+                : handleDeleteItem(deleteItem);
             }}
           >
             Yes

@@ -12,6 +12,12 @@ $breakpoints-up: (
   }
 }
 
+@mixin mqManual($size) {
+  @media only screen and (min-width: $size) {
+    @content;
+  }
+}
+
 @mixin mqSmall {
   @media only screen and (max-width: f.em(375)) {
     @content;

@@ -1,0 +1,108 @@
+@use "../../abstract" as *;
+.AddNewItem {
+  background-color: #00000065;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  display: grid;
+  place-items: center;
+
+  .formWrapper {
+    width: 90%;
+    max-width: rem(600);
+    background-color: white;
+    border-radius: $card_border_radius;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .header {
+    padding: 1rem 1rem 0 1rem;
+    display: grid;
+    place-items: center;
+  }
+  h1 {
+    background-color: $nursh_light_gold;
+    padding: 1rem;
+    border-radius: 0.7rem;
+    box-shadow: $card_shadow;
+  }
+
+  input[type="file"] {
+    display: none;
+  }
+  input {
+    outline: none;
+    border: none;
+    background-color: $nursh_light_gold;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: $nursh_cream;
+    padding: 1rem;
+
+    button {
+      border-radius: 0.5rem;
+      font-size: inherit;
+      padding: 0.6rem 0;
+    }
+  }
+
+  .imageWrapper {
+    border: rem(1) dashed $nursh_dark_olive;
+    border-radius: 0.5rem;
+    height: rem(180);
+    display: grid;
+    place-content: center;
+    label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+  }
+  svg {
+    font-size: 2rem;
+  }
+
+  figure {
+    width: rem(175);
+    height: rem(175);
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .deleteIcon {
+    position: absolute;
+    bottom: rem(5);
+    right: rem(5);
+    background-color: red;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+
+    svg {
+      font-size: 1rem;
+    }
+  }
+  button:disabled {
+    background-color: rgba(0, 0, 0, 0.264);
+  }
+}

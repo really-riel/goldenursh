@@ -98,11 +98,7 @@ const AdminSideNav = ({ setIsSideNavOpen }) => {
                   <FiShoppingBag /> Orders
                 </li>
               </NavLink>
-              <NavLink
-                className="profile"
-                to={"/admin/dishes"}
-                onClick={handleClick}
-              >
+              <NavLink className="" to={"/admin/dishes"} onClick={handleClick}>
                 <li>
                   <BiDish />
                   Dishes

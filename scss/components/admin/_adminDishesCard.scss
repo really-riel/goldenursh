@@ -1,0 +1,54 @@
+@use "../../abstract" as *;
+.AdminDishesCard {
+  display: grid;
+  place-items: center;
+  box-shadow: $card_shadow;
+  padding: 0.7rem 0;
+  border-radius: $card_border_radius;
+  .mainCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    gap: 0.3rem;
+  }
+  figure {
+    width: 100%;
+    height: rem(200);
+    border-radius: $card_border_radius;
+    overflow: hidden;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .dishSection {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    font-size: clamp(0.8rem, 0.4rem + 1vw, 1.2rem);
+    font-weight: 500;
+  }
+  .dishSection:last-child {
+    margin-top: 0.5rem;
+  }
+
+  .editBtn {
+    background-color: transparent;
+    color: $nursh_dark_olive;
+    border: rem(1) solid $nursh_dark_olive;
+  }
+
+  .price {
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    font-size: clamp(1rem, 0.4rem + 1vw, 3rem);
+    svg {
+      font-size: clamp(1.3rem, 1rem + 1vw, 2.5rem);
+    }
+  }
+}

@@ -26,7 +26,7 @@ const Loading = () => {
         animate="animate"
         aria-hidden="true"
         className="spinner"
-        style={{ margin: "0 auto", width: "30%" }}
+        style={{ margin: "0 auto", width: "12%" }}
         viewBox="0 0 100 101"
         fill="green"
         xmlns="http://www.w3.org/2000/svg"

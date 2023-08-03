@@ -20,9 +20,14 @@ import ReviewSlide from "../../components/ReviewSlide";
 import img1 from "../../assets/connectImg1.png";
 import img2 from "../../assets/connectImg2.png";
 import { motion } from "framer-motion";
+import useGetCollection from "../../hooks/useGetCollection";
+import Loading from "../../components/Loading";
 
 const Home = () => {
   const [isViewAll, setIsViewAll] = useState(false);
+
+  const { docItems, isLoading } = useGetCollection("dishes");
+
   return (
     <main className="Home">
       {/* Meal slider */}
@@ -78,31 +83,36 @@ const Home = () => {
         className="trendingOrders shapedividers_com-9343"
       >
         <h2>TRENDING ORDER</h2>
-        <div className="trendingOrdersList">
-          {trendingOrders
-            ?.slice(0, !isViewAll ? 6 : trendingOrders?.length)
-            .map((item, index) => (
-              <TMealCard key={index} item={item} />
-            ))}
-        </div>
-
-        <motion.span
-          whileTap={{ scale: 0.8 }}
-          className="viewAll"
-          onClick={() => setIsViewAll(!isViewAll)}
-        >
-          {isViewAll ? (
-            <>
-              Hide
-              <RiArrowUpFill />
-            </>
-          ) : (
-            <>
-              {" "}
-              View all <RiArrowDownFill />
-            </>
-          )}
-        </motion.span>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <div className="trendingOrdersList">
+            {docItems
+              ?.slice(0, !isViewAll ? 6 : trendingOrders?.length)
+              .map((item, index) => (
+                <TMealCard key={index} item={item} />
+              ))}
+          </div>
+        )}
+        {docItems?.length > 6 && (
+          <motion.span
+            whileTap={{ scale: 0.8 }}
+            className="viewAll"
+            onClick={() => setIsViewAll(!isViewAll)}
+          >
+            {isViewAll ? (
+              <>
+                Hide
+                <RiArrowUpFill />
+              </>
+            ) : (
+              <>
+                {" "}
+                View all <RiArrowDownFill />
+              </>
+            )}
+          </motion.span>
+        )}
       </section>
       {/* your choice */}
       <section id="yourChoice" className="yourChoice">
