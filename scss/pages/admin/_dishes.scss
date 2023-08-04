@@ -33,6 +33,9 @@
   .dishesWrapper {
     display: grid;
     gap: 1rem;
+    place-content: center;
+    width: 80%;
+    margin: 0 auto;
 
     @include mqManual(em(600)) {
       grid-template-columns: repeat(2, 1fr);
@@ -60,7 +63,8 @@
   .drinksWrapper {
     display: grid;
     gap: 1rem;
-
+    width: 80%;
+    margin: 0 auto;
     @include mqManual(em(600)) {
       grid-template-columns: repeat(2, 1fr);
     }
