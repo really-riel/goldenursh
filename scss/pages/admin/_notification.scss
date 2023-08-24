@@ -1,0 +1,65 @@
+@use "../../abstract" as *;
+.Notification {
+  display: flex;
+  align-items: center;
+  p {
+    font-size: $admin_font_size;
+  }
+  .mainWrapper {
+    width: 95%;
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: rem(20);
+  }
+  .searchForm {
+    box-shadow: $card_shadow;
+    border-radius: $card_border_radius;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem 0.5rem;
+    max-width: rem(250);
+    margin-left: auto;
+  }
+  input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    width: 100%;
+
+    display: grid;
+    place-items: center;
+  }
+  .all {
+    background-color: $nursh_light_gold;
+    width: fit-content;
+    padding: 0.5rem;
+    border-radius: 0.7rem 0.9rem;
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  section:last-child {
+    box-shadow: $card_shadow2;
+    border-radius: $card_border_radius;
+    padding: 0.5rem;
+    min-height: 50vh;
+  }
+  .btnContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    margin-top: auto;
+  }
+  .clearBtn {
+    background-color: $nursh_dark_olive;
+    color: white;
+    padding: 0.5rem 1.3rem;
+  }
+}

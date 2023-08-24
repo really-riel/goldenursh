@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   BiEdit,
   BiEditAlt,
@@ -13,6 +13,10 @@ const Inventory = () => {
     { quantity: 5, type: "Garnishng" },
     { quantity: 9, type: "Drinks" },
   ];
+  const [dishSearchInput, setDishSearchInput] = useState("");
+  const [drinkSearchInput, setDrinkSearchInput] = useState("");
+  const [dishSearchResult, setDishSearchResult] = useState([]);
+  const [drinkSearchResult, setDrinkSearchResult] = useState([]);
 
   const header = ["Category", "Quantity left", "Notification", "Action"];
 
@@ -57,6 +61,30 @@ const Inventory = () => {
     },
   ];
 
+  useEffect(() => {
+    const filteredDishResult = main.filter(
+      (data) =>
+        data.category.toLowerCase().includes(dishSearchInput.toLowerCase()) ||
+        data.food.toLowerCase().includes(dishSearchInput.toLowerCase()) ||
+        data.notification
+          .toLowerCase()
+          .includes(dishSearchInput.toLowerCase()) ||
+        data.qtyLeft.toLowerCase().includes(dishSearchInput.toLowerCase())
+    );
+    const filteredDrinkResult = drinksMain.filter(
+      (data) =>
+        data.category.toLowerCase().includes(drinkSearchInput.toLowerCase()) ||
+        data.drink.toLowerCase().includes(drinkSearchInput.toLowerCase()) ||
+        data.notification
+          .toLowerCase()
+          .includes(drinkSearchInput.toLowerCase()) ||
+        data.qtyLeft.toLowerCase().includes(drinkSearchInput.toLowerCase())
+    );
+
+    setDrinkSearchResult(filteredDrinkResult);
+    setDishSearchResult(filteredDishResult);
+  }, [dishSearchInput, drinkSearchInput]);
+
   return (
     <main className="Inventory">
       <div className="mainWrapper">
@@ -79,7 +107,12 @@ const Inventory = () => {
             <h2>For Dishes</h2>
 
             <form action="" className="searchForm">
-              <input type="text" placeholder="search" />
+              <input
+                type="text"
+                placeholder="search"
+                role="searchbox"
+                onChange={(e) => setDishSearchInput(e.target.value)}
+              />
               <BiSearch />
             </form>
           </div>
@@ -92,7 +125,7 @@ const Inventory = () => {
                 ))}
               </div>
               <div className="body">
-                {main.map((item, index) => (
+                {dishSearchResult.map((item, index) => (
                   <div key={index} className="details">
                     <p> {item.food} </p>
                     <p> {item.category} </p>
@@ -136,7 +169,12 @@ const Inventory = () => {
           <div className="forHeader">
             <h2>For Drinks</h2>
             <form action="" className="searchForm">
-              <input type="text" placeholder="search" />
+              <input
+                type="text"
+                placeholder="search"
+                role="searchbox"
+                onChange={(e) => setDrinkSearchInput(e.target.value)}
+              />
               <BiSearch />
             </form>
           </div>
@@ -149,7 +187,7 @@ const Inventory = () => {
                 ))}
               </div>
               <div className="body">
-                {drinksMain.map((item, index) => (
+                {drinkSearchResult.map((item, index) => (
                   <div key={index} className="details">
                     <p> {item.drink} </p>
                     <p> {item.category} </p>
