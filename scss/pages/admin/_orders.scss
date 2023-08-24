@@ -115,4 +115,53 @@
       flex-direction: row;
     }
   }
+
+  .orderListSect {
+    width: 100%;
+    overflow: auto;
+    box-shadow: $card_shadow;
+    border-radius: $card_border_radius;
+  }
+
+  .orderList {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    min-width: max-content;
+    padding: 0.5rem;
+
+    img {
+      width: rem(70);
+      height: rem(70);
+      object-fit: cover;
+      border-radius: 0.5rem;
+    }
+  }
+
+  .orderListItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: rem(1) solid lightgray;
+    padding: 0.2rem;
+    gap: 1rem;
+  }
+
+  .pending {
+    background-color: $nursh_light_gold;
+    padding: 0.5rem;
+    border-radius: 0.9rem;
+  }
+  .delivered {
+    background-color: greenyellow;
+    padding: 0.5rem;
+    border-radius: 0.9rem;
+  }
+  .cancelled {
+    background-color: red;
+    padding: 0.5rem;
+    border-radius: 0.9rem;
+  }
 }

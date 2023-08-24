@@ -3,14 +3,33 @@ import { TbCurrencyNaira } from "react-icons/tb";
 import useWindowSize from "../../hooks/useWindowSize";
 import { BiCalendar, BiSearch, BiSearchAlt } from "react-icons/bi";
 import { BsChevronDown } from "react-icons/bs";
+import { useEffect } from "react";
+import useGetCollection from "../../hooks/useGetCollection";
+import Loading from "../../components/Loading";
 
 const Orders = () => {
   const { width } = useWindowSize();
   const [selectedOption, setSelectedOption] = useState("all orders");
+  const [data, setData] = useState([]);
 
   const handleSelect = (e) => {
     setSelectedOption(e.target.innerText.toLowerCase());
   };
+  const { docItems, isLoading } = useGetCollection("orders");
+  console.log(docItems);
+
+  useEffect(() => {
+    selectedOption === "pending"
+      ? setData(docItems?.filter((item) => item.orderStatus === "pending"))
+      : selectedOption === "processing"
+      ? setData(docItems?.filter((item) => item.orderStatus === "processing"))
+      : selectedOption === "delivered"
+      ? setData(docItems?.filter((item) => item.orderStatus === "delivered"))
+      : setData(docItems);
+  }, [docItems, selectedOption]);
+
+  console.log(data);
+
   return (
     <main className="Orders">
       <div className="OrderWrapper">
@@ -96,6 +115,33 @@ const Orders = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+        <section className="orderListSect">
+          <div className="orderList">
+            {!data && !isLoading && <p>No orders</p>}
+            {isLoading && <Loading />}
+
+            {data?.map((items, index) =>
+              items.orderItems.map((item, indx) => (
+                <div className="orderListItem" key={index}>
+                  <img src={item.image} alt="" />
+                  <div className="">
+                    <p>
+                      {item.mainMeal} <br /> {item.extra}
+                    </p>
+                  </div>
+                  <p>X{item.quantity}</p>
+                  <p>{item.price}</p>
+                  <p>{items.address}</p>
+                  <div>
+                    <p className={items.orderStatus.toLowerCase()}>
+                      {items.orderStatus}
+                    </p>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </section>
         <section className="Order Breakdown">

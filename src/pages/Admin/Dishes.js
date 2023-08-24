@@ -1,14 +1,10 @@
 import React from "react";
 import AdminDishesCard from "../../components/Admin/AdminDishesCard";
-import I1 from "../../assets/coconut_rice.jpeg";
-import I2 from "../../assets/desert.jpg";
-import I3 from "../../assets/grilled_meat.jpeg";
 import { BiMessageSquareAdd } from "react-icons/bi";
 import AdminDrinkCard from "../../components/Admin/AdminDrinkCard";
 import { useState } from "react";
 import AddNewItem from "../../components/Admin/AddNewItem";
 import useGetCollection from "../../hooks/useGetCollection";
-import { deleteItem } from "../../utils/firebaseFunctions";
 import { toast } from "react-toastify";
 import OptionsPopUp from "../../components/OptionsPopUp";
 import { deleteDoc, doc } from "firebase/firestore";
