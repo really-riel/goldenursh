@@ -38,12 +38,16 @@ const AdminHeader = () => {
             <Link to={"/"}>
               <li>Home</li>
             </Link>
-            <li className="icon">
-              <HiOutlineMail />
-            </li>
-            <li className="icon">
-              <BiBell />
-            </li>
+            <Link to={"/admin/messages"}>
+              <li className="icon">
+                <HiOutlineMail />
+              </li>
+            </Link>
+            <Link to={"admin/notification"}>
+              <li className="icon">
+                <BiBell />
+              </li>
+            </Link>
             <li className="userDetails">
               <img src={user?.image} alt="" />
               <p>

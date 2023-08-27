@@ -58,10 +58,16 @@ const DesktopNav = () => {
             {isOpen && (
               <div className="categoryList">
                 <ul>
-                  <li onClick={() => setIsOpen(false)}>Trending List</li>
-                  <li onClick={() => setIsOpen(false)}>
-                    Order based on your choice
-                  </li>
+                  <Link to={"/#trendingOrders"}>
+                    <li onClick={(e) => setIsOpen(false) && console.log("ok")}>
+                      Trending List
+                    </li>
+                  </Link>
+                  <Link to={"/#yourChoice"}>
+                    <li onClick={() => setIsOpen(false)}>
+                      Order based on your choice
+                    </li>
+                  </Link>
                 </ul>
               </div>
             )}
