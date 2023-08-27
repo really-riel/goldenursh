@@ -3,6 +3,7 @@ import { BsInstagram, BsTwitter, BsWhatsapp } from "react-icons/bs";
 import { FaFacebookF } from "react-icons/fa";
 import { motion } from "framer-motion";
 import contactImg from "../assets/connectImg2.png";
+import { Link } from "react-router-dom";
 
 const LaptopContactPage = () => {
   return (
@@ -11,7 +12,7 @@ const LaptopContactPage = () => {
         <div className="gridContainer">
           <div className="grid1">
             <h2>Connect With Us</h2>
-            <p>Via our social media </p>
+            <p>Via our social media platforms</p>
             <div className="socials">
               <button className="social">
                 <BsInstagram />
@@ -29,17 +30,20 @@ const LaptopContactPage = () => {
             <p>
               You can also send us a message <br /> here.
             </p>
-
-            <button className="messageBtn">Message</button>
+            <Link to={"/contact/chat"}>
+              <button className="messageBtn">Message</button>
+            </Link>
           </div>
           <div className="grid2">
-            <p>
-              Welcome,
-              <br /> This is Goldenursh <br /> support line
-            </p>
-            <figure>
-              <img src={contactImg} alt="contactImg" />
-            </figure>
+            <div className="phoneContainer">
+              <p>
+                Welcome,
+                <br /> This is Goldenursh <br /> support line
+              </p>
+              <figure>
+                <img src={contactImg} alt="contactImg" />
+              </figure>
+            </div>
           </div>
         </div>
       </div>

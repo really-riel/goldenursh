@@ -4,6 +4,15 @@
 
   @include mq(laptop) {
     display: flex;
+    flex-direction: column;
+  }
+  height: 100%;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+
+  h2 {
+    font-size: clamp(1rem, 1rem + 1vw, 2rem);
   }
 
   .container1 {
@@ -11,6 +20,28 @@
     align-items: center;
     justify-content: center;
     background-color: $nursh_light_gold;
+    flex: 1;
+    position: relative;
+  }
+  .container1::before {
+    content: "";
+    background-color: $nursh_dark_olive;
+    height: 1.5rem;
+    width: 120%;
+    transform: rotate(-3deg);
+    transform-origin: bottom right;
+    position: absolute;
+    bottom: 0;
+  }
+  .container1::after {
+    content: "";
+    background-color: $nursh_light_gold;
+    height: 5rem;
+    width: 120%;
+    transform: rotate(-3deg);
+    position: absolute;
+    bottom: -2rem;
+    z-index: 1;
   }
 
   .gridContainer {
@@ -22,25 +53,69 @@
     gap: 3rem;
     position: relative;
   }
+
   .grid1 {
-    background-color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    font-size: clamp(1rem, 1rem + 1vw, 1.5rem);
   }
 
   .grid2 {
-    background-color: white;
-    width: 14rem;
-    border: 0.5rem solid $nursh_dark_gold;
-    border-radius: $card_border_radius;
-    height: 100%;
-    right: 0;
-    text-align: center;
+    margin-bottom: -7rem;
+    z-index: 2;
   }
+  .phoneContainer {
+    background-color: white;
+    width: 16rem;
+    border: 0.5rem solid $nursh_dark_gold;
+    border-radius: 2rem;
+    height: 100%;
+    margin-left: auto;
+    margin-right: 5rem;
+    text-align: center;
+    padding-top: 1rem;
+  }
+
   figure {
     width: 20rem;
     margin-left: -3rem;
-    margin-top: -3rem;
+    margin-bottom: -5rem;
   }
   img {
     width: 100%;
+  }
+
+  .container2 {
+    background-color: $nursh_cream;
+    flex: 2;
+  }
+
+  .messageBtn {
+    background-color: $nursh_dark_olive;
+    color: white;
+    width: 80%;
+    font-size: inherit;
+    padding: 1rem;
+  }
+
+  .socials {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .social {
+    background-color: $nursh_dark_gold;
+    color: white;
+    height: rem(40);
+    width: rem(40);
+    display: grid;
+    place-items: center;
+
+    svg {
+      font-size: 1.2rem;
+    }
   }
 }
