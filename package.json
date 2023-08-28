@@ -2,7 +2,7 @@
   "name": "react-defualt",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "https://goldenursh.vercel.app",
   "dependencies": {
     "chart.js": "^4.2.1",
     "easy-peasy": "^5.2.0",
