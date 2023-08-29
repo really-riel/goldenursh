@@ -132,3 +132,6 @@ export const checktAndSetUserChatMessages = async (user, adminId) => {
 export const saveItem = async (data, itemType) => {
   await setDoc(doc(db, itemType, `${Date.now()}`), data, { merge: true });
 };
+export const saveEditedItem = async (data, itemType) => {
+  await setDoc(doc(db, itemType, `${data.id}`), data);
+};

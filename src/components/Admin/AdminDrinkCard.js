@@ -4,8 +4,9 @@ import { TbCurrencyNaira } from "react-icons/tb";
 const AdminDrinkCard = ({
   item,
   setIsShowOptions,
-  setDeleteItem,
+  setItemObject,
   setItemType,
+  setIsShowEditOption,
 }) => {
   return (
     <div className="AdminDrinkCard">
@@ -25,13 +26,21 @@ const AdminDrinkCard = ({
             className="deleteBtn"
             onClick={() => {
               setIsShowOptions(true);
-              setDeleteItem(item);
+              setItemObject(item);
               setItemType("drinks");
             }}
           >
             Delete
           </button>
-          <button>Send</button>
+          <button
+            onClick={() => {
+              setIsShowEditOption(true);
+              setItemObject(item);
+              setItemType("drinks");
+            }}
+          >
+            Edit
+          </button>
         </div>
       </div>
     </div>

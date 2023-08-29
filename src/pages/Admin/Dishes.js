@@ -10,14 +10,16 @@ import OptionsPopUp from "../../components/OptionsPopUp";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../utils/firebase";
 import Loading from "../../components/Loading";
+import EditItem from "../../components/Admin/EditItem";
 
 const Dishes = () => {
   const [isShowAddNewItem, setIsShowAddNewItem] = useState(false);
   const [itemType, setItemType] = useState("");
-  const [deleteItem, setDeleteItem] = useState({});
+  const [itemObject, setItemObject] = useState({});
   const dishesData = useGetCollection("dishes");
   const drinksData = useGetCollection("drinks");
   const [isShowOptions, setIsShowOptions] = useState(false);
+  const [isShowEditOption, setIsShowEditOption] = useState(false);
 
   console.log(itemType);
 
@@ -47,8 +49,9 @@ const Dishes = () => {
                   key={index}
                   item={item}
                   setIsShowOptions={setIsShowOptions}
-                  setDeleteItem={setDeleteItem}
+                  setItemObject={setItemObject}
                   setItemType={setItemType}
+                  setIsShowEditOption={setIsShowEditOption}
                 />
               ))}
             </div>
@@ -75,8 +78,9 @@ const Dishes = () => {
                   key={index}
                   item={item}
                   setIsShowOptions={setIsShowOptions}
-                  setDeleteItem={setDeleteItem}
+                  setItemObject={setItemObject}
                   setItemType={setItemType}
+                  setIsShowEditOption={setIsShowEditOption}
                 />
               ))}
             </div>
@@ -103,7 +107,14 @@ const Dishes = () => {
         <OptionsPopUp
           setIsLogOutOptOpen={setIsShowOptions}
           handleDeleteItem={handleDeleteItem}
-          deleteItem={deleteItem}
+          deleteItem={itemObject}
+        />
+      )}
+      {isShowEditOption && (
+        <EditItem
+          itemObject={itemObject}
+          itemType={itemType}
+          setIsShowEditOption={setIsShowEditOption}
         />
       )}
     </main>
