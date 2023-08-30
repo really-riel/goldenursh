@@ -1,11 +1,6 @@
-import React, { useRef } from "react";
+import React from "react";
 import Header from "./header/Header";
-import {
-  HashRouter,
-  Outlet,
-  ScrollRestoration,
-  useLocation,
-} from "react-router-dom";
+import { Outlet, ScrollRestoration, useLocation } from "react-router-dom";
 import Footer from "./footer/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -27,25 +22,6 @@ const Layout = () => {
     setUser(doc);
   }, [doc]);
  */
-  const location = useLocation();
-  const lastHash = useRef("");
-
-  // listen to location change using useEffect with location as dependency
-  // https://jasonwatmore.com/react-router-v6-listen-to-location-route-change-without-history-listen
-  useEffect(() => {
-    if (location.hash) {
-      lastHash.current = location.hash.slice(1); // safe hash for further use after navigation
-    }
-
-    if (lastHash.current && document.getElementById(lastHash.current)) {
-      setTimeout(() => {
-        document
-          .getElementById(lastHash.current)
-          ?.scrollIntoView({ behavior: "smooth", block: "start" });
-        lastHash.current = "";
-      }, 100);
-    }
-  }, [location]);
   return (
     <>
       <ToastContainer position="top-left" className={"toastMessage"} />

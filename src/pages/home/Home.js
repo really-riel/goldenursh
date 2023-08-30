@@ -84,7 +84,9 @@ const Home = () => {
       >
         <h2>TRENDING ORDER</h2>
         {isLoading ? (
-          <Loading />
+          <div className="loadingContainer">
+            <Loading />
+          </div>
         ) : (
           <div className="trendingOrdersList">
             {docItems

@@ -41,7 +41,9 @@ const Dishes = () => {
             Add Edit or Delete Dishes <br /> and Drinks.
           </p>
           {dishesData?.isLoading ? (
-            <Loading />
+            <div className="loadingContainer">
+              <Loading />
+            </div>
           ) : (
             <div className="dishesWrapper">
               {dishesData.docItems?.map((item, index) => (
@@ -70,7 +72,9 @@ const Dishes = () => {
         <section className="drinkSection">
           <h1>Drinks</h1>
           {drinksData?.isLoading ? (
-            <Loading />
+            <div className="loadingContainer">
+              <Loading />
+            </div>
           ) : (
             <div className="drinksWrapper">
               {drinksData.docItems?.map((item, index) => (
