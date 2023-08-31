@@ -4,27 +4,27 @@ import { MdCloudUpload, MdDelete } from "react-icons/md";
 
 import SmallLogo from "../../components/SmallLogo";
 import { motion } from "framer-motion";
-import { Link, useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import {
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
 import { toast } from "react-toastify";
-import { auth, storage } from "../../utils/firebase";
+import { auth, db, storage } from "../../utils/firebase";
 import {
   getChatAdminDetails,
   setUsersInDatabase,
+  updateAdminLastLogin,
 } from "../../utils/firebaseFunctions";
-import {
-  deleteObject,
-  getDownloadURL,
-  ref,
-  uploadBytesResumable,
-} from "firebase/storage";
-import Loading from "../../components/Loading";
-import { useStoreActions, useStoreState } from "easy-peasy";
-import { useEffect } from "react";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+
+import { useStoreActions } from "easy-peasy";
 import Loader from "../../components/Loader";
+import { AiOutlineGoogle } from "react-icons/ai";
+import { doc, getDoc } from "firebase/firestore";
 
 const SignUp = () => {
-  const [rawName, setRawName] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,9 +32,10 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(false);
+  const { state } = useLocation();
 
   const {
-    auth: { setUser },
+    auth: { setUser, setIsAdmin, setAdminRole },
     chat: { setChatAdminDetails },
   } = useStoreActions((actions) => actions);
 
@@ -129,6 +130,61 @@ const SignUp = () => {
     setImageFile(null);
   };
 
+  const checkIfUserIsAnAdmin = async (id) => {
+    const document = await getDoc(doc(db, "admin", id));
+
+    if (document.exists()) {
+      setIsAdmin(true);
+      setAdminRole(document.data().role);
+      await updateAdminLastLogin(id);
+    }
+  };
+
+  const handleSignInWithGoogle = async () => {
+    setIsLoading(true);
+    try {
+      const provider = new GoogleAuthProvider();
+      const response = await signInWithPopup(auth, provider);
+      console.log(response.user);
+
+      const docRef = doc(db, "users", response.user.uid);
+      const docSnap = await getDoc(docRef);
+      const data = docSnap.data();
+
+      if (!docSnap.exists()) {
+        await setUsersInDatabase(response.user);
+        setUser({
+          id: response.user.uid,
+          name: response.user.displayName,
+          email: response.user.email,
+          phone: response.user.phoneNumber,
+          image: response.user.photoURL,
+          address: null,
+        });
+      } else {
+        setUser({
+          id: response.user.uid,
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          image: data.image,
+          address: data.address,
+        });
+      }
+
+      await checkIfUserIsAnAdmin(response.user.uid);
+      await getChatAdminDetails(setChatAdminDetails);
+
+      setIsLoading(false);
+      state ? navigate(state) : navigate("/");
+      toast.success("Login Successful");
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+      toast.error("an error occured, try again later 🙇‍♂️");
+    }
+  };
+
   return (
     <main className="Login SignUp">
       {isLoading && <Loader />}
@@ -157,7 +213,10 @@ const SignUp = () => {
                 {imageFile ? (
                   <>
                     <figure>
-                      <img src={URL.createObjectURL(imageFile)} alt="image" />
+                      <img
+                        src={URL.createObjectURL(imageFile)}
+                        alt="profile image"
+                      />
                     </figure>
                     <button
                       className="deleteImage"
@@ -232,6 +291,18 @@ const SignUp = () => {
                 Sign Up
               </motion.button>
             </form>
+            <div className="or">
+              <div className="leftLine"></div>
+              <p>or</p>
+              <div className="rightLine"></div>
+            </div>
+            <motion.button
+              whileTap={{ scale: 0.8 }}
+              className="signInWithGoogle"
+              onClick={handleSignInWithGoogle}
+            >
+              Sign Up With Google <AiOutlineGoogle />
+            </motion.button>
             <p className="suggestion">
               Have an account already? Sign-in
               <Link to={"/auth/login"}>
