@@ -6,11 +6,16 @@ import { BsChevronDown } from "react-icons/bs";
 import { useEffect } from "react";
 import useGetCollection from "../../hooks/useGetCollection";
 import Loading from "../../components/Loading";
+import { MdPending } from "react-icons/md";
 
 const Orders = () => {
   const { width } = useWindowSize();
   const [selectedOption, setSelectedOption] = useState("all orders");
   const [data, setData] = useState([]);
+  const [totalAmt, setTotalAmt] = useState("");
+  const [totalQty, setTotalQty] = useState("");
+  const [totalpending, setTotalPending] = useState("");
+  const [totalDelivered, setTotalDelivered] = useState("");
 
   const handleSelect = (e) => {
     setSelectedOption(e.target.innerText.toLowerCase());
@@ -28,7 +33,39 @@ const Orders = () => {
       : setData(docItems);
   }, [docItems, selectedOption]);
 
-  console.log(data);
+  useEffect(() => {
+    const sum = docItems?.reduce((acc, item) => {
+      return acc + item.total;
+    }, 0);
+
+    const qtyArry = docItems?.map((item) => {
+      return item.orderItems.reduce((acc, currentitem) => {
+        return acc + currentitem.quantity;
+      }, 0);
+    });
+
+    const qty = qtyArry?.reduce((acc, item) => {
+      return acc + item;
+    }, 0);
+
+    function countAndMultiply(array, targetValue) {
+      return array?.reduce((accumulator, currentObj) => {
+        const occurrenceCount = currentObj.orderStatus === targetValue ? 1 : 0;
+
+        if (Array.isArray(currentObj.orderItems)) {
+          return accumulator + occurrenceCount * currentObj.orderItems.length;
+        }
+
+        return accumulator + occurrenceCount;
+      }, 0);
+    }
+
+    setTotalQty(qty);
+
+    setTotalAmt(sum);
+    setTotalPending(countAndMultiply(docItems, "pending"));
+    setTotalDelivered(countAndMultiply(docItems, "delivered"));
+  }, [docItems]);
 
   return (
     <main className="Orders">
@@ -44,7 +81,7 @@ const Orders = () => {
             <p>Total Amount</p>
             <p className="bold">
               <TbCurrencyNaira />
-              50000.00
+              {totalAmt}
             </p>
           </div>
           <div
@@ -53,15 +90,15 @@ const Orders = () => {
             } `}
           >
             <p>Total Quantity</p>
-            <p className="bold">500</p>
+            <p className="bold">{totalQty}</p>
           </div>
           <div className="sect borderRgt">
-            <p>Total Processed</p>
-            <p className="bold">100</p>
+            <p>Total Delivered</p>
+            <p className="bold">{totalDelivered}</p>
           </div>
           <div className="sect noBorderBtm">
             <p>Pending Orders</p>
-            <p className="bold">100</p>
+            <p className="bold">{totalpending}</p>
           </div>
         </div>
 
@@ -119,12 +156,18 @@ const Orders = () => {
         </section>
         <section className="orderListSect">
           <div className="orderList">
-            {!data && !isLoading && <p>No orders</p>}
-            {isLoading && <Loading />}
+            {data?.length === 0 && !isLoading && (
+              <p>No {selectedOption} orders</p>
+            )}
+            {isLoading && (
+              <div className="loadingContainer">
+                <Loading />
+              </div>
+            )}
 
             {data?.map((items, index) =>
               items.orderItems.map((item, indx) => (
-                <div className="orderListItem" key={index}>
+                <div className="orderListItem" key={`${index}-${indx}`}>
                   <img src={item.image} alt="" />
                   <div className="">
                     <p>
@@ -145,7 +188,7 @@ const Orders = () => {
           </div>
         </section>
         <section className="Order Breakdown">
-          <h2>Order Breakdown</h2>
+          {/*  <h2>Order Breakdown</h2> */}
         </section>
       </div>
     </main>
