@@ -22,10 +22,7 @@ const SupportChat = () => {
   const { user } = useStoreState((state) => state.auth);
   const { state } = useLocation();
 
-  const { document, isLoading, error } = useGetDocuments(
-    "chats",
-    `${state.id}${user.id}`
-  );
+  const { document, isLoading, error } = useGetDocuments("chats", state.id);
 
   useEffect(() => {
     if (error) toast.error("error occured, reload page 🙇‍♂️");
@@ -40,7 +37,7 @@ const SupportChat = () => {
       if (chatImageFile) {
         await handleImageUpload();
       } else {
-        await updateDoc(doc(db, "chats", `${state.id}${user.id}`), {
+        await updateDoc(doc(db, "chats", `${state.id}`), {
           messages: arrayUnion({
             id: randomId(),
             text: chatMessage,

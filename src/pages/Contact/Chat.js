@@ -45,10 +45,7 @@ const Chat = () => {
 
   console.log(chatAdminDetails);
 
-  const { document, error } = useGetDocuments(
-    "chats",
-    `${user.id}${chatAdminDetails.adminId}`
-  );
+  const { document, error } = useGetDocuments("chats", `${user.id}`);
 
   console.log(document, error);
   console.log(chatAdminDetails);
@@ -59,7 +56,7 @@ const Chat = () => {
       try {
         await checkIfUserChatDoesNotExistAndSetUserChatToDb(user);
 
-        await checktAndSetUserChatMessages(user, chatAdminDetails.adminId);
+        await checktAndSetUserChatMessages(user);
 
         setIsShowfield(true);
         setIsInitialLoading(false);
@@ -83,17 +80,14 @@ const Chat = () => {
         await handleImageUpload();
       } else {
         if (!chatMessage) return;
-        await updateDoc(
-          doc(db, "chats", `${user.id}${chatAdminDetails.adminId}`),
-          {
-            messages: arrayUnion({
-              id: randomId(),
-              text: chatMessage,
-              senderId: user.id,
-              date: Timestamp.now(),
-            }),
-          }
-        );
+        await updateDoc(doc(db, "chats", `${user.id}`), {
+          messages: arrayUnion({
+            id: randomId(),
+            text: chatMessage,
+            senderId: user.id,
+            date: Timestamp.now(),
+          }),
+        });
 
         await updateUserChat();
       }
@@ -118,18 +112,15 @@ const Chat = () => {
       async () => {
         const imageUrl = await getDownloadURL(uploadTask.snapshot.ref);
         console.log(imageUrl);
-        await updateDoc(
-          doc(db, "chats", `${user.id}${chatAdminDetails.adminId}`),
-          {
-            messages: arrayUnion({
-              id: randomId(),
-              text: chatMessage,
-              senderId: user.id,
-              date: Timestamp.now(),
-              image: imageUrl,
-            }),
-          }
-        );
+        await updateDoc(doc(db, "chats", `${user.id}`), {
+          messages: arrayUnion({
+            id: randomId(),
+            text: chatMessage,
+            senderId: user.id,
+            date: Timestamp.now(),
+            image: imageUrl,
+          }),
+        });
       }
     );
   };

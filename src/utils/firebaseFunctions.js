@@ -115,12 +115,11 @@ export const getChatAdminDetails = async (setChatAdminDetails) => {
   }
 };
 
-export const checktAndSetUserChatMessages = async (user, adminId) => {
-  const combinedId = user.id + adminId;
+export const checktAndSetUserChatMessages = async (user) => {
   try {
-    const response = await getDoc(doc(db, "chats", combinedId));
+    const response = await getDoc(doc(db, "chats", user.id));
     if (!response.exists()) {
-      await setDoc(doc(db, "chats", combinedId), {
+      await setDoc(doc(db, "chats", user.id), {
         messages: [],
       });
     }
