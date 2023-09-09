@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { Link, Navigate } from "react-router-dom";
+import useGetCollection from "../../hooks/useGetCollection";
 
 const Notification = () => {
+  const { docItems, isLoading } = useGetCollection("userChat");
+  const [totalPendingMsgs, setTotalPendingMsgs] = useState(0);
+
+  useEffect(() => {
+    if (docItems) {
+      const pendingMessages = docItems?.filter(
+        (item) => item.status === "pending"
+      );
+      setTotalPendingMsgs(pendingMessages?.length);
+    }
+  }, [docItems]);
   return (
     <main className="Notification">
       <div className="mainWrapper">
@@ -19,7 +31,9 @@ const Notification = () => {
             <h2 className="all">All Notifications</h2>
           </div>
           <Link to={"/admin/messages"}>
-            <p>You have 5 pending messages </p>
+            {totalPendingMsgs.length > 1 && (
+              <p>You have {totalPendingMsgs} pending messages </p>
+            )}
           </Link>
           <Link to={"/admin/orders"}>
             <p>Sola placed an order</p>

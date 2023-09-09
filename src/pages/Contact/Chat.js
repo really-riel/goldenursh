@@ -46,6 +46,7 @@ const Chat = () => {
   console.log(chatAdminDetails);
 
   const { document, error } = useGetDocuments("chats", `${user.id}`);
+  console.log(document);
 
   console.log(document, error);
   console.log(chatAdminDetails);
