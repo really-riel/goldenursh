@@ -15,6 +15,7 @@ const Notification = () => {
       setTotalPendingMsgs(pendingMessages?.length);
     }
   }, [docItems]);
+
   return (
     <main className="Notification">
       <div className="mainWrapper">
@@ -31,7 +32,7 @@ const Notification = () => {
             <h2 className="all">All Notifications</h2>
           </div>
           <Link to={"/admin/messages"}>
-            {totalPendingMsgs.length > 1 && (
+            {totalPendingMsgs > 0 && (
               <p>You have {totalPendingMsgs} pending messages </p>
             )}
           </Link>

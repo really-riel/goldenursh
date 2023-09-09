@@ -12,11 +12,25 @@ import { RequireAdminLink } from "../../components/RequireLinks";
 import { HiOutlineMail } from "react-icons/hi";
 import { useStoreState } from "easy-peasy";
 import { BiBell } from "react-icons/bi";
+import { useEffect } from "react";
+import useGetCollection from "../../hooks/useGetCollection";
 
 const AdminHeader = () => {
   const { user } = useStoreState((state) => state.auth);
   const [isSideNavOpen, setIsSideNavOpen] = useState(false);
   const { width } = useWindowSize();
+
+  const { docItems, isLoading } = useGetCollection("userChat");
+  const [totalPendingMsgs, setTotalPendingMsgs] = useState(0);
+
+  useEffect(() => {
+    if (docItems) {
+      const pendingMessages = docItems?.filter(
+        (item) => item.status === "pending"
+      );
+      setTotalPendingMsgs(pendingMessages?.length);
+    }
+  }, [docItems]);
 
   return (
     <RequireAdminLink>
@@ -28,7 +42,28 @@ const AdminHeader = () => {
           />
         </motion.div>
         <div className="logoContainer">
+          <nav className="mobileHeaderNav">
+            <ul>
+              <Link to={"/admin/messages"}>
+                <li className="icon">
+                  <HiOutlineMail />
+                  {totalPendingMsgs > 0 && (
+                    <div className="notify">
+                      <p>{totalPendingMsgs}</p>
+                    </div>
+                  )}
+                </li>
+              </Link>
+              {/*  <Link to={"admin/notification"}>
+                <li className="icon">
+                  <BiBell />
+                </li>
+              </Link> */}
+            </ul>
+          </nav>
+
           {width < 1200 && <TabletNav />}
+
           <Link to={"/"}>
             <Logo />
           </Link>
@@ -41,6 +76,11 @@ const AdminHeader = () => {
             <Link to={"/admin/messages"}>
               <li className="icon">
                 <HiOutlineMail />
+                {totalPendingMsgs > 0 && (
+                  <div className="notify">
+                    <p>{totalPendingMsgs}</p>
+                  </div>
+                )}
               </li>
             </Link>
             <Link to={"admin/notification"}>
