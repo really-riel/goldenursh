@@ -78,6 +78,10 @@
     }
   }
 
+  .trendingOrders {
+    scroll-margin-top: rem(60);
+  }
+
   /* your choice section */
   .yourChoice {
     flex-grow: 1;
@@ -88,6 +92,7 @@
     justify-content: center;
     gap: 2rem;
     padding-bottom: 3rem;
+    scroll-margin-top: rem(60);
   }
   .yourChoiceList {
     width: 80%;
