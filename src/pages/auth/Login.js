@@ -154,19 +154,25 @@ const Login = () => {
               Hello, Welcome back. <br /> Good to have you
             </p>
             <form onSubmit={handleSignIn}>
-              <label htmlFor="loginEmail">E-mail Address</label>
+              <label className="offscreen" htmlFor="loginEmail">
+                E-mail Address
+              </label>
               <input
                 type="email"
                 id="loginEmail"
+                placeholder="E-mail"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
-              <label htmlFor="password">password</label>
+              <label className="offscreen" htmlFor="password">
+                password
+              </label>
               <div className="passwordWrapper">
                 <input
                   type={isPasswordvisible ? "text" : "password"}
                   id="password"
+                  placeholder="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required

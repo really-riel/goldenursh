@@ -262,7 +262,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.3rem;
-  box-shadow: $card_shadow2;
+  box-shadow: $card_shadow;
 
   @include mq(tablet) {
     height: auto;

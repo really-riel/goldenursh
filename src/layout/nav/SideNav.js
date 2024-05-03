@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import Logo from "../../components/Logo";
 import { SlHome } from "react-icons/sl";
 import { HiOutlineViewGrid } from "react-icons/hi";
@@ -30,6 +30,7 @@ const SideNav = ({ setIsSideNavOpen }) => {
   const { deleteUser, setIsAdmin, setAdminRole } = useStoreActions(
     (actions) => actions.auth
   );
+  const { pathname } = useLocation();
 
   const handleLogout = async () => {
     try {
@@ -78,11 +79,14 @@ const SideNav = ({ setIsSideNavOpen }) => {
                 </NavLink>
               </RequireAdminLink>
 
-              <li onClick={() => setIsOpen(!isOpen)}>
-                <HiOutlineViewGrid />
-                Categories
-                {isOpen ? <FiChevronDown /> : <FiChevronRight />}
-              </li>
+              {pathname === "/" && (
+                <li onClick={() => setIsOpen(!isOpen)}>
+                  <HiOutlineViewGrid />
+                  Categories
+                  {isOpen ? <FiChevronDown /> : <FiChevronRight />}
+                </li>
+              )}
+
               {isOpen && (
                 <ul className="categoryList">
                   <a

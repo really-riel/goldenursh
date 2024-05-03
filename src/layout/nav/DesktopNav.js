@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { FiChevronDown, FiChevronRight } from "react-icons/fi";
 import TabletNav from "./TabletNav";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, Navigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { signOut } from "firebase/auth";
 import { auth } from "../../utils/firebase";
 import { toast } from "react-toastify";
 import { RequireAdminLink } from "../../components/RequireLinks";
-import { FaUserCog } from "react-icons/fa";
 import OptionsPopUp from "../../components/OptionsPopUp";
 
 const DesktopNav = () => {
@@ -19,6 +18,8 @@ const DesktopNav = () => {
   );
 
   const [isLogoutOptOpen, setIsLogOutOptOpen] = useState(false);
+
+  const { pathname } = useLocation();
 
   const handleLogout = async () => {
     try {
@@ -34,6 +35,20 @@ const DesktopNav = () => {
         : toast.error(error.code.split("/")[1]);
     }
   };
+
+  const scrollToHome = (sectionId) => {
+    const homeSection = document.getElementById(sectionId);
+    /*  if (pathname !== "/") {
+      return <Navigate to={pathname} />;
+    }
+    homeSection.scrollIntoView({ behavior: "smooth" }); */
+    return pathname !== "/" ? (
+      <Navigate to="/" replace={true} />
+    ) : (
+      homeSection.scrollIntoView({ behavior: "smooth" })
+    );
+  };
+
   return (
     <>
       <nav className="desktopNav">
@@ -48,30 +63,39 @@ const DesktopNav = () => {
             </NavLink>
           </RequireAdminLink>
 
-          <motion.li
-            whileTap={{ scale: 0.8 }}
-            className="category"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            <span>Categories</span>
-            {isOpen ? <FiChevronDown /> : <FiChevronRight />}
-            {isOpen && (
-              <div className="categoryList">
-                <ul>
-                  <Link to={"/#trendingOrders"}>
-                    <li onClick={(e) => setIsOpen(false) && console.log("ok")}>
+          {pathname === "/" && (
+            <motion.li
+              whileTap={{ scale: 0.8 }}
+              className="category"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              <span>Categories</span>
+              {isOpen ? <FiChevronDown /> : <FiChevronRight />}
+              {isOpen && (
+                <div className="categoryList">
+                  <ul>
+                    <li
+                      onClick={(e) => {
+                        setIsOpen(false) && console.log("ok");
+                        scrollToHome("trendingOrders");
+                      }}
+                    >
                       Trending List
                     </li>
-                  </Link>
-                  <Link to={"/#yourChoice"}>
-                    <li onClick={() => setIsOpen(false)}>
+                    <li
+                      onClick={() => {
+                        setIsOpen(false);
+                        scrollToHome("yourChoice");
+                      }}
+                    >
                       Order based on your choice
                     </li>
-                  </Link>
-                </ul>
-              </div>
-            )}
-          </motion.li>
+                  </ul>
+                </div>
+              )}
+            </motion.li>
+          )}
+
           <NavLink to={"/contact"}>
             <motion.li whileTap={{ scale: 0.8 }}>Contact</motion.li>
           </NavLink>

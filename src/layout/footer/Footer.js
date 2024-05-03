@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { IoIosArrowDropup } from "react-icons/io";
 import { BsInstagram, BsTwitter, BsWhatsapp } from "react-icons/bs";
@@ -6,8 +6,22 @@ import { FaFacebookF } from "react-icons/fa";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
+  const [isShowButton, setIsShowButton] = useState(false);
 
   const year = new Date().getFullYear();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY || document.documentElement.scrollTop;
+
+      setIsShowButton(scrollY > window.innerHeight);
+    };
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const handleGoToTop = () => {
     window.scrollTo({
@@ -44,11 +58,13 @@ const Footer = () => {
             <button>Subscribe</button>
           </form>
         </section>
-        <section>
-          <a role="button" onClick={handleGoToTop}>
-            Back to Top <IoIosArrowDropup />
-          </a>
-        </section>
+        {isShowButton && (
+          <section>
+            <a role="button" onClick={handleGoToTop}>
+              Back to Top <IoIosArrowDropup />
+            </a>
+          </section>
+        )}
       </div>
       <p className="footing">Copyright {year} &copy; All rights Reserved. </p>
     </footer>

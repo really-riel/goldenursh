@@ -30,6 +30,11 @@
   height: rem(100);
 }
 
+.offscreen {
+  position: absolute;
+  left: -10000px;
+}
+
 /* Toastify styles */
 
 /* curve bottom svg */

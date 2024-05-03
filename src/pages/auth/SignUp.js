@@ -242,41 +242,52 @@ const SignUp = () => {
                 accept="image/*"
                 onChange={(e) => setImageFile(e.target.files[0])}
               />
-              <label htmlFor="name">Name</label>
+              <label className="offscreen" htmlFor="name">
+                Name
+              </label>
 
               <input
                 type="text"
                 id="name"
-                placeholder="First name   Last name"
+                placeholder="Name"
                 value={name}
                 onChange={handleNameFormatting}
                 required
               />
 
-              <label htmlFor="signUpEmail">E-mail Address</label>
+              <label className="offscreen" htmlFor="signUpEmail">
+                E-mail Address
+              </label>
 
               <input
                 type="email"
                 id="signUpEmail"
+                placeholder="E-mail"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
 
-              <label htmlFor="signUpPassword">password</label>
+              <label className="offscreen" htmlFor="signUpPassword">
+                password
+              </label>
 
               <input
                 id="signUpPassword"
                 type="password"
+                placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
 
-              <label htmlFor="confirmPassword">Confirm Password</label>
+              <label className="offscreen" htmlFor="confirmPassword">
+                Confirm Password
+              </label>
               <input
                 type="password"
                 id="confirmPassword"
+                placeholder="Confirm Password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required

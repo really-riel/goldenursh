@@ -39,10 +39,13 @@ const ResetPassword = () => {
             <SmallLogo />
             <p className="mobileLogin">Reset Password</p>
             <form onSubmit={handleResetPassword}>
-              <label htmlFor="loginEmail">E-mail Address</label>
+              <label className="offscreen" htmlFor="loginEmail">
+                E-mail Address
+              </label>
               <input
                 type="email"
                 id="loginEmail"
+                placeholder="E-mail"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
